@@ -1,6 +1,6 @@
 # Portafolio — Dominick Ibarra Acedo
 
-Portafolio profesional con tres facetas — **Desarrollo Web · Servicios IT · IA & Automatización** — que demuestra con evidencia real, no solo describe: demo interactiva de transacción atómica (Núcleo) y un copiloto IA en vivo anclado a los datos del sitio.
+Portafolio profesional con tres facetas — **Desarrollo Web · Servicios IT · IA & Automatización** Con una demo interactiva de transacción atómica (Núcleo) y un copiloto IA en vivo anclado a los datos del sitio.
 
 **Stack**: Vite + React 19 + TypeScript + Tailwind CSS v4 · Cloudflare Worker (copiloto) · Cloudflare Pages (despliegue).
 
