@@ -1,0 +1,23 @@
+{
+  "file_hashes": {
+    ".claude/CLAUDE.md": "bba443e5249da372a0884664cfd83a1cadb636cd204619008484e0b05a489641",
+    ".claude/hooks/vexp-guard.sh": "b0b597198e6022920913cd86f566dcbeff65dc32beae0d98c18a657d5134a42b",
+    "src/App.tsx": "c48617bdb0ced2b35940a5431fd5feee89f048eab89fc1f74ebcf322b8490b07",
+    "src/components/Layout.tsx": "1df2ece79ee81280bdaf8c18e4c6cf1180a79554b3148853d8d53425ee5bf0b2",
+    "src/data/content.ts": "0543116d914c2748dba302d03ab4aea8f1aca1947fcd8c081a38b139f4e4b616",
+    "src/main.tsx": "8eaa3fa8973b085f62c45997102bde2f76e55dd35233b867511da2612b6bf6a2",
+    "src/pages/FacetPage.tsx": "af359b742c2fdfde69eda9914143958193bf15e090fdaa4ff59c28b4421d9e2a",
+    "src/pages/Home.tsx": "579e777ef5859b64d36c268c7a74720ee3aac5d376d0937653db902f32cafc81",
+    "src/vite-env.d.ts": "00a29185efbdf41c38089c4164fb1b9415449bcd9eaa57c77623a12b55a50b6f",
+    "vite.config.ts": "3fd7b90e3771e6d00b2b870aab54de9381200f328da440440ebac9d602983e45"
+  },
+  "indexed_at_commit": "",
+  "indexed_at_timestamp": "2026-07-14T23:29:20.260888900+00:00",
+  "schema_version": 3,
+  "stats": {
+    "total_edges": 12,
+    "total_files": 10,
+    "total_nodes": 26
+  },
+  "vexp_version": "2.2.0"
+}

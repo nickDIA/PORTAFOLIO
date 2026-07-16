@@ -1,0 +1,213 @@
+@import "tailwindcss";
+
+/* ============================================================
+   TOKENS GLOBALES DEL SISTEMA DE DISEÑO
+   Única fuente de verdad para color, tipografía y espaciado.
+   Tailwind v4: @theme genera las utilidades (bg-ink, text-signal-web,
+   font-display, etc.) a partir de estas variables.
+   ============================================================ */
+@theme {
+  /* -- Color base -- */
+  --color-ink: #0b0d12; /* fondo global */
+  --color-surface: #12151c; /* tarjetas / superficies elevadas */
+  --color-text: #e7e9f0; /* texto principal */
+  --color-text-muted: #7a8099; /* texto secundario */
+
+  /* -- Colores de señal: uno por faceta. No decorativos —
+        son el sistema de navegación del sitio. -- */
+  --color-signal-web: #5b8def; /* Desarrollo Web (azul eléctrico) */
+  --color-signal-it: #e8a23d; /* Servicios IT (ámbar/cobre) */
+  --color-signal-ai: #4fd1c5; /* IA & Automatización (cian) */
+
+  /* -- Estado de error (fallos simulados, validaciones) -- */
+  --color-danger: #ef6a6a;
+
+  /* -- Tipografía -- */
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  /* -- Reset de la escala sans por defecto al cuerpo del sistema -- */
+  --font-sans: "IBM Plex Sans", system-ui, sans-serif;
+}
+
+/* ============================================================
+   Base global
+   ============================================================ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-ink text-text font-body antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display;
+  }
+
+  code,
+  kbd,
+  pre {
+    @apply font-mono;
+  }
+
+  /* Accesibilidad: foco visible por teclado, tematizable por faceta.
+     Cada página de faceta puede sobreescribir --focus-ring con su
+     color de señal. */
+  :root {
+    --focus-ring: var(--color-signal-web);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Accesibilidad: respetar reduced-motion globalmente */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  ::selection {
+    background-color: var(--color-signal-web);
+    color: var(--color-ink);
+  }
+}
+
+/* ============================================================
+   Hero de la señal — animación de traza de circuito
+   Todas las trazas usan pathLength=1, así dasharray/dashoffset
+   funcionan en fracciones [0,1] sin medir píxeles.
+   ============================================================ */
+@layer components {
+  /* Traza que se dibuja desde el origen */
+  .trace-path {
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: trace-draw 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  /* Pulso de señal que recorre la traza en bucle */
+  .trace-pulse {
+    fill: none;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-dasharray: 0.07 0.93;
+    stroke-dashoffset: 1;
+    opacity: 0;
+    animation: trace-pulse 2.8s linear infinite;
+  }
+
+  /* Nodo de origen */
+  .node-core {
+    transform-box: fill-box;
+    transform-origin: center;
+    scale: 0;
+    animation: node-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  /* Anillo expansivo del nodo de origen */
+  .node-ring {
+    transform-box: fill-box;
+    transform-origin: center;
+    opacity: 0;
+    animation: ring-pulse 3s ease-out infinite 1.6s;
+  }
+
+  /* Pads y etiquetas que aparecen al completarse cada traza */
+  .pad-fade {
+    opacity: 0;
+    animation: fade-in 0.5s ease forwards;
+  }
+
+  /* Entrada de las tarjetas de faceta */
+  .fade-up {
+    opacity: 0;
+    animation: fade-up-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+}
+
+@keyframes trace-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes trace-pulse {
+  0% {
+    stroke-dashoffset: 1;
+    opacity: 0;
+  }
+  10%,
+  90% {
+    opacity: 0.9;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes node-pop {
+  to {
+    scale: 1;
+  }
+}
+
+@keyframes ring-pulse {
+  0% {
+    opacity: 0.6;
+    transform: scale(0.4);
+  }
+  70%,
+  100% {
+    opacity: 0;
+    transform: scale(1.8);
+  }
+}
+
+@keyframes fade-in {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-up-in {
+  from {
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Reduced-motion: la regla global ya colapsa las animaciones de
+   entrada a su estado final; los bucles infinitos (pulso y anillo)
+   quedarían congelados en un frame visible, así que se ocultan. */
+@media (prefers-reduced-motion: reduce) {
+  .trace-pulse,
+  .node-ring {
+    display: none;
+  }
+}

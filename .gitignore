@@ -1,0 +1,10 @@
+node_modules
+dist
+*.local
+.env
+.DS_Store
+
+# Secrets del Worker en desarrollo local (API key) — nunca a git
+.dev.vars
+.wrangler
+

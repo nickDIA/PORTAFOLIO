@@ -1,0 +1,17 @@
+{
+  // Copiloto IA — Cloudflare Worker (Fase 5)
+  // Secret requerido antes de desplegar o probar con API real:
+  //   npx wrangler secret put ANTHROPIC_API_KEY
+  // Desarrollo local:
+  //   npm run worker:dev   (puerto 8787; Vite hace proxy de /api)
+  //   → para probar con API real en local, crea .dev.vars con:
+  //     ANTHROPIC_API_KEY=sk-ant-...
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "portafolio-copiloto",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-07-01",
+  "vars": {
+    // En producción, restringe CORS al dominio del sitio:
+    // "ALLOWED_ORIGIN": "https://tu-dominio.pages.dev"
+  }
+}
