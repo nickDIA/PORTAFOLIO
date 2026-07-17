@@ -11,7 +11,7 @@
   "main": "worker/index.ts",
   "compatibility_date": "2026-07-01",
   "vars": {
-    // En producción, restringe CORS al dominio del sitio:
-    // "ALLOWED_ORIGIN": "https://tu-dominio.pages.dev"
+    // CORS restringido al dominio del sitio en producción.
+    "ALLOWED_ORIGIN": "https://portafolio-ccq.pages.dev"
   }
 }

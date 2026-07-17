@@ -11,7 +11,14 @@ import { useEffect, useRef, useState } from "react";
    local es UX para que el visitante sepa dónde está parado.
    ============================================================ */
 
-const ENDPOINT = import.meta.env.VITE_COPILOT_URL ?? "/api/chat";
+/* En dev, "/api/chat" lo proxya Vite al Worker local (localhost:8787).
+   En el build de producción apunta al Worker desplegado. La variable de
+   build VITE_COPILOT_URL sobreescribe ambos si se define. */
+const ENDPOINT =
+  import.meta.env.VITE_COPILOT_URL ??
+  (import.meta.env.PROD
+    ? "https://portafolio-copiloto.dominickomg.workers.dev/api/chat"
+    : "/api/chat");
 const MAX_USER_MESSAGES = 15;
 const STORAGE_KEY = "copiloto-conversacion";
 

@@ -49,7 +49,7 @@ npx wrangler secret put GEMINI_API_KEY   # pega la key cuando la pida
 npm run worker:deploy                     # → https://portafolio-copiloto.<subdominio>.workers.dev
 ```
 
-**Sitio (Cloudflare Pages):** conecta el repo en el dashboard de Pages con build command `npm run build` y output `dist`. Define la variable de build `VITE_COPILOT_URL` con la URL del Worker + `/api/chat`. Después, restringe CORS: en `wrangler.jsonc`, fija `ALLOWED_ORIGIN` al dominio del sitio y redespliega el Worker.
+**Sitio (Cloudflare Pages):** conecta el repo en el dashboard de Pages con build command `npm run build` y output `dist`. El build de producción apunta al Worker desplegado por defecto (ver `ENDPOINT` en `ChatDock.tsx`); para usar otra URL, define la variable de build `VITE_COPILOT_URL`. El CORS del Worker está restringido a `ALLOWED_ORIGIN` en `wrangler.jsonc` — actualízalo si cambias el dominio del sitio y redespliega el Worker.
 
 ## Decisiones de ingeniería del copiloto
 
