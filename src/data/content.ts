@@ -229,15 +229,15 @@ export const projects: Project[] = [
     role: "Diseño e implementación end-to-end",
     period: "2026",
     summary:
-      "Asistente conversacional real (no mockup) embebido en este sitio, que responde sobre mi experiencia usando la API de Claude — su system prompt se genera desde este mismo archivo de datos.",
+      "Asistente conversacional real (no mockup) embebido en este sitio, que responde sobre mi experiencia usando la API de Gemini — su system prompt se genera desde este mismo archivo de datos.",
     description:
-      "Cloudflare Worker como proxy a la API de Claude: la API key vive como secret en el Worker y nunca toca el cliente. El system prompt se genera automáticamente desde este mismo archivo de datos (los placeholders sin rellenar se filtran), así las respuestas quedan ancladas a hechos verificables. Los límites — 15 mensajes por sesión, 512 tokens de salida, validación estricta del historial — se aplican en el servidor, no solo en la UI: control de costo y abuso desde el diseño. El streaming SSE de Claude se canaliza directo al widget, que es un dock persistente accesible desde cualquier página del sitio.",
+      "Cloudflare Worker como proxy a la API de Gemini: la API key vive como secret en el Worker y nunca toca el cliente. El system prompt se genera automáticamente desde este mismo archivo de datos (los placeholders sin rellenar se filtran), así las respuestas quedan ancladas a hechos verificables. Los límites — 15 mensajes por sesión, 512 tokens de salida, validación estricta del historial — se aplican en el servidor, no solo en la UI: control de costo y abuso desde el diseño. El streaming SSE de Gemini se canaliza directo al widget, que es un dock persistente accesible desde cualquier página del sitio.",
     achievements: [
       "API key protegida en el Worker como secret — cero exposición en cliente",
       "Respuestas ancladas a datos reales vía system prompt generado desde content.ts",
       "Límites de uso (mensajes por sesión y tokens de salida) como decisión de ingeniería de costos",
     ],
-    tech: ["Claude API (Anthropic)", "Cloudflare Workers", "TypeScript", "SSE (Server-Sent Events)"],
+    tech: ["Gemini API (Google)", "Cloudflare Workers", "TypeScript", "SSE (Server-Sent Events)"],
     screenshots: [],
     links: [],
     featured: true,

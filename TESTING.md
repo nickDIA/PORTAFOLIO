@@ -76,7 +76,7 @@ El system prompt se genera desde `content.ts` y es la garantía anti-invención:
 
 - Apertura/cierre accesibles: `aria-expanded`, foco al input al abrir, Escape cierra y devuelve el foco al botón del dock.
 - Sugerencias iniciales cuando la conversación está vacía.
-- **Streaming**: con fetch mockeado emitiendo SSE real de la API de Claude (`content_block_delta`), la respuesta se ensambla fragmento a fragmento; el payload enviado al Worker es exactamente `{ messages: [...] }`; el contador avanza (1/15).
+- **Streaming**: con fetch mockeado emitiendo SSE real de la API de Gemini (`candidates[0].content.parts`), la respuesta se ensambla fragmento a fragmento; el payload enviado al Worker es exactamente `{ messages: [...] }`; el contador avanza (1/15).
 - **Error del Worker**: el mensaje amigable del servidor se muestra en el chat sin romperlo; el input queda disponible para reintentar.
 - **Límite de sesión en UI**: con 15 mensajes usados, la entrada se reemplaza por el aviso (15/15).
 - Persistencia: la conversación sobrevive en `sessionStorage` entre montajes.
@@ -120,11 +120,11 @@ Con `wrangler dev` local (sin API key) y `curl` directo al endpoint, más el pip
 | Petición válida sin secret configurado | **HTTP 503** — mensaje claro de "no configurado" |
 | Desde el widget (clic en sugerencia) | El error del Worker aparece como mensaje amigable en el chat, contador 1/15 |
 
-El camino con API real (streaming de Claude end-to-end) queda pendiente de la API key del usuario — el parseo SSE del cliente está cubierto por tests con stream mockeado en formato real de la API.
+El camino con API real (streaming de Gemini end-to-end) queda pendiente de la API key del usuario — el parseo SSE del cliente está cubierto por tests con stream mockeado en formato real de la API.
 
 ## Huecos conocidos (pendientes para Fase 6)
 
 - Sin pruebas E2E en navegador real automatizadas (Playwright) — la verificación E2E fue manual documentada.
 - Sin regresión visual (screenshots diff).
 - La auditoría de contraste con axe en navegador real (no jsdom) queda para el pase final de accesibilidad de la Fase 6, junto con Lighthouse.
-- Prueba del copiloto con la API real de Claude (streaming end-to-end) en cuanto exista el secret.
+- Prueba del copiloto con la API real de Gemini (streaming end-to-end) en cuanto exista el secret.

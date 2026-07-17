@@ -1,29 +1,29 @@
 import { SYSTEM_PROMPT } from "../src/data/systemPrompt";
-import { LIMITS, validateChatRequest } from "./validate";
+import { LIMITS, validateChatRequest, type ChatMessage } from "./validate";
 
 /* ============================================================
-   Copiloto IA — Cloudflare Worker como proxy a la API de Claude.
+   Copiloto IA — Cloudflare Worker como proxy a la API de Gemini.
 
    - La API key vive como secret del Worker (wrangler secret put
-     ANTHROPIC_API_KEY) — nunca toca el cliente.
+     GEMINI_API_KEY) — nunca toca el cliente.
    - El system prompt se genera en build desde src/data/content.ts.
    - Límites de sesión y de tokens de salida aplicados aquí
      (ver worker/validate.ts) — el endpoint es público.
-   - La respuesta de Anthropic se transmite tal cual (SSE):
+   - La respuesta de Gemini se transmite tal cual (SSE):
      el Worker no re-parsea el stream, solo lo canaliza.
    ============================================================ */
 
 interface Env {
-  ANTHROPIC_API_KEY: string;
+  GEMINI_API_KEY: string;
   /** Origen permitido para CORS; en producción, el dominio del sitio */
   ALLOWED_ORIGIN?: string;
   /** Override opcional del modelo */
   MODEL?: string;
 }
 
-const DEFAULT_MODEL = "claude-haiku-4-5-20251001";
-const ANTHROPIC_URL = "https://api.anthropic.com/v1/messages";
-const ANTHROPIC_VERSION = "2023-06-01";
+const DEFAULT_MODEL = "gemini-2.5-flash";
+const geminiUrl = (model: string) =>
+  `https://generativelanguage.googleapis.com/v1beta/models/${model}:streamGenerateContent?alt=sse`;
 
 const corsHeaders = (env: Env): Record<string, string> => ({
   "Access-Control-Allow-Origin": env.ALLOWED_ORIGIN ?? "*",
@@ -40,6 +40,13 @@ const jsonResponse = (
     status,
     headers: { "content-type": "application/json", ...corsHeaders(env) },
   });
+
+/** Gemini usa "model" en vez de "assistant" para el turno del asistente. */
+const toGeminiContents = (messages: ChatMessage[]) =>
+  messages.map((m) => ({
+    role: m.role === "assistant" ? "model" : "user",
+    parts: [{ text: m.content }],
+  }));
 
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
@@ -58,33 +65,30 @@ export default {
       return jsonResponse(env, validation.status, { error: validation.error });
     }
 
-    if (!env.ANTHROPIC_API_KEY) {
+    if (!env.GEMINI_API_KEY) {
       return jsonResponse(env, 503, {
         error:
-          "El copiloto no está configurado todavía (falta el secret ANTHROPIC_API_KEY).",
+          "El copiloto no está configurado todavía (falta el secret GEMINI_API_KEY).",
       });
     }
 
-    const upstream = await fetch(ANTHROPIC_URL, {
+    const upstream = await fetch(geminiUrl(env.MODEL ?? DEFAULT_MODEL), {
       method: "POST",
       headers: {
-        "x-api-key": env.ANTHROPIC_API_KEY,
-        "anthropic-version": ANTHROPIC_VERSION,
+        "x-goog-api-key": env.GEMINI_API_KEY,
         "content-type": "application/json",
       },
       body: JSON.stringify({
-        model: env.MODEL ?? DEFAULT_MODEL,
-        max_tokens: LIMITS.maxOutputTokens,
-        system: SYSTEM_PROMPT,
-        messages: validation.messages,
-        stream: true,
+        systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
+        contents: toGeminiContents(validation.messages),
+        generationConfig: { maxOutputTokens: LIMITS.maxOutputTokens },
       }),
     });
 
     if (!upstream.ok || !upstream.body) {
       /* No filtrar detalles del upstream al cliente; sí al log del Worker */
       console.error(
-        "Error de la API de Anthropic:",
+        "Error de la API de Gemini:",
         upstream.status,
         await upstream.text().catch(() => "(sin cuerpo)"),
       );

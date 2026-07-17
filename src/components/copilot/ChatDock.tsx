@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
    Copiloto IA — dock persistente (no modal).
    Vive en el Layout: acompaña todas las rutas sin bloquear la
    página. Habla con el Cloudflare Worker (/api/chat), que hace
-   proxy a la API de Claude con el system prompt generado desde
+   proxy a la API de Gemini con el system prompt generado desde
    content.ts.
 
    El límite real de mensajes lo aplica el Worker; el contador
@@ -108,14 +108,17 @@ export default function ChatDock() {
         throw new Error(detalle ?? `HTTP ${res.status}`);
       }
 
-      /* Parseo del stream SSE de la API de Claude */
+      /* Parseo del stream SSE de la API de Gemini */
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
       let buffer = "";
       for (;;) {
         const { done, value } = await reader.read();
         if (done) break;
-        buffer += decoder.decode(value, { stream: true });
+        /* Gemini termina cada evento con CRLF ("\r\n\r\n"); normalizamos a
+           LF para que el split de abajo funcione sin importar el estilo
+           de línea que use el proveedor upstream. */
+        buffer += decoder.decode(value, { stream: true }).replace(/\r\n/g, "\n");
         const eventos = buffer.split("\n\n");
         buffer = eventos.pop() ?? "";
         for (const evento of eventos) {
@@ -123,18 +126,14 @@ export default function ChatDock() {
             if (!lineaRaw.startsWith("data:")) continue;
             try {
               const data = JSON.parse(lineaRaw.slice(5).trim()) as {
-                type?: string;
-                delta?: { type?: string; text?: string };
+                candidates?: { content?: { parts?: { text?: string }[] } }[];
               };
-              if (
-                data.type === "content_block_delta" &&
-                data.delta?.type === "text_delta" &&
-                data.delta.text
-              ) {
-                appendToLast(data.delta.text);
-              }
+              const texto = data.candidates?.[0]?.content?.parts
+                ?.map((p) => p.text ?? "")
+                .join("");
+              if (texto) appendToLast(texto);
             } catch {
-              /* líneas no-JSON (pings, event:) se ignoran */
+              /* líneas no-JSON se ignoran */
             }
           }
         }

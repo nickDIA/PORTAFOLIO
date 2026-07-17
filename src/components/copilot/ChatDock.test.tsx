@@ -9,21 +9,21 @@ import ChatDock from "./ChatDock";
    límite de sesión en la UI.
    ============================================================ */
 
-/** Construye un stream SSE como el que emite la API de Claude. */
+/**
+ * Construye un stream SSE como el que emite la API de Gemini —
+ * incluyendo el detalle real que causó un bug en producción:
+ * Gemini separa eventos con CRLF ("\r\n\r\n"), no LF puro.
+ */
 function sseStream(fragmentos: string[]): ReadableStream<Uint8Array> {
   const enc = new TextEncoder();
   return new ReadableStream({
     start(controller) {
       for (const texto of fragmentos) {
         const data = JSON.stringify({
-          type: "content_block_delta",
-          delta: { type: "text_delta", text: texto },
+          candidates: [{ content: { role: "model", parts: [{ text: texto }] } }],
         });
-        controller.enqueue(
-          enc.encode(`event: content_block_delta\ndata: ${data}\n\n`),
-        );
+        controller.enqueue(enc.encode(`data: ${data}\r\n\r\n`));
       }
-      controller.enqueue(enc.encode('event: message_stop\ndata: {"type":"message_stop"}\n\n'));
       controller.close();
     },
   });
@@ -102,7 +102,7 @@ describe("ChatDock — envío con streaming", () => {
     vi.stubGlobal(
       "fetch",
       vi.fn().mockResolvedValue(
-        new Response(JSON.stringify({ error: "El copiloto no está configurado todavía (falta el secret ANTHROPIC_API_KEY)." }), {
+        new Response(JSON.stringify({ error: "El copiloto no está configurado todavía (falta el secret GEMINI_API_KEY)." }), {
           status: 503,
         }),
       ),
