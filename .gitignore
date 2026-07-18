@@ -8,3 +8,9 @@ dist
 .dev.vars
 .wrangler
 
+# Playwright — artefactos locales de las pruebas E2E
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+

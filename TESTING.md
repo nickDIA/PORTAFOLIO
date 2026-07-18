@@ -1,6 +1,6 @@
 # TESTING.md — Pruebas del portafolio
 
-> Estado al cierre de la Fase 5 (2026-07-15): **62 pruebas · 9 archivos · todas en verde** · build de producción limpio (incluye type-check del Worker).
+> Estado (2026-07-18): **62 pruebas unitarias/componente (Vitest) + 9 E2E (Playwright) · todas en verde** · build de producción limpio (incluye type-check del Worker) · CI en GitHub Actions en cada push/PR a `main` · sitio y copiloto en producción.
 
 ## Cómo correr las pruebas
 
@@ -128,9 +128,27 @@ Con `wrangler dev` local (sin API key) y `curl` directo al endpoint, más el pip
 
 El camino con API real (streaming de Gemini end-to-end) queda pendiente de la API key del usuario — el parseo SSE del cliente está cubierto por tests con stream mockeado en formato real de la API.
 
+## Suite E2E (Playwright)
+
+`e2e/` contiene 9 pruebas en navegador real (Chromium) que complementan la suite de Vitest — jsdom no renderiza de verdad, así que layout, contraste computado y el flujo completo por red del copiloto solo se pueden verificar aquí.
+
+```bash
+npm run test:e2e        # suite completa, headless
+npm run test:e2e:ui     # modo interactivo (Playwright UI)
+```
+
+| Archivo | Qué prueba |
+|---|---|
+| `e2e/navigation.spec.ts` (4) | Landing con las 3 tarjetas de faceta; por cada faceta, el encabezado correcto y `--focus-ring` resuelto al hex exacto de su color de señal — verificado en un navegador real que sí computa CSS custom properties anidadas (jsdom no) |
+| `e2e/nucleo-demo.spec.ts` (2) | El mismo flujo de la demo transaccional verificado manualmente durante el desarrollo, ahora automatizado: COMMIT actualiza estado + auditoría; rollback forzado revierte ambos juntos y desarma el toggle |
+| `e2e/copilot.spec.ts` (3) | Abrir el dock, enviar una pregunta y ver la respuesta streameada — con la red mockeada usando el formato SSE real de Gemini (CRLF, `\r\n\r\n`) como segunda línea de defensa contra la regresión de línea de comando descrita arriba; manejo de error del Worker; cierre con Escape devolviendo el foco |
+
+Corre como job separado en CI (`e2e` en `.github/workflows/ci.yml`), en paralelo al de Vitest — instala Chromium y sube el reporte HTML como artefacto si algo falla.
+
+**Sanity check aplicado**: antes de dar por buena la suite, rompí a propósito una aserción (`ring: "#000000"` en vez del hex real) y confirmé que el test falla con el mensaje esperado, no que pase en falso — misma disciplina que se usó para verificar el fix de CRLF.
+
 ## Huecos conocidos (pendientes para Fase 6)
 
-- Sin pruebas E2E en navegador real automatizadas (Playwright) — la verificación E2E fue manual documentada.
 - Sin regresión visual (screenshots diff).
 - La auditoría de contraste con axe en navegador real (no jsdom) queda para el pase final de accesibilidad de la Fase 6, junto con Lighthouse.
-- Prueba del copiloto con la API real de Gemini (streaming end-to-end) en cuanto exista el secret.
+- Los E2E de Playwright corren solo en Chromium — Firefox/WebKit quedan para cuando el proyecto lo justifique.

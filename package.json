@@ -9,6 +9,8 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
     "worker:dev": "wrangler dev",
     "worker:deploy": "wrangler deploy"
   },
@@ -19,6 +21,7 @@
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^5.20260715.1",
+    "@playwright/test": "^1.61.1",
     "@tailwindcss/vite": "^4.1.0",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
