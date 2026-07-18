@@ -160,14 +160,25 @@ export const projects: Project[] = [
     ],
     screenshots: [
       {
-        src: "/screenshots/nautylab-1.png",
-        alt: "Interfaz principal de Nautylab con el asistente de IA respondiendo en tiempo real",
+        src: "/screenshots/Nautylab1.png",
+        alt: "Lector de cuentos de Nautylab mostrando una historia ilustrada generada por IA, con narración paso a paso",
+      },
+      {
+        src: "/screenshots/Nautylab2.png",
+        alt: "Chat del tutor de Español respondiendo la pregunta de un estudiante sobre qué es una sílaba",
+      },
+      {
+        src: "/screenshots/Nautylab3.png",
+        alt: "Asistente de creación de cuentos, en el paso de elegir el lugar de la aventura",
+      },
+      {
+        src: "/screenshots/Nautylab4.png",
+        alt: "Resumen final del cuento generado, antes de crear la historia",
       },
     ],
-    links: [
-      { label: "Repositorio", url: "[[TODO: URL del repo]]" },
-      { label: "Demo en vivo", url: "[[TODO: URL de la demo, o elimina este enlace]]" },
-    ],
+    /* Proyecto de residencia profesional — el código no es de mi propiedad,
+       así que no hay repositorio ni demo pública que enlazar. */
+    links: [],
     featured: true,
   },
   {

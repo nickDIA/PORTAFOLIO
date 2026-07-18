@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Type-check, build & test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      # Mismo comando que ejecuta Cloudflare Pages en producción —
+      # incluye tsc -b (app + node + worker) y el build de Vite.
+      - name: Type-check & build
+        run: npm run build
+
+      - name: Test (Vitest + Testing Library + axe-core)
+        run: npm test

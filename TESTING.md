@@ -12,6 +12,12 @@ npm run build     # type-check estricto + build de producción
 
 Stack: **Vitest** (runner nativo de Vite) + **React Testing Library** + **jsdom** + **axe-core** (auditoría de accesibilidad).
 
+## CI (GitHub Actions)
+
+[`.github/workflows/ci.yml`](.github/workflows/ci.yml) corre en cada push y pull request a `main` (y manualmente vía `workflow_dispatch`): `npm ci` → `npm run build` (type-check de app + node + Worker, más el build de Vite — el mismo comando que ejecuta Cloudflare Pages en producción) → `npm test`. El badge de estado está en el [README](README.md).
+
+Es un gate de calidad, no el despliegue: Cloudflare Pages despliega por su propia integración de Git al hacer push a `main`, independiente de este workflow.
+
 ## Suite automatizada
 
 ### 1. `src/data/content.test.ts` — integridad de la fuente única de verdad (12 pruebas)

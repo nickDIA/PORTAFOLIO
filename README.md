@@ -1,5 +1,7 @@
 # Portafolio — Dominick Ibarra Acedo
 
+[![CI](https://github.com/nickDIA/PORTAFOLIO/actions/workflows/ci.yml/badge.svg)](https://github.com/nickDIA/PORTAFOLIO/actions/workflows/ci.yml)
+
 Portafolio profesional con tres facetas — **Desarrollo Web · Servicios IT · IA & Automatización** Con una demo interactiva de transacción atómica (Núcleo) y un copiloto IA en vivo anclado a los datos del sitio.
 
 **Stack**: Vite + React 19 + TypeScript + Tailwind CSS v4 · Cloudflare Worker (copiloto) · Cloudflare Pages (despliegue).
