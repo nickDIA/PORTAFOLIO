@@ -1,8 +1,8 @@
 import { NavLink, Outlet } from "react-router-dom";
-import { facets } from "../data/content";
+import { roles } from "../data/content";
 import ChatDock from "./copilot/ChatDock";
 
-/* Mapa estático faceta → clases (Tailwind necesita ver las clases
+/* Mapa estático rol → clases (Tailwind necesita ver las clases
    completas en el código para generarlas — no admite concatenación). */
 const signalNav: Record<string, { active: string; idle: string }> = {
   "signal-web": {
@@ -43,19 +43,19 @@ export default function Layout() {
           </NavLink>
 
           <ul className="flex flex-wrap gap-x-6 gap-y-2 ml-auto">
-            {facets.map((f) => (
-              <li key={f.id}>
+            {roles.map((r) => (
+              <li key={r.id}>
                 <NavLink
-                  to={f.slug}
+                  to={r.slug}
                   className={({ isActive }) =>
                     `font-mono text-sm transition-colors ${
                       isActive
-                        ? signalNav[f.signalToken].active
-                        : signalNav[f.signalToken].idle
+                        ? signalNav[r.signalToken].active
+                        : signalNav[r.signalToken].idle
                     }`
                   }
                 >
-                  {f.name}
+                  {r.name}
                 </NavLink>
               </li>
             ))}

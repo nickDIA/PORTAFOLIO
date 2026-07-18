@@ -1,7 +1,7 @@
-import type { FacetId } from "../data/content";
+import type { RoleId } from "../data/content";
 
 /* ============================================================
-   Acentos por faceta: el color de señal como sistema.
+   Acentos por rol: el color de señal como sistema.
    Clases Tailwind completas (el compilador necesita verlas
    literales), una sola definición para las tres páginas.
    ============================================================ */
@@ -21,7 +21,7 @@ export interface Accent {
   ring: string;
 }
 
-export const facetAccent: Record<FacetId, Accent> = {
+export const roleAccent: Record<RoleId, Accent> = {
   web: {
     text: "text-signal-web",
     bgSoft: "bg-signal-web/10",

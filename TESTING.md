@@ -24,14 +24,14 @@ Es un gate de calidad, no el despliegue: Cloudflare Pages despliega por su propi
 
 `content.ts` alimenta la UI hoy y el system prompt del copiloto en la Fase 5. Estas pruebas protegen sus invariantes mientras se rellenan los `[[TODO`:
 
-- Existen exactamente las 3 facetas (`web`, `it`, `ai`) con slugs únicos y su token de señal correcto.
-- IDs de proyecto únicos; todo proyecto y experiencia pertenece a una faceta existente.
-- **Exactamente un proyecto central (`featured`) por faceta** — el layout lo asume.
+- Existen exactamente los 3 roles (`web`, `it`, `ai`) con slugs únicos y su token de señal correcto.
+- IDs de proyecto únicos; todo proyecto y experiencia pertenece a un rol existente.
+- **Exactamente un proyecto central (`featured`) por rol** — el layout lo asume.
 - Los proyectos del brief existen: `nautylab`, `nucleo`, `copiloto-ia`, `integracion-gemini`, `alexa-skill`; la experiencia IT completa: `ayuntamiento`, `freelance-it`, `liderazgo-operativo`.
 - Toda captura declara ruta bajo `/screenshots/` y un `alt` no vacío.
 - `isPending` detecta placeholders; los datos ya confirmados (nombre, email) no lo son.
 
-### 2. `src/components/facet/NucleoDemo.test.tsx` — la transacción atómica (5 pruebas)
+### 2. `src/components/role/NucleoDemo.test.tsx` — la transacción atómica (5 pruebas)
 
 Con timers reales (la secuencia temporizada ES el contenido de la demo):
 
@@ -44,18 +44,18 @@ Con timers reales (la secuencia temporizada ES el contenido de la demo):
 
 ### 3. `src/App.test.tsx` — routing y tematización (6 pruebas)
 
-- Landing: nombre, las 3 tarjetas de faceta enlazando a su ruta, sección de contacto.
+- Landing: nombre, las 3 tarjetas de rol enlazando a su ruta, sección de contacto.
 - Contacto resiliente: el email real es enlace `mailto:`; los `[[TODO` se muestran como chips inertes, **nunca como enlaces rotos**.
-- Por cada faceta: renderiza su `h1`, fija `--focus-ring` a **su** color de señal y tematiza el `document.title` — el color como sistema de navegación, verificado.
+- Por cada rol: renderiza su `h1`, fija `--focus-ring` a **su** color de señal y tematiza el `document.title` — el color como sistema de navegación, verificado.
 - Estructura accesible compartida: skip-link → `#contenido`, `nav` etiquetado, `main` presente.
 
-### 4. `src/components/facet/ScreenshotFrame.test.tsx` — cero imágenes rotas (3 pruebas)
+### 4. `src/components/role/ScreenshotFrame.test.tsx` — cero imágenes rotas (3 pruebas)
 
 Alt pendiente `[[TODO` → marco punteado con la ruta esperada; captura real → `<img>` con `alt` y `loading="lazy"`; error de carga → cae al marco pendiente.
 
 ### 5. `src/components/SignalTrace.test.tsx` — el hero de la señal (4 pruebas)
 
-Ambas versiones (escritorio/móvil) son `aria-hidden` (decorativas — la navegación son las tarjetas); una traza por faceta con su token de color (nunca hex directo); con hover/foco (`hot`) la rama activa queda a opacidad 1 y las otras dos a 0.3; todas las trazas usan `pathLength=1` (la base de la animación CSS pura).
+Ambas versiones (escritorio/móvil) son `aria-hidden` (decorativas — la navegación son las tarjetas); una traza por rol con su token de color (nunca hex directo); con hover/foco (`hot`) la rama activa queda a opacidad 1 y las otras dos a 0.3; todas las trazas usan `pathLength=1` (la base de la animación CSS pura).
 
 ### 6. `src/a11y.test.tsx` — auditoría axe-core (4 pruebas)
 
@@ -106,7 +106,7 @@ Realizada sobre `npm run dev` en Chrome (panel integrado), documentada por fase:
 
 - **Geometría del hero**: los 3 pads terminales de la traza alineados con el centro de su tarjeta — error medido: **0.01px** a 1280px de viewport.
 - **Responsive**: a 375px el SVG de escritorio se oculta, aparece el conector vertical degradado, **sin overflow horizontal**.
-- **Tematización por faceta**: `--focus-ring` medido en runtime = `#e8a23d` en /servicios-it, `#4fd1c5` en /ia-automatizacion; `h1` en el color de señal correspondiente.
+- **Tematización por rol**: `--focus-ring` medido en runtime = `#e8a23d` en /servicios-it, `#4fd1c5` en /ia-automatizacion; `h1` en el color de señal correspondiente.
 - **Demo de Núcleo E2E** (clics reales): transacción exitosa → badge actualizado + entrada de auditoría con timestamp real; rollback forzado → activo revertido a su estado exacto anterior, entrada eliminada, toggle desarmado.
 - **Consola del navegador**: limpia (cero errores) en las 4 rutas.
 - **Fuentes y tokens**: `body` computado = IBM Plex Sans sobre `rgb(11,13,18)`; trazas con `var(--color-signal-*)`.
@@ -139,7 +139,7 @@ npm run test:e2e:ui     # modo interactivo (Playwright UI)
 
 | Archivo | Qué prueba |
 |---|---|
-| `e2e/navigation.spec.ts` (4) | Landing con las 3 tarjetas de faceta; por cada faceta, el encabezado correcto y `--focus-ring` resuelto al hex exacto de su color de señal — verificado en un navegador real que sí computa CSS custom properties anidadas (jsdom no) |
+| `e2e/navigation.spec.ts` (4) | Landing con las 3 tarjetas de rol; por cada rol, el encabezado correcto y `--focus-ring` resuelto al hex exacto de su color de señal — verificado en un navegador real que sí computa CSS custom properties anidadas (jsdom no) |
 | `e2e/nucleo-demo.spec.ts` (2) | El mismo flujo de la demo transaccional verificado manualmente durante el desarrollo, ahora automatizado: COMMIT actualiza estado + auditoría; rollback forzado revierte ambos juntos y desarma el toggle |
 | `e2e/copilot.spec.ts` (3) | Abrir el dock, enviar una pregunta y ver la respuesta streameada — con la red mockeada usando el formato SSE real de Gemini (CRLF, `\r\n\r\n`) como segunda línea de defensa contra la regresión de línea de comando descrita arriba; manejo de error del Worker; cierre con Escape devolviendo el foco |
 

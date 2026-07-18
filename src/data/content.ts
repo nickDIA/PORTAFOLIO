@@ -15,10 +15,10 @@
 
 /* ----------------------------- Tipos ----------------------------- */
 
-export type FacetId = "web" | "it" | "ai";
+export type RoleId = "web" | "it" | "ai";
 
-export interface Facet {
-  id: FacetId;
+export interface Role {
+  id: RoleId;
   slug: string; // ruta de la página
   name: string;
   /** Token Tailwind del color de señal (clase generada por @theme) */
@@ -40,9 +40,9 @@ export interface Screenshot {
 
 export interface Project {
   id: string;
-  facet: FacetId;
+  role: RoleId;
   name: string;
-  role: string;
+  title: string; // puesto/cargo en el proyecto, ej. "Desarrollador full-stack"
   period: string; // ej. "2024 — 2025"
   summary: string; // 1-2 frases para tarjetas
   description: string; // párrafo largo para la página de detalle
@@ -50,15 +50,15 @@ export interface Project {
   tech: string[];
   screenshots: Screenshot[];
   links: ProjectLink[];
-  /** true = proyecto central de su faceta (se muestra primero y más grande) */
+  /** true = proyecto central de su rol (se muestra primero y más grande) */
   featured: boolean;
 }
 
 export interface Experience {
   id: string;
-  facet: FacetId;
+  role: RoleId;
   organization: string;
-  role: string;
+  title: string; // puesto/cargo, ej. "Encargado de Turno"
   period: string;
   description: string;
   highlights: string[];
@@ -98,9 +98,9 @@ export const profile: Profile = {
   },
 };
 
-/* ----------------------------- Facetas ----------------------------- */
+/* ----------------------------- Roles ----------------------------- */
 
-export const facets: Facet[] = [
+export const roles: Role[] = [
   {
     id: "web",
     slug: "/desarrollo-web",
@@ -136,9 +136,9 @@ export const projects: Project[] = [
   /* ---------- Desarrollo Web ---------- */
   {
     id: "nautylab",
-    facet: "web",
+    role: "web",
     name: "Nautylab",
-    role: "Desarrollador full-stack",
+    title: "Desarrollador full-stack",
     period: "2024 — 2025", // [[TODO: verificar periodo]]
     summary:
       "Aplicación web con asistente de IA integrado: React 19, accesibilidad WCAG 2.1 y respuestas de Gemini en streaming en tiempo real.",
@@ -183,9 +183,9 @@ export const projects: Project[] = [
   },
   {
     id: "gestor-inventario",
-    facet: "web",
+    role: "web",
     name: "Gestor de Inventario",
-    role: "Desarrollador",
+    title: "Desarrollador",
     period: "2024", // [[TODO: verificar periodo]]
     summary:
       "Aplicación para dar de alta, mover y auditar productos de un inventario, con historial de movimientos.",
@@ -209,9 +209,9 @@ export const projects: Project[] = [
   /* ---------- Servicios IT ---------- */
   {
     id: "nucleo",
-    facet: "it",
+    role: "it",
     name: "Núcleo",
-    role: "Diseño y desarrollo del sistema",
+    title: "Diseño y desarrollo del sistema",
     period: "2025 — presente", // [[TODO: verificar periodo]]
     summary:
       "Sistema de gestión de activos IT con auditoría transaccional: cada cambio de estado queda registrado con quién, cuándo y por qué — o se revierte completo.",
@@ -235,9 +235,9 @@ export const projects: Project[] = [
   /* ---------- IA & Automatización ---------- */
   {
     id: "copiloto-ia",
-    facet: "ai",
+    role: "ai",
     name: "Copiloto IA del portafolio",
-    role: "Diseño e implementación end-to-end",
+    title: "Diseño e implementación end-to-end",
     period: "2026",
     summary:
       "Asistente conversacional real (no mockup) embebido en este sitio, que responde sobre mi experiencia usando la API de Gemini — su system prompt se genera desde este mismo archivo de datos.",
@@ -255,9 +255,9 @@ export const projects: Project[] = [
   },
   {
     id: "integracion-gemini",
-    facet: "ai",
+    role: "ai",
     name: "Integración de Gemini en Nautylab",
-    role: "Desarrollador — integración de IA",
+    title: "Desarrollador — integración de IA",
     period: "2025", // [[TODO: verificar periodo]]
     summary:
       "Integración de Gemini 2.5 Flash con streaming SSE, prompt engineering aplicado y pipeline de generación de imágenes en dos etapas.",
@@ -280,9 +280,9 @@ export const projects: Project[] = [
   },
   {
     id: "alexa-skill",
-    facet: "ai",
+    role: "ai",
     name: "Skill de Alexa",
-    role: "Desarrollador",
+    title: "Desarrollador",
     period: "2024", // [[TODO: verificar periodo]]
     summary:
       "Skill de voz para Alexa construida en Python: interacción conversacional de extremo a extremo, del enunciado del usuario a la respuesta hablada.",
@@ -303,9 +303,9 @@ export const projects: Project[] = [
 export const experience: Experience[] = [
   {
     id: "ayuntamiento",
-    facet: "it",
+    role: "it",
     organization: "Ayuntamiento de Tijuana", // [[TODO: verificar nombre oficial]]
-    role: "Soporte técnico e inventario IT",
+    title: "Soporte técnico e inventario IT",
     period: "2024 — 2025", // [[TODO: verificar periodo]]
     description:
       "Soporte técnico e inventario de más de 300 equipos de cómputo y su red: diagnóstico y reparación, altas y bajas de equipo, y mantenimiento del registro que permite saber dónde está cada activo y en qué estado.",
@@ -316,9 +316,9 @@ export const experience: Experience[] = [
   },
   {
     id: "freelance-it",
-    facet: "it",
+    role: "it",
     organization: "Freelance",
-    role: "Técnico IT independiente",
+    title: "Técnico IT independiente",
     period: "2023 — presente", // [[TODO: verificar periodo]]
     description:
       "Servicios IT para pequeños negocios y particulares: armado y mantenimiento de equipos, instalación de redes, respaldo y recuperación de información, y asesoría para decidir qué comprar y qué reparar.",
@@ -329,9 +329,9 @@ export const experience: Experience[] = [
   },
   {
     id: "liderazgo-operativo",
-    facet: "it",
+    role: "it",
     organization: "Sector retail", // [[TODO: nombre de la empresa]]
-    role: "Encargado de Turno",
+    title: "Encargado de Turno",
     period: "2023 — 2024", // [[TODO: verificar periodo]]
     description:
       "Liderazgo operativo con responsabilidad completa del turno: coordinación del personal, control de inventario y manejo de valores. Liderazgo en piso — resolver con la gente enfrente, no desde un escritorio.",
@@ -347,14 +347,14 @@ export const experience: Experience[] = [
 /** true si el campo sigue siendo un placeholder [[TODO sin rellenar */
 export const isPending = (value: string) => value.includes("[[TODO");
 
-/** Proyectos de una faceta, con el destacado primero. */
-export function projectsByFacet(facet: FacetId): Project[] {
+/** Proyectos de un rol, con el destacado primero. */
+export function projectsByRole(role: RoleId): Project[] {
   return projects
-    .filter((p) => p.facet === facet)
+    .filter((p) => p.role === role)
     .sort((a, b) => Number(b.featured) - Number(a.featured));
 }
 
-/** Experiencia de una faceta. */
-export function experienceByFacet(facet: FacetId): Experience[] {
-  return experience.filter((e) => e.facet === facet);
+/** Experiencia de un rol. */
+export function experienceByRole(role: RoleId): Experience[] {
+  return experience.filter((e) => e.role === role);
 }

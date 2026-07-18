@@ -14,7 +14,7 @@ describe("SignalTrace", () => {
     for (const svg of svgs) expect(svg).toHaveAttribute("aria-hidden", "true");
   });
 
-  it("dibuja una traza por faceta con su color de señal", () => {
+  it("dibuja una traza por rol con su color de señal", () => {
     const { container } = render(<SignalTrace hot={null} />);
     const strokes = [...container.querySelectorAll("path.trace-path")].map(
       (p) => p.getAttribute("stroke"),

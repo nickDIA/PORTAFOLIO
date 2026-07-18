@@ -1,8 +1,8 @@
 import {
-  facets,
+  roles,
   profile,
-  projectsByFacet,
-  experienceByFacet,
+  projectsByRole,
+  experienceByRole,
 } from "./content";
 
 /* ============================================================
@@ -53,15 +53,15 @@ export function buildSystemPrompt(): string {
   if (linkedin) perfil.push(`LinkedIn: ${linkedin}`);
   partes.push(perfil.join("\n"));
 
-  /* ---- Facetas con proyectos ---- */
-  for (const f of facets) {
-    const seccion: string[] = [`# Faceta: ${f.name}`];
-    const desc = limpiar(f.description);
+  /* ---- Roles con proyectos ---- */
+  for (const r of roles) {
+    const seccion: string[] = [`# Rol: ${r.name}`];
+    const desc = limpiar(r.description);
     if (desc) seccion.push(desc);
 
-    for (const p of projectsByFacet(f.id)) {
+    for (const p of projectsByRole(r.id)) {
       seccion.push(`## Proyecto: ${p.name}${p.featured ? " (proyecto central)" : ""}`);
-      seccion.push(...linea("Rol", limpiar(p.role)));
+      seccion.push(...linea("Puesto", limpiar(p.title)));
       seccion.push(...linea("Periodo", limpiar(p.period)));
       seccion.push(...linea("Resumen", limpiar(p.summary)));
       seccion.push(...linea("Descripción", limpiar(p.description)));
@@ -78,11 +78,11 @@ export function buildSystemPrompt(): string {
       }
     }
 
-    /* Experiencia laboral de la faceta */
-    for (const e of experienceByFacet(f.id)) {
+    /* Experiencia laboral del rol */
+    for (const e of experienceByRole(r.id)) {
       const org = limpiar(e.organization);
       seccion.push(`## Experiencia: ${org ?? e.id}`);
-      seccion.push(...linea("Rol", limpiar(e.role)));
+      seccion.push(...linea("Puesto", limpiar(e.title)));
       seccion.push(...linea("Periodo", limpiar(e.period)));
       seccion.push(...linea("Descripción", limpiar(e.description)));
       const hitos = e.highlights

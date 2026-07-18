@@ -1,11 +1,11 @@
 import { projects } from "../data/content";
-import { facetAccent } from "../lib/accent";
-import FacetShell, { SectionLabel } from "../components/facet/FacetShell";
-import FeaturedProject from "../components/facet/FeaturedProject";
-import ProjectCard from "../components/facet/ProjectCard";
-import TechChips from "../components/facet/TechChips";
+import { roleAccent } from "../lib/accent";
+import RoleShell, { SectionLabel } from "../components/role/RoleShell";
+import FeaturedProject from "../components/role/FeaturedProject";
+import ProjectCard from "../components/role/ProjectCard";
+import TechChips from "../components/role/TechChips";
 
-const accent = facetAccent.ai;
+const accent = roleAccent.ai;
 
 export default function IaAutomatizacion() {
   const copiloto = projects.find((p) => p.id === "copiloto-ia")!;
@@ -13,7 +13,7 @@ export default function IaAutomatizacion() {
   const alexa = projects.find((p) => p.id === "alexa-skill")!;
 
   return (
-    <FacetShell facetId="ai">
+    <RoleShell roleId="ai">
       {/* El copiloto en primer plano: la prueba viva, no una captura */}
       <section
         aria-labelledby="copiloto"
@@ -76,6 +76,6 @@ export default function IaAutomatizacion() {
           <ProjectCard project={alexa} accent={accent} />
         </div>
       </section>
-    </FacetShell>
+    </RoleShell>
   );
 }

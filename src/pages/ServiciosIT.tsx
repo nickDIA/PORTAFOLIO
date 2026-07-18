@@ -1,18 +1,18 @@
-import { experienceByFacet, projectsByFacet } from "../data/content";
-import { facetAccent } from "../lib/accent";
-import FacetShell, { SectionLabel } from "../components/facet/FacetShell";
-import FeaturedProject from "../components/facet/FeaturedProject";
-import NucleoDemo from "../components/facet/NucleoDemo";
-import ViajePeticion from "../components/facet/ViajePeticion";
+import { experienceByRole, projectsByRole } from "../data/content";
+import { roleAccent } from "../lib/accent";
+import RoleShell, { SectionLabel } from "../components/role/RoleShell";
+import FeaturedProject from "../components/role/FeaturedProject";
+import NucleoDemo from "../components/role/NucleoDemo";
+import ViajePeticion from "../components/role/ViajePeticion";
 
-const accent = facetAccent.it;
+const accent = roleAccent.it;
 
 export default function ServiciosIT() {
-  const [nucleo] = projectsByFacet("it");
-  const experience = experienceByFacet("it");
+  const [nucleo] = projectsByRole("it");
+  const experience = experienceByRole("it");
 
   return (
-    <FacetShell facetId="it">
+    <RoleShell roleId="it">
       <section aria-label="Proyecto central" className="space-y-6">
         <FeaturedProject project={nucleo} accent={accent} />
         <NucleoDemo />
@@ -33,7 +33,7 @@ export default function ServiciosIT() {
                 {e.organization}
               </h3>
               <p className={`mt-0.5 font-mono text-xs ${accent.text}`}>
-                {e.role} · {e.period}
+                {e.title} · {e.period}
               </p>
               <p className="mt-3 text-sm leading-relaxed text-text-muted">
                 {e.description}
@@ -52,6 +52,6 @@ export default function ServiciosIT() {
           ))}
         </ol>
       </section>
-    </FacetShell>
+    </RoleShell>
   );
 }

@@ -1,26 +1,26 @@
 import { useEffect, type ReactNode } from "react";
-import { facets, type FacetId } from "../../data/content";
-import { facetAccent } from "../../lib/accent";
+import { roles, type RoleId } from "../../data/content";
+import { roleAccent } from "../../lib/accent";
 import { useDocumentTitle } from "../../lib/useDocumentTitle";
 
 interface Props {
-  facetId: FacetId;
+  roleId: RoleId;
   children: ReactNode;
 }
 
 /**
- * Armazón común de las páginas de faceta: header tematizado,
+ * Armazón común de las páginas de rol: header tematizado,
  * anillo de foco de teclado en el color de señal y título del
- * documento. El contenido de cada faceta va como children.
+ * documento. El contenido de cada rol va como children.
  */
-export default function FacetShell({ facetId, children }: Props) {
-  const index = facets.findIndex((f) => f.id === facetId);
-  const facet = facets[index];
-  const accent = facetAccent[facetId];
+export default function RoleShell({ roleId, children }: Props) {
+  const index = roles.findIndex((r) => r.id === roleId);
+  const role = roles[index];
+  const accent = roleAccent[roleId];
 
-  useDocumentTitle(facet.name);
+  useDocumentTitle(role.name);
 
-  /* El foco de teclado adopta el color de señal de la faceta */
+  /* El foco de teclado adopta el color de señal del rol */
   useEffect(() => {
     document.documentElement.style.setProperty("--focus-ring", accent.ring);
     return () => {
@@ -32,15 +32,15 @@ export default function FacetShell({ facetId, children }: Props) {
     <div className="space-y-16">
       <header className="fade-up">
         <p className="font-mono text-xs uppercase tracking-[0.25em] text-text-muted">
-          faceta /0{index + 1}
+          rol /0{index + 1}
         </p>
         <h1
           className={`mt-3 text-3xl sm:text-5xl font-bold tracking-tight ${accent.text}`}
         >
-          {facet.name}
+          {role.name}
         </h1>
         <p className="mt-4 max-w-2xl text-lg text-text-muted">
-          {facet.description}
+          {role.description}
         </p>
       </header>
       {children}

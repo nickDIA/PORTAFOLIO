@@ -1,10 +1,10 @@
-import type { FacetId } from "../data/content";
+import type { RoleId } from "../data/content";
 
 /* ============================================================
    Traza de circuito del hero.
    Un nodo de origen central se ramifica en tres trazas, una por
-   faceta, cada una en su color de señal. Las ramas terminan
-   alineadas con el centro de las tarjetas de faceta (grid de 3
+   rol, cada una en su color de señal. Las ramas terminan
+   alineadas con el centro de las tarjetas de rol (grid de 3
    columnas en un contenedor de 976px con gap de 24px →
    centros en x = 154.67, 488 y 821.33).
 
@@ -16,7 +16,7 @@ import type { FacetId } from "../data/content";
 const ORIGIN = { x: 488, y: 14 };
 
 interface Branch {
-  id: FacetId;
+  id: RoleId;
   d: string;
   color: string; // var() del token — nunca hex directo
   padX: number;
@@ -61,8 +61,8 @@ const branches: Branch[] = [
 ];
 
 interface Props {
-  /** Faceta bajo hover/foco en las tarjetas: su traza se intensifica */
-  hot: FacetId | null;
+  /** Rol bajo hover/foco en las tarjetas: su traza se intensifica */
+  hot: RoleId | null;
 }
 
 export default function SignalTrace({ hot }: Props) {

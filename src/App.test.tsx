@@ -23,12 +23,12 @@ afterEach(() => {
 });
 
 describe("landing (/)", () => {
-  it("muestra nombre, las tres tarjetas de faceta y contacto", () => {
+  it("muestra nombre, las tres tarjetas de rol y contacto", () => {
     renderAt("/");
     expect(
       screen.getByRole("heading", { level: 1, name: /Dominick Ibarra Acedo/ }),
     ).toBeInTheDocument();
-    /* Acotado a main: los nombres de faceta también están en el nav */
+    /* Acotado a main: los nombres de rol también están en el nav */
     const main = within(screen.getByRole("main"));
     expect(main.getByRole("link", { name: /Desarrollo Web/ })).toHaveAttribute(
       "href",
@@ -66,7 +66,7 @@ describe.each([
   ["/desarrollo-web", "Desarrollo Web", "var(--color-signal-web)"],
   ["/servicios-it", "Servicios IT", "var(--color-signal-it)"],
   ["/ia-automatizacion", "IA & Automatización", "var(--color-signal-ai)"],
-])("página de faceta %s", (path, name, ring) => {
+])("página de rol %s", (path, name, ring) => {
   it(`renderiza "${name}" y tematiza foco y título`, () => {
     renderAt(path);
     expect(screen.getByRole("heading", { level: 1, name })).toBeInTheDocument();

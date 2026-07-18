@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { fireEvent, render, screen } from "@testing-library/react";
 import ScreenshotFrame from "./ScreenshotFrame";
-import { facetAccent } from "../../lib/accent";
+import { roleAccent } from "../../lib/accent";
 
 /* El sitio nunca debe mostrar una imagen rota: capturas con alt
    pendiente ([[TODO) o que fallan al cargar caen al marco punteado. */
@@ -11,7 +11,7 @@ describe("ScreenshotFrame", () => {
     render(
       <ScreenshotFrame
         shot={{ src: "/screenshots/nucleo-1.png", alt: "[[TODO: describir]]" }}
-        accent={facetAccent.it}
+        accent={roleAccent.it}
       />,
     );
     expect(screen.getByText("[ captura pendiente ]")).toBeInTheDocument();
@@ -23,7 +23,7 @@ describe("ScreenshotFrame", () => {
     render(
       <ScreenshotFrame
         shot={{ src: "/screenshots/real.png", alt: "Vista del panel" }}
-        accent={facetAccent.web}
+        accent={roleAccent.web}
       />,
     );
     const img = screen.getByRole("img", { name: "Vista del panel" });
@@ -35,7 +35,7 @@ describe("ScreenshotFrame", () => {
     render(
       <ScreenshotFrame
         shot={{ src: "/screenshots/rota.png", alt: "Captura que no existe" }}
-        accent={facetAccent.web}
+        accent={roleAccent.web}
       />,
     );
     fireEvent.error(screen.getByRole("img"));

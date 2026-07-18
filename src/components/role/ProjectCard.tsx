@@ -23,7 +23,7 @@ export default function ProjectCard({ project, accent }: Props) {
           {project.name}
         </h3>
         <p className="mt-0.5 font-mono text-xs text-text-muted">
-          {project.role} · {project.period}
+          {project.title} · {project.period}
         </p>
       </div>
       <p className="text-sm leading-relaxed text-text-muted">

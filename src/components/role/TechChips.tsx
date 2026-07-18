@@ -7,7 +7,7 @@ interface Props {
   label?: string;
 }
 
-/** Fila de chips de tecnología en el color de señal de la faceta. */
+/** Fila de chips de tecnología en el color de señal del rol. */
 export default function TechChips({ tech, accent, label = "Stack" }: Props) {
   const items = tech.filter((t) => !isPending(t));
   if (items.length === 0) return null;

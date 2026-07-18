@@ -14,7 +14,7 @@ interface Props {
   children?: ReactNode;
 }
 
-/** Presentación grande del proyecto central de una faceta. */
+/** Presentación grande del proyecto central de un rol. */
 export default function FeaturedProject({
   project,
   accent,
@@ -38,7 +38,7 @@ export default function FeaturedProject({
         {project.name}
       </h2>
       <p className="mt-1 font-mono text-xs text-text-muted">
-        {project.role} · {project.period}
+        {project.title} · {project.period}
       </p>
 
       <div className={`mt-8 grid gap-10 ${hasShots ? "lg:grid-cols-2" : ""}`}>

@@ -1,17 +1,17 @@
-import { isPending, profile, projectsByFacet } from "../data/content";
-import { facetAccent } from "../lib/accent";
-import FacetShell, { SectionLabel } from "../components/facet/FacetShell";
-import FeaturedProject from "../components/facet/FeaturedProject";
-import ProjectCard from "../components/facet/ProjectCard";
+import { isPending, profile, projectsByRole } from "../data/content";
+import { roleAccent } from "../lib/accent";
+import RoleShell, { SectionLabel } from "../components/role/RoleShell";
+import FeaturedProject from "../components/role/FeaturedProject";
+import ProjectCard from "../components/role/ProjectCard";
 
-const accent = facetAccent.web;
+const accent = roleAccent.web;
 
 export default function DesarrolloWeb() {
-  const [featured, ...support] = projectsByFacet("web");
+  const [featured, ...support] = projectsByRole("web");
   const github = profile.contact.github;
 
   return (
-    <FacetShell facetId="web">
+    <RoleShell roleId="web">
       <section aria-label="Proyecto central">
         <FeaturedProject project={featured} accent={accent} />
       </section>
@@ -58,6 +58,6 @@ export default function DesarrolloWeb() {
           )}
         </div>
       </section>
-    </FacetShell>
+    </RoleShell>
   );
 }

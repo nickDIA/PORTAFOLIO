@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { facets, isPending, profile, type FacetId } from "../data/content";
+import { roles, isPending, profile, type RoleId } from "../data/content";
 import SignalTrace from "../components/SignalTrace";
 import { useDocumentTitle } from "../lib/useDocumentTitle";
 
-/* Clases completas por faceta (Tailwind no admite concatenación). */
+/* Clases completas por rol (Tailwind no admite concatenación). */
 const cardAccent: Record<string, string> = {
   "signal-web": "border-signal-web/40 hover:border-signal-web focus-visible:border-signal-web",
   "signal-it": "border-signal-it/40 hover:border-signal-it focus-visible:border-signal-it",
@@ -24,7 +24,7 @@ export default function Home() {
 
   /* La tarjeta bajo hover/foco intensifica su traza en el SVG:
      el color de señal funciona como navegación, no como adorno. */
-  const [hot, setHot] = useState<FacetId | null>(null);
+  const [hot, setHot] = useState<RoleId | null>(null);
 
   const contactLinks = [
     { label: "GitHub", href: profile.contact.github },
@@ -57,28 +57,28 @@ export default function Home() {
           <SignalTrace hot={hot} />
         </div>
 
-        {/* Tarjetas de faceta: destino de cada rama */}
+        {/* Tarjetas de rol: destino de cada rama */}
         <div className="grid gap-6 sm:grid-cols-3 sm:-mt-1">
-          {facets.map((f, i) => (
+          {roles.map((r, i) => (
             <Link
-              key={f.id}
-              to={f.slug}
-              onMouseEnter={() => setHot(f.id)}
+              key={r.id}
+              to={r.slug}
+              onMouseEnter={() => setHot(r.id)}
               onMouseLeave={() => setHot(null)}
-              onFocus={() => setHot(f.id)}
+              onFocus={() => setHot(r.id)}
               onBlur={() => setHot(null)}
-              className={`fade-up block rounded-lg bg-surface border p-6 transition-all hover:-translate-y-1 motion-reduce:hover:translate-y-0 ${cardAccent[f.signalToken]}`}
+              className={`fade-up block rounded-lg bg-surface border p-6 transition-all hover:-translate-y-1 motion-reduce:hover:translate-y-0 ${cardAccent[r.signalToken]}`}
               style={{ animationDelay: cardDelays[i] }}
             >
               <p className="font-mono text-xs text-text-muted">0{i + 1}</p>
               <h2
-                className={`mt-2 font-display text-xl font-semibold ${titleAccent[f.signalToken]}`}
+                className={`mt-2 font-display text-xl font-semibold ${titleAccent[r.signalToken]}`}
               >
-                {f.name}
+                {r.name}
               </h2>
-              <p className="mt-2 text-sm text-text-muted">{f.tagline}</p>
+              <p className="mt-2 text-sm text-text-muted">{r.tagline}</p>
               <p
-                className={`mt-4 font-mono text-xs ${titleAccent[f.signalToken]}`}
+                className={`mt-4 font-mono text-xs ${titleAccent[r.signalToken]}`}
                 aria-hidden="true"
               >
                 explorar →
