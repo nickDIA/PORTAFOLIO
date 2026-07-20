@@ -2,6 +2,8 @@ import { useEffect, type ReactNode } from "react";
 import { roles, type RoleId } from "../../data/content";
 import { roleAccent } from "../../lib/accent";
 import { useDocumentTitle } from "../../lib/useDocumentTitle";
+import { useT } from "../../i18n/locale";
+import { ui } from "../../i18n/ui";
 
 interface Props {
   roleId: RoleId;
@@ -14,11 +16,12 @@ interface Props {
  * documento. El contenido de cada rol va como children.
  */
 export default function RoleShell({ roleId, children }: Props) {
+  const t = useT();
   const index = roles.findIndex((r) => r.id === roleId);
   const role = roles[index];
   const accent = roleAccent[roleId];
 
-  useDocumentTitle(role.name);
+  useDocumentTitle(t(role.name));
 
   /* El foco de teclado adopta el color de señal del rol */
   useEffect(() => {
@@ -32,15 +35,15 @@ export default function RoleShell({ roleId, children }: Props) {
     <div className="space-y-16">
       <header className="fade-up">
         <p className="font-mono text-xs uppercase tracking-[0.25em] text-text-muted">
-          rol /0{index + 1}
+          {t(ui.role.label)} /0{index + 1}
         </p>
         <h1
           className={`mt-3 text-3xl sm:text-5xl font-bold tracking-tight ${accent.text}`}
         >
-          {role.name}
+          {t(role.name)}
         </h1>
         <p className="mt-4 max-w-2xl text-lg text-text-muted">
-          {role.description}
+          {t(role.description)}
         </p>
       </header>
       {children}

@@ -8,6 +8,7 @@ import {
   experienceByRole,
   isPending,
 } from "./content";
+import type { LocalizedText } from "../i18n/locale";
 
 /* ============================================================
    Integridad de la fuente única de verdad.
@@ -61,11 +62,12 @@ describe("proyectos", () => {
     expect(ids).toContain("alexa-skill");
   });
 
-  it("toda captura declara ruta bajo /screenshots y un alt", () => {
+  it("toda captura declara ruta bajo /screenshots y un alt en ambos idiomas", () => {
     for (const p of projects) {
       for (const s of p.screenshots) {
         expect(s.src, `${p.id}: src`).toMatch(/^\/screenshots\//);
-        expect(s.alt.length, `${p.id}: alt vacío`).toBeGreaterThan(0);
+        expect(s.alt.es.length, `${p.id}: alt.es vacío`).toBeGreaterThan(0);
+        expect(s.alt.en.length, `${p.id}: alt.en vacío`).toBeGreaterThan(0);
       }
     }
   });
@@ -110,5 +112,63 @@ describe("perfil", () => {
     expect(isPending(profile.name)).toBe(false);
     expect(isPending(profile.contact.email)).toBe(false);
     expect(profile.contact.email).toContain("@");
+  });
+});
+
+/* ============================================================
+   Bilingüismo: cada campo LocalizedText debe traer es Y en no
+   vacíos — un placeholder [[TODO sin rellenar cuenta como
+   "presente" (es intencional, ver content.ts), pero un campo
+   real nunca debe quedar vacío en ningún idioma.
+   ============================================================ */
+
+const nonEmpty = (field: LocalizedText, where: string) => {
+  expect(field.es.length, `${where}.es vacío`).toBeGreaterThan(0);
+  expect(field.en.length, `${where}.en vacío`).toBeGreaterThan(0);
+};
+
+describe("bilingüe", () => {
+  it("perfil: tagline, intro, location y cvNote traen ambos idiomas", () => {
+    nonEmpty(profile.title, "profile.title");
+    nonEmpty(profile.tagline, "profile.tagline");
+    nonEmpty(profile.intro, "profile.intro");
+    nonEmpty(profile.location, "profile.location");
+    nonEmpty(profile.contact.cvNote, "profile.contact.cvNote");
+  });
+
+  it("cada rol trae name, tagline y description en ambos idiomas", () => {
+    for (const r of roles) {
+      nonEmpty(r.name, `role ${r.id}.name`);
+      nonEmpty(r.tagline, `role ${r.id}.tagline`);
+      nonEmpty(r.description, `role ${r.id}.description`);
+    }
+  });
+
+  it("cada proyecto trae sus campos de prosa en ambos idiomas", () => {
+    for (const p of projects) {
+      nonEmpty(p.name, `project ${p.id}.name`);
+      nonEmpty(p.title, `project ${p.id}.title`);
+      nonEmpty(p.summary, `project ${p.id}.summary`);
+      nonEmpty(p.description, `project ${p.id}.description`);
+      for (const [i, a] of p.achievements.entries()) {
+        nonEmpty(a, `project ${p.id}.achievements[${i}]`);
+      }
+    }
+  });
+
+  it("cada experiencia trae organization, title y description en ambos idiomas", () => {
+    for (const e of experience) {
+      nonEmpty(e.organization, `experience ${e.id}.organization`);
+      nonEmpty(e.title, `experience ${e.id}.title`);
+      nonEmpty(e.description, `experience ${e.id}.description`);
+    }
+  });
+
+  it("los placeholders [[TODO están sincronizados entre es y en (mismo estado pendiente)", () => {
+    for (const p of projects) {
+      expect(isPending(p.period.es), `${p.id}.period`).toBe(
+        isPending(p.period.en),
+      );
+    }
   });
 });

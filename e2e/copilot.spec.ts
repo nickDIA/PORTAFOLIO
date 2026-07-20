@@ -6,7 +6,9 @@ import { test, expect } from "@playwright/test";
    en CI), pero el SSE simulado usa CRLF ("\r\n\r\n") — el formato
    real de Gemini que causó un bug de producción (ver TESTING.md).
    Esta prueba es una segunda línea de defensa contra esa regresión,
-   ahora en un navegador real de extremo a extremo.
+   ahora en un navegador real de extremo a extremo. Incluye una
+   pasada en inglés: solo el chrome del widget se traduce, el
+   copiloto mismo ya responde en el idioma en que le escriban.
    ============================================================ */
 
 test("abre, envía una pregunta y muestra la respuesta streameada", async ({
@@ -77,4 +79,36 @@ test("cierra con Escape y devuelve el foco al botón del dock", async ({
   await page.keyboard.press("Escape");
   await expect(page.getByRole("dialog")).toHaveCount(0);
   await expect(toggle).toBeFocused();
+});
+
+test("en /en, el chrome del dock (botones, sugerencias) está en inglés", async ({
+  page,
+}) => {
+  await page.route("**/api/chat", async (route) => {
+    const evento = `data: ${JSON.stringify({
+      candidates: [
+        {
+          content: { role: "model", parts: [{ text: "Nautylab is a real project." }] },
+          finishReason: "STOP",
+        },
+      ],
+    })}\r\n\r\n`;
+    await route.fulfill({
+      status: 200,
+      contentType: "text/event-stream",
+      body: evento,
+    });
+  });
+
+  await page.goto("/en/ia-automatizacion");
+  await page.getByRole("button", { name: "AI Copilot" }).click();
+
+  const dialog = page.getByRole("dialog", { name: "AI Copilot" });
+  await dialog.getByRole("button", { name: "What is Nautylab?" }).click();
+
+  await expect(dialog.getByText("What is Nautylab?")).toBeVisible();
+  await expect(dialog.getByText("Nautylab is a real project.")).toBeVisible();
+  await expect(
+    dialog.getByRole("textbox", { name: "Type your question" }),
+  ).toBeVisible();
 });

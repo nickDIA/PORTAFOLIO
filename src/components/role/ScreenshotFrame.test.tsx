@@ -10,7 +10,10 @@ describe("ScreenshotFrame", () => {
   it("alt pendiente [[TODO → marco pendiente con la ruta esperada", () => {
     render(
       <ScreenshotFrame
-        shot={{ src: "/screenshots/nucleo-1.png", alt: "[[TODO: describir]]" }}
+        shot={{
+          src: "/screenshots/nucleo-1.png",
+          alt: { es: "[[TODO: describir]]", en: "[[TODO: describe]]" },
+        }}
         accent={roleAccent.it}
       />,
     );
@@ -19,10 +22,13 @@ describe("ScreenshotFrame", () => {
     expect(screen.queryByRole("img")).not.toBeInTheDocument();
   });
 
-  it("captura real → renderiza la imagen con alt y lazy loading", () => {
+  it("captura real → renderiza la imagen con alt (locale por defecto: es) y lazy loading", () => {
     render(
       <ScreenshotFrame
-        shot={{ src: "/screenshots/real.png", alt: "Vista del panel" }}
+        shot={{
+          src: "/screenshots/real.png",
+          alt: { es: "Vista del panel", en: "Panel view" },
+        }}
         accent={roleAccent.web}
       />,
     );
@@ -34,7 +40,10 @@ describe("ScreenshotFrame", () => {
   it("si la imagen falla al cargar, cae al marco pendiente", () => {
     render(
       <ScreenshotFrame
-        shot={{ src: "/screenshots/rota.png", alt: "Captura que no existe" }}
+        shot={{
+          src: "/screenshots/rota.png",
+          alt: { es: "Captura que no existe", en: "Screenshot doesn't exist" },
+        }}
         accent={roleAccent.web}
       />,
     );

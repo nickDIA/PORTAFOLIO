@@ -4,10 +4,11 @@ import { MemoryRouter } from "react-router-dom";
 import App from "./App";
 
 /* ============================================================
-   Routing + tematización: cada ruta renderiza su página, el
-   color de señal tematiza el foco de teclado (--focus-ring) y
-   el título del documento, y la estructura accesible base
-   (skip-link, nav, main) está presente en todas.
+   Routing + tematización + bilingüismo: cada ruta renderiza su
+   página en el idioma correcto (español sin prefijo, inglés bajo
+   /en), el color de señal tematiza el foco de teclado y el
+   título del documento, y la estructura accesible base está
+   presente en ambos árboles de rutas.
    ============================================================ */
 
 const renderAt = (path: string) =>
@@ -23,7 +24,7 @@ afterEach(() => {
 });
 
 describe("landing (/)", () => {
-  it("muestra nombre, las tres tarjetas de rol y contacto", () => {
+  it("muestra nombre, las tres tarjetas de rol y contacto en español", () => {
     renderAt("/");
     expect(
       screen.getByRole("heading", { level: 1, name: /Dominick Ibarra Acedo/ }),
@@ -62,11 +63,33 @@ describe("landing (/)", () => {
   });
 });
 
+describe("landing (/en)", () => {
+  it("muestra las tres tarjetas de rol traducidas al inglés", () => {
+    renderAt("/en");
+    expect(
+      screen.getByRole("heading", { level: 1, name: /Dominick Ibarra Acedo/ }),
+    ).toBeInTheDocument();
+    const main = within(screen.getByRole("main"));
+    expect(main.getByRole("link", { name: /Web Development/ })).toHaveAttribute(
+      "href",
+      "/en/desarrollo-web",
+    );
+    expect(main.getByRole("link", { name: /IT Services/ })).toHaveAttribute(
+      "href",
+      "/en/servicios-it",
+    );
+    expect(
+      main.getByRole("link", { name: /AI & Automation/ }),
+    ).toHaveAttribute("href", "/en/ia-automatizacion");
+    expect(screen.getByText("Contact")).toBeInTheDocument();
+  });
+});
+
 describe.each([
   ["/desarrollo-web", "Desarrollo Web", "var(--color-signal-web)"],
   ["/servicios-it", "Servicios IT", "var(--color-signal-it)"],
   ["/ia-automatizacion", "IA & Automatización", "var(--color-signal-ai)"],
-])("página de rol %s", (path, name, ring) => {
+])("página de rol %s (español)", (path, name, ring) => {
   it(`renderiza "${name}" y tematiza foco y título`, () => {
     renderAt(path);
     expect(screen.getByRole("heading", { level: 1, name })).toBeInTheDocument();
@@ -77,8 +100,49 @@ describe.each([
   });
 });
 
+describe.each([
+  ["/en/desarrollo-web", "Web Development", "var(--color-signal-web)"],
+  ["/en/servicios-it", "IT Services", "var(--color-signal-it)"],
+  ["/en/ia-automatizacion", "AI & Automation", "var(--color-signal-ai)"],
+])("página de rol %s (inglés)", (path, name, ring) => {
+  it(`renderiza "${name}" y tematiza foco y título`, () => {
+    renderAt(path);
+    expect(screen.getByRole("heading", { level: 1, name })).toBeInTheDocument();
+    expect(
+      document.documentElement.style.getPropertyValue("--focus-ring"),
+    ).toBe(ring);
+    expect(document.title).toContain(name);
+  });
+});
+
+describe("selector de idioma", () => {
+  it("en / ofrece un link a la versión en inglés de la misma página", () => {
+    renderAt("/servicios-it");
+    expect(screen.getByRole("link", { name: "English" })).toHaveAttribute(
+      "href",
+      "/en/servicios-it",
+    );
+  });
+
+  it("en /en ofrece un link a la versión en español de la misma página", () => {
+    renderAt("/en/servicios-it");
+    expect(screen.getByRole("link", { name: "Español" })).toHaveAttribute(
+      "href",
+      "/servicios-it",
+    );
+  });
+
+  it("el link de idioma en la raíz apunta a /en, no a /en/", () => {
+    renderAt("/");
+    expect(screen.getByRole("link", { name: "English" })).toHaveAttribute(
+      "href",
+      "/en",
+    );
+  });
+});
+
 describe("estructura accesible compartida", () => {
-  it("skip-link, navegación y main presentes", () => {
+  it("skip-link, navegación y main presentes en español", () => {
     renderAt("/");
     expect(
       screen.getByRole("link", { name: /Saltar al contenido/ }),
@@ -87,5 +151,24 @@ describe("estructura accesible compartida", () => {
       screen.getByRole("navigation", { name: /Navegación principal/ }),
     ).toBeInTheDocument();
     expect(screen.getByRole("main")).toHaveAttribute("id", "contenido");
+  });
+
+  it("skip-link, navegación y main presentes en inglés, y traducidos", () => {
+    renderAt("/en");
+    expect(
+      screen.getByRole("link", { name: /Skip to content/ }),
+    ).toHaveAttribute("href", "#contenido");
+    expect(
+      screen.getByRole("navigation", { name: /Main navigation/ }),
+    ).toBeInTheDocument();
+    expect(screen.getByRole("main")).toHaveAttribute("id", "contenido");
+  });
+
+  it("document.documentElement.lang sigue la ruta actual", () => {
+    renderAt("/");
+    expect(document.documentElement.lang).toBe("es");
+    cleanup();
+    renderAt("/en");
+    expect(document.documentElement.lang).toBe("en");
   });
 });

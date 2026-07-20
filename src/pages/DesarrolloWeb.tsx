@@ -1,5 +1,7 @@
 import { isPending, profile, projectsByRole } from "../data/content";
 import { roleAccent } from "../lib/accent";
+import { useT } from "../i18n/locale";
+import { ui } from "../i18n/ui";
 import RoleShell, { SectionLabel } from "../components/role/RoleShell";
 import FeaturedProject from "../components/role/FeaturedProject";
 import ProjectCard from "../components/role/ProjectCard";
@@ -7,6 +9,7 @@ import ProjectCard from "../components/role/ProjectCard";
 const accent = roleAccent.web;
 
 export default function DesarrolloWeb() {
+  const t = useT();
   const [featured, ...support] = projectsByRole("web");
   const github = profile.contact.github;
 
@@ -18,7 +21,7 @@ export default function DesarrolloWeb() {
 
       <section aria-labelledby="proyectos-apoyo" className="space-y-6">
         <SectionLabel id="proyectos-apoyo">
-          {support.length === 1 ? "Proyecto de apoyo" : "Proyectos de apoyo"}
+          {t(support.length === 1 ? ui.project.supportOne : ui.project.supportMany)}
         </SectionLabel>
         <div className="grid gap-6 sm:grid-cols-2">
           {support.map((p) => (
@@ -32,11 +35,10 @@ export default function DesarrolloWeb() {
         className={`rounded-lg border p-8 text-center ${accent.borderSoft} ${accent.bgSoft}`}
       >
         <h2 id="codigo" className="font-display text-xl font-semibold">
-          El código está abierto
+          {t(ui.desarrolloWeb.codeHeading)}
         </h2>
         <p className="mt-2 text-sm text-text-muted">
-          Los repositorios públicos están en GitHub — la evidencia se puede
-          leer, no solo mirar.
+          {t(ui.desarrolloWeb.codeParagraph)}
         </p>
         <div className="mt-5">
           {isPending(github) ? (
@@ -44,7 +46,7 @@ export default function DesarrolloWeb() {
               className="inline-block rounded border border-dashed border-text-muted/30 px-4 py-2 font-mono text-sm text-text-muted"
               title="URL pendiente de configurar en content.ts"
             >
-              GitHub · pendiente
+              {t(ui.desarrolloWeb.githubPending)}
             </span>
           ) : (
             <a
@@ -53,7 +55,7 @@ export default function DesarrolloWeb() {
               rel="noopener noreferrer"
               className={`inline-block rounded border px-4 py-2 font-mono text-sm transition-colors hover:bg-signal-web/20 ${accent.border} ${accent.text}`}
             >
-              Ver GitHub ↗
+              {t(ui.desarrolloWeb.viewGithub)}
             </a>
           )}
         </div>

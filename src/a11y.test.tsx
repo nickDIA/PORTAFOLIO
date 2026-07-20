@@ -32,6 +32,10 @@ describe.each([
   ["/desarrollo-web"],
   ["/servicios-it"],
   ["/ia-automatizacion"],
+  ["/en"],
+  ["/en/desarrollo-web"],
+  ["/en/servicios-it"],
+  ["/en/ia-automatizacion"],
 ])("axe %s", (path) => {
   it("sin violaciones de accesibilidad", async () => {
     expect(await auditar(path)).toEqual([]);

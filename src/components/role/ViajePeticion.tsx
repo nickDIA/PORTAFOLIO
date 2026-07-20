@@ -1,3 +1,6 @@
+import { useT } from "../../i18n/locale";
+import { ui } from "../../i18n/ui";
+
 /* ============================================================
    Mini-versión visual de "El viaje de una petición" (Núcleo).
    Una petición avanza por la traza; en la transacción se bifurca
@@ -8,17 +11,19 @@
 
 const AMBER = "var(--color-signal-it)";
 
-const stages = [
-  { x: 40, y: 84, label: "petición" },
-  { x: 200, y: 84, label: "validación" },
-  { x: 360, y: 112, label: "transacción" },
-  { x: 640, y: 84, label: "respuesta" },
-];
-
 export default function ViajePeticion() {
+  const t = useT();
+
+  const stages = [
+    { x: 40, y: 84, label: t(ui.viajePeticion.stagePeticion) },
+    { x: 200, y: 84, label: t(ui.viajePeticion.stageValidacion) },
+    { x: 360, y: 112, label: t(ui.viajePeticion.stageTransaccion) },
+    { x: 640, y: 84, label: t(ui.viajePeticion.stageRespuesta) },
+  ];
+
   return (
     <figure
-      aria-label="Diagrama del viaje de una petición en Núcleo: la petición pasa por validación y llega a una transacción que escribe simultáneamente el cambio de estado y la entrada de auditoría; ambas convergen en la respuesta — se confirman juntas o se revierten juntas."
+      aria-label={t(ui.viajePeticion.ariaLabel)}
       className="rounded-lg border border-signal-it/30 bg-surface p-6"
     >
       <svg
@@ -110,20 +115,19 @@ export default function ViajePeticion() {
           style={{ animationDelay: "1.7s" }}
         >
           <text x="460" y="26" textAnchor="middle" fill={AMBER}>
-            cambio de estado
+            {t(ui.viajePeticion.changeOfState)}
           </text>
           <text x="460" y="104" textAnchor="middle" fill={AMBER}>
-            entrada de auditoría
+            {t(ui.viajePeticion.auditEntry)}
           </text>
           <text x="460" y="64" textAnchor="middle" fill="var(--color-text-muted)">
-            atómico
+            {t(ui.viajePeticion.atomic)}
           </text>
         </g>
       </svg>
 
       <figcaption className="mt-4 font-mono text-xs text-text-muted">
-        El viaje de una petición — las dos escrituras se confirman juntas o se
-        revierten juntas.
+        {t(ui.viajePeticion.caption)}
       </figcaption>
     </figure>
   );

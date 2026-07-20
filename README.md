@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/nickDIA/PORTAFOLIO/actions/workflows/ci.yml/badge.svg)](https://github.com/nickDIA/PORTAFOLIO/actions/workflows/ci.yml)
 
-Portafolio profesional con tres roles — **Desarrollo Web · Servicios IT · IA & Automatización** — con una demo interactiva de transacción atómica (Núcleo) y un copiloto IA en vivo anclado a los datos del sitio.
+Portafolio profesional bilingüe (es/en) con tres roles — **Desarrollo Web · Servicios IT · IA & Automatización** — con una demo interactiva de transacción atómica (Núcleo) y un copiloto IA en vivo anclado a los datos del sitio.
 
 **Stack**: Vite + React 19 + TypeScript + Tailwind CSS v4 · Cloudflare Worker (copiloto) · Cloudflare Pages (despliegue).
 
@@ -29,14 +29,19 @@ GEMINI_API_KEY=AIza...
 
 ## Contenido
 
-Todo el contenido vive en [`src/data/content.ts`](src/data/content.ts) — única fuente de verdad que alimenta la UI **y** el system prompt del copiloto ([`src/data/systemPrompt.ts`](src/data/systemPrompt.ts)). Los campos por rellenar están marcados `[[TODO` (búscalos); los fragmentos sin rellenar se filtran automáticamente del prompt y se muestran como "pendiente" en la UI, nunca como contenido roto.
+Todo el contenido vive en [`src/data/content.ts`](src/data/content.ts) — única fuente de verdad que alimenta la UI **y** el system prompt del copiloto ([`src/data/systemPrompt.ts`](src/data/systemPrompt.ts)). Cada campo de prosa es bilingüe (`{ es, en }`); los campos por rellenar están marcados `[[TODO` en ambos idiomas (búscalos) — los fragmentos sin rellenar se filtran automáticamente del prompt y se muestran como "pendiente" en la UI, nunca como contenido roto.
 
 Capturas de pantalla → `public/screenshots/` · CV → `public/cv.pdf`.
+
+## Idiomas (es/en)
+
+El español vive en las rutas sin prefijo (`/servicios-it`); el inglés bajo `/en` (`/en/servicios-it`) — cada página tiene un link propio compartible por idioma. La infraestructura vive en `src/i18n/`: `locale.ts` (contexto de idioma + `useT()`) y `ui.ts` (diccionario de texto de interfaz que no viene de `content.ts`). El copiloto responde en el idioma en que le escriban, independiente del idioma del sitio — su system prompt se genera siempre desde el español canónico.
 
 ## Pruebas
 
 ```bash
-npm test             # 62 pruebas (Vitest + Testing Library + axe-core)
+npm test             # 81 pruebas (Vitest + Testing Library + axe-core)
+npm run test:e2e     # 18 pruebas E2E (Playwright, navegador real, es + en)
 ```
 
 Detalle completo de cobertura y verificaciones manuales en [TESTING.md](TESTING.md).

@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { roles, isPending, profile, type RoleId } from "../data/content";
 import SignalTrace from "../components/SignalTrace";
 import { useDocumentTitle } from "../lib/useDocumentTitle";
+import { useLocale, useT, localizePath } from "../i18n/locale";
+import { ui } from "../i18n/ui";
 
 /* Clases completas por rol (Tailwind no admite concatenación). */
 const cardAccent: Record<string, string> = {
@@ -21,6 +23,8 @@ const cardDelays = ["0.9s", "1.05s", "1.2s"];
 
 export default function Home() {
   useDocumentTitle();
+  const t = useT();
+  const locale = useLocale();
 
   /* La tarjeta bajo hover/foco intensifica su traza en el SVG:
      el color de señal funciona como navegación, no como adorno. */
@@ -30,25 +34,29 @@ export default function Home() {
     { label: "GitHub", href: profile.contact.github },
     { label: "LinkedIn", href: profile.contact.linkedin },
     { label: "Email", href: `mailto:${profile.contact.email}` },
-    { label: "Descargar CV", href: profile.contact.cvUrl, download: true },
+    {
+      label: t(ui.home.downloadCv),
+      href: profile.contact.cvUrl,
+      download: true,
+    },
   ];
 
   return (
     <div className="space-y-24">
       {/* ============ Hero de la señal ============ */}
-      <section aria-label="Presentación" className="pt-6 sm:pt-10">
+      <section aria-label={t(ui.home.presentationLabel)} className="pt-6 sm:pt-10">
         <div className="text-center">
           <p className="font-mono text-xs uppercase tracking-[0.25em] text-text-muted fade-up">
-            {profile.title}
-            {profile.location && !isPending(profile.location) && (
-              <> · {profile.location}</>
+            {t(profile.title)}
+            {profile.location && !isPending(t(profile.location)) && (
+              <> · {t(profile.location)}</>
             )}
           </p>
           <h1 className="mt-4 text-4xl sm:text-6xl font-bold tracking-tight fade-up [animation-delay:0.1s]">
             {profile.name}
           </h1>
           <p className="mt-4 text-lg sm:text-xl text-text-muted max-w-2xl mx-auto fade-up [animation-delay:0.2s]">
-            {profile.tagline}
+            {t(profile.tagline)}
           </p>
         </div>
 
@@ -62,7 +70,7 @@ export default function Home() {
           {roles.map((r, i) => (
             <Link
               key={r.id}
-              to={r.slug}
+              to={localizePath(r.slug, locale)}
               onMouseEnter={() => setHot(r.id)}
               onMouseLeave={() => setHot(null)}
               onFocus={() => setHot(r.id)}
@@ -74,14 +82,14 @@ export default function Home() {
               <h2
                 className={`mt-2 font-display text-xl font-semibold ${titleAccent[r.signalToken]}`}
               >
-                {r.name}
+                {t(r.name)}
               </h2>
-              <p className="mt-2 text-sm text-text-muted">{r.tagline}</p>
+              <p className="mt-2 text-sm text-text-muted">{t(r.tagline)}</p>
               <p
                 className={`mt-4 font-mono text-xs ${titleAccent[r.signalToken]}`}
                 aria-hidden="true"
               >
-                explorar →
+                {t(ui.home.explore)}
               </p>
             </Link>
           ))}
@@ -94,9 +102,9 @@ export default function Home() {
           id="sobre-mi"
           className="font-mono text-sm uppercase tracking-widest text-text-muted"
         >
-          Sobre mí
+          {t(ui.home.aboutHeading)}
         </h2>
-        <p className="mt-4 text-lg leading-relaxed">{profile.intro}</p>
+        <p className="mt-4 text-lg leading-relaxed">{t(profile.intro)}</p>
       </section>
 
       {/* ============ Contacto ============ */}
@@ -108,7 +116,7 @@ export default function Home() {
           id="contacto"
           className="font-mono text-sm uppercase tracking-widest text-text-muted"
         >
-          Contacto
+          {t(ui.home.contactHeading)}
         </h2>
         <ul className="mt-6 flex flex-wrap justify-center gap-3">
           {contactLinks.map((link) =>
@@ -118,7 +126,7 @@ export default function Home() {
                 className="rounded border border-text-muted/30 px-4 py-2 font-mono text-sm text-text-muted"
                 title="Enlace pendiente de configurar en content.ts"
               >
-                {link.label} · pendiente
+                {link.label} · {t(ui.home.pending)}
               </li>
             ) : (
               <li key={link.label}>
@@ -137,7 +145,7 @@ export default function Home() {
           )}
         </ul>
         <p className="mt-4 font-mono text-xs text-text-muted">
-          {profile.contact.cvNote}
+          {t(profile.contact.cvNote)}
         </p>
       </section>
     </div>

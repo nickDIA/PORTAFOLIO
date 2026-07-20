@@ -1,5 +1,8 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { useEffect } from "react";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { roles } from "../data/content";
+import { useLocale, useT, localizePath, stripLocalePrefix } from "../i18n/locale";
+import { ui } from "../i18n/ui";
 import ChatDock from "./copilot/ChatDock";
 
 /* Mapa estático rol → clases (Tailwind necesita ver las clases
@@ -20,6 +23,23 @@ const signalNav: Record<string, { active: string; idle: string }> = {
 };
 
 export default function Layout() {
+  const locale = useLocale();
+  const t = useT();
+  const location = useLocation();
+
+  /* lang del documento sincronizado con el idioma actual — accesibilidad
+     y corrección semántica, no solo cosmético. */
+  useEffect(() => {
+    document.documentElement.lang = locale;
+  }, [locale]);
+
+  const otherLocale = locale === "es" ? "en" : "es";
+  const otherLocalePath = localizePath(
+    stripLocalePrefix(location.pathname),
+    otherLocale,
+  );
+  const otherLocaleLabel = otherLocale === "en" ? "English" : "Español";
+
   return (
     <div className="min-h-screen flex flex-col">
       {/* Accesibilidad: enlace para saltar la navegación con teclado */}
@@ -27,26 +47,27 @@ export default function Layout() {
         href="#contenido"
         className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:bg-surface focus:px-4 focus:py-2 focus:rounded font-mono text-sm"
       >
-        Saltar al contenido
+        {t(ui.layout.skipLink)}
       </a>
 
       <header className="border-b border-surface">
         <nav
-          aria-label="Navegación principal"
+          aria-label={t(ui.layout.navLabel)}
           className="mx-auto max-w-5xl flex flex-wrap items-center gap-x-6 gap-y-2 px-6 py-4"
         >
           <NavLink
-            to="/"
+            to={localizePath("/", locale)}
+            end
             className="font-display font-semibold text-lg tracking-tight"
           >
-            Portafolio
+            {t(ui.layout.brand)}
           </NavLink>
 
-          <ul className="flex flex-wrap gap-x-6 gap-y-2 ml-auto">
+          <ul className="flex flex-wrap items-center gap-x-6 gap-y-2 ml-auto">
             {roles.map((r) => (
               <li key={r.id}>
                 <NavLink
-                  to={r.slug}
+                  to={localizePath(r.slug, locale)}
                   className={({ isActive }) =>
                     `font-mono text-sm transition-colors ${
                       isActive
@@ -55,10 +76,19 @@ export default function Layout() {
                     }`
                   }
                 >
-                  {r.name}
+                  {t(r.name)}
                 </NavLink>
               </li>
             ))}
+            <li>
+              <NavLink
+                to={otherLocalePath}
+                hrefLang={otherLocale}
+                className="rounded border border-text/20 px-2.5 py-1 font-mono text-xs text-text-muted transition-colors hover:border-text hover:text-text"
+              >
+                {otherLocaleLabel}
+              </NavLink>
+            </li>
           </ul>
         </nav>
       </header>
@@ -69,7 +99,7 @@ export default function Layout() {
 
       <footer className="border-t border-surface">
         <div className="mx-auto max-w-5xl px-6 py-6 font-mono text-xs text-text-muted">
-          © 2026 — construido con React, TypeScript y Tailwind CSS
+          {t(ui.layout.footer)}
         </div>
       </footer>
 

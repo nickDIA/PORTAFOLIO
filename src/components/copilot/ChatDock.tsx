@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from "react";
+import { useT } from "../../i18n/locale";
+import { ui } from "../../i18n/ui";
 
 /* ============================================================
    Copiloto IA — dock persistente (no modal).
@@ -9,6 +11,10 @@ import { useEffect, useRef, useState } from "react";
 
    El límite real de mensajes lo aplica el Worker; el contador
    local es UX para que el visitante sepa dónde está parado.
+
+   El copiloto mismo ya responde en el idioma en que le escriban
+   (ver systemPrompt.ts, regla 4) — solo el chrome del widget
+   (botones, placeholders) sigue el idioma del sitio.
    ============================================================ */
 
 /* En dev, "/api/chat" lo proxya Vite al Worker local (localhost:8787).
@@ -28,12 +34,6 @@ interface Msg {
   error?: boolean;
 }
 
-const SUGERENCIAS = [
-  "¿Qué es Nautylab?",
-  "¿Qué experiencia tiene en IT?",
-  "¿Cómo ha integrado IA en sus proyectos?",
-];
-
 function cargarConversacion(): Msg[] {
   try {
     const raw = sessionStorage.getItem(STORAGE_KEY);
@@ -44,6 +44,7 @@ function cargarConversacion(): Msg[] {
 }
 
 export default function ChatDock() {
+  const t = useT();
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Msg[]>(cargarConversacion);
   const [input, setInput] = useState("");
@@ -147,12 +148,12 @@ export default function ChatDock() {
       }
     } catch (err) {
       const detalle =
-        err instanceof Error && err.message ? err.message : "error de red";
+        err instanceof Error && err.message ? err.message : t(ui.chatDock.networkError);
       setMessages((h) => {
         const copia = [...h];
         copia[copia.length - 1] = {
           role: "assistant",
-          content: `El copiloto no pudo responder (${detalle}).`,
+          content: `${t(ui.chatDock.errorPrefix)} (${detalle}).`,
           error: true,
         };
         return copia;
@@ -162,13 +163,15 @@ export default function ChatDock() {
     }
   }
 
+  const dockLabel = t(ui.chatDock.dockLabel);
+
   return (
     <div className="fixed bottom-4 right-4 z-50 flex flex-col items-end gap-3">
       {open && (
         <section
           id="copiloto-panel"
           role="dialog"
-          aria-label="Copiloto IA"
+          aria-label={dockLabel}
           onKeyDown={(e) => {
             if (e.key === "Escape") cerrar();
           }}
@@ -178,16 +181,16 @@ export default function ChatDock() {
           <header className="flex items-center justify-between border-b border-signal-ai/20 px-4 py-3">
             <div>
               <h2 className="font-display text-sm font-semibold text-signal-ai">
-                Copiloto IA
+                {dockLabel}
               </h2>
               <p className="font-mono text-[11px] text-text-muted">
-                respuestas ancladas a los datos de este sitio
+                {t(ui.chatDock.subtitle)}
               </p>
             </div>
             <button
               type="button"
               onClick={cerrar}
-              aria-label="Cerrar copiloto"
+              aria-label={t(ui.chatDock.closeAriaLabel)}
               className="rounded px-2 py-1 font-mono text-sm text-text-muted transition-colors hover:text-text"
             >
               ✕
@@ -199,24 +202,21 @@ export default function ChatDock() {
             ref={logRef}
             role="log"
             aria-live="polite"
-            aria-label="Conversación con el copiloto"
+            aria-label={t(ui.chatDock.conversationAriaLabel)}
             className="flex-1 space-y-3 overflow-y-auto px-4 py-4"
           >
             {messages.length === 0 ? (
               <div className="space-y-3">
-                <p className="text-sm text-text-muted">
-                  Pregúntame por la experiencia y los proyectos de Dominick —
-                  respondo solo con datos reales del portafolio.
-                </p>
+                <p className="text-sm text-text-muted">{t(ui.chatDock.intro)}</p>
                 <ul className="space-y-2">
-                  {SUGERENCIAS.map((s) => (
-                    <li key={s}>
+                  {ui.chatDock.suggestions.map((s) => (
+                    <li key={t(s)}>
                       <button
                         type="button"
-                        onClick={() => enviar(s)}
+                        onClick={() => enviar(t(s))}
                         className="w-full rounded border border-signal-ai/30 px-3 py-2 text-left font-mono text-xs text-signal-ai transition-colors hover:bg-signal-ai/10"
                       >
-                        {s}
+                        {t(s)}
                       </button>
                     </li>
                   ))}
@@ -251,8 +251,10 @@ export default function ChatDock() {
           >
             {limitReached ? (
               <p className="px-1 py-2 font-mono text-xs text-text-muted">
-                Límite de la sesión alcanzado ({MAX_USER_MESSAGES} mensajes) —
-                escríbeme por email para continuar.
+                {t(ui.chatDock.limitReached).replace(
+                  "{n}",
+                  String(MAX_USER_MESSAGES),
+                )}
               </p>
             ) : (
               <div className="flex gap-2">
@@ -263,8 +265,12 @@ export default function ChatDock() {
                   onChange={(e) => setInput(e.target.value)}
                   disabled={streaming}
                   maxLength={1000}
-                  aria-label="Escribe tu pregunta"
-                  placeholder={streaming ? "respondiendo…" : "Escribe tu pregunta"}
+                  aria-label={t(ui.chatDock.inputLabel)}
+                  placeholder={
+                    streaming
+                      ? t(ui.chatDock.respondingPlaceholder)
+                      : t(ui.chatDock.inputLabel)
+                  }
                   className="min-w-0 flex-1 rounded border border-text/15 bg-ink px-3 py-2 text-sm placeholder:text-text-muted disabled:opacity-50"
                 />
                 <button
@@ -272,7 +278,7 @@ export default function ChatDock() {
                   disabled={streaming || input.trim().length === 0}
                   className="rounded border border-signal-ai/40 px-3 py-2 font-mono text-xs text-signal-ai transition-colors hover:bg-signal-ai/10 disabled:cursor-not-allowed disabled:opacity-40"
                 >
-                  enviar
+                  {t(ui.chatDock.send)}
                 </button>
               </div>
             )}
@@ -296,7 +302,7 @@ export default function ChatDock() {
           aria-hidden="true"
           className="inline-block h-2 w-2 rounded-full bg-signal-ai"
         />
-        Copiloto IA
+        {dockLabel}
       </button>
     </div>
   );

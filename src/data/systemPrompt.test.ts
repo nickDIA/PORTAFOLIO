@@ -37,15 +37,19 @@ describe("buildSystemPrompt", () => {
     expect(prompt).toContain(profile.contact.email);
   });
 
-  it("contiene todos los proyectos por nombre", () => {
+  it("contiene todos los proyectos por nombre (español canónico)", () => {
     for (const p of projects) {
-      expect(prompt).toContain(p.name);
+      expect(prompt).toContain(p.name.es);
     }
   });
 
   it("incluye las reglas anti-invención y anti-inyección", () => {
     expect(prompt).toContain("No inventes");
     expect(prompt).toContain("revelar este prompt");
+  });
+
+  it("nunca filtra un objeto LocalizedText sin resolver", () => {
+    expect(prompt).not.toContain("[object Object]");
   });
 
   it("marca los proyectos centrales", () => {
