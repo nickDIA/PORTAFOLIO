@@ -1,6 +1,6 @@
 # TESTING.md — Pruebas del portafolio
 
-> Estado (2026-07-20): **93 pruebas unitarias/componente (Vitest) + 42 E2E (Playwright) · todas en verde** · build de producción limpio (incluye type-check del Worker y prerender de las 8 rutas) · CI en GitHub Actions en cada push/PR a `main` · sitio bilingüe (es/en) y copiloto en producción · SEO por idioma (Open Graph + hreflang) prerenderizado.
+> Estado (2026-07-20): **102 pruebas unitarias/componente (Vitest) + 49 E2E (Playwright) · todas en verde** · build de producción limpio (incluye type-check del Worker y prerender de las 10 rutas) · CI en GitHub Actions en cada push/PR a `main` · sitio bilingüe (es/en) y copiloto en producción · SEO por idioma (Open Graph + hreflang) prerenderizado · página "Sobre mí" (`/sobre-mi`) con historias personales.
 
 ## Cómo correr las pruebas
 
@@ -20,7 +20,7 @@ Es un gate de calidad, no el despliegue: Cloudflare Pages despliega por su propi
 
 ## Suite automatizada
 
-### 1. `src/data/content.test.ts` — integridad de la fuente única de verdad (17 pruebas)
+### 1. `src/data/content.test.ts` — integridad de la fuente única de verdad (20 pruebas)
 
 `content.ts` alimenta la UI hoy y el system prompt del copiloto. Estas pruebas protegen sus invariantes mientras se rellenan los `[[TODO`:
 
@@ -31,6 +31,7 @@ Es un gate de calidad, no el despliegue: Cloudflare Pages despliega por su propi
 - Toda captura declara ruta bajo `/screenshots/` y un `alt` no vacío **en ambos idiomas**.
 - `isPending` detecta placeholders; los datos ya confirmados (nombre, email) no lo son.
 - **Bilingüe**: cada campo `LocalizedText` (perfil, roles, proyectos, experiencia) trae `es` y `en` no vacíos; los placeholders `[[TODO` quedan sincronizados entre ambos idiomas (nunca pendiente en uno y resuelto en el otro).
+- **`about`** (historias de "Sobre mí"): título e intro de la página en ambos idiomas; cada historia trae `heading`/`body` en `es` y `en`; ids de historia únicos.
 
 ### 2. `src/components/role/NucleoDemo.test.tsx` — la transacción atómica (5 pruebas)
 
@@ -43,11 +44,12 @@ Con timers reales (la secuencia temporizada ES el contenido de la demo):
 | Bloqueo de concurrencia | Todos los botones deshabilitados durante la transacción, rehabilitados al terminar |
 | **Rollback atómico** | Con "forzar error": `ERROR simulado → ROLLBACK → sin cambios parciales`; el activo vuelve a su estado original, la entrada revertida desaparece, el conteo de auditoría queda intacto y el toggle se desarma solo |
 
-### 3. `src/App.test.tsx` — routing, tematización y bilingüismo (19 pruebas)
+### 3. `src/App.test.tsx` — routing, tematización y bilingüismo (22 pruebas)
 
 - Landing en `/` (español) y `/en` (inglés): nombre, las 3 tarjetas de rol traducidas enlazando a su ruta con el prefijo correcto, sección de contacto traducida.
 - Contacto resiliente: el email real es enlace `mailto:`; los `[[TODO` se muestran como chips inertes, **nunca como enlaces rotos**.
 - Por cada rol, en **ambos** árboles de rutas (`/desarrollo-web` y `/en/desarrollo-web`, etc.): renderiza su `h1` traducido, fija `--focus-ring` a **su** color de señal y tematiza el `document.title` — el color como sistema de navegación, verificado en los dos idiomas.
+- **Página Sobre mí** (`/sobre-mi`, `/en/sobre-mi`): título traducido, al menos una historia renderizada, y el nav enlaza a la ruta correcta desde cualquier página en ambos idiomas.
 - **Selector de idioma**: el link a "English"/"Español" apunta a la ruta equivalente en el otro idioma (no a la raíz); el caso especial de la landing (`/en`, no `/en/`) está cubierto.
 - `document.documentElement.lang` sigue el idioma de la ruta activa.
 - Estructura accesible compartida: skip-link → `#contenido` (traducido), `nav` etiquetado, `main` presente — en ambos idiomas.
@@ -60,9 +62,9 @@ Alt pendiente `[[TODO` → marco punteado con la ruta esperada; captura real →
 
 Ambas versiones (escritorio/móvil) son `aria-hidden` (decorativas — la navegación son las tarjetas); una traza por rol con su token de color (nunca hex directo); con hover/foco (`hot`) la rama activa queda a opacidad 1 y las otras dos a 0.3; todas las trazas usan `pathLength=1` (la base de la animación CSS pura).
 
-### 6. `src/a11y.test.tsx` — auditoría axe-core (8 pruebas)
+### 6. `src/a11y.test.tsx` — auditoría axe-core (10 pruebas)
 
-`axe.run` (reglas WCAG 2.1 A/AA estructurales) sobre las 4 páginas **en español y en inglés** (8 rutas en total): **cero violaciones**. La regla `color-contrast` se excluye porque jsdom no renderiza — el contraste se verifica numéricamente abajo.
+`axe.run` (reglas WCAG 2.1 A/AA estructurales) sobre las 5 páginas **en español y en inglés** (10 rutas en total): **cero violaciones**. La regla `color-contrast` se excluye porque jsdom no renderiza — el contraste se verifica en navegador real (ver E2E abajo).
 
 ### 7. `src/data/systemPrompt.test.ts` — grounding del copiloto (9 pruebas)
 
@@ -145,7 +147,7 @@ El camino con API real (streaming de Gemini end-to-end) queda pendiente de la AP
 
 ## Suite E2E (Playwright)
 
-`e2e/` contiene 18 pruebas en navegador real (Chromium) que complementan la suite de Vitest — jsdom no renderiza de verdad, así que layout, contraste computado y el flujo completo por red del copiloto solo se pueden verificar aquí.
+`e2e/` contiene 49 pruebas en navegador real (Chromium) que complementan la suite de Vitest — jsdom no renderiza de verdad, así que layout, contraste computado y el flujo completo por red del copiloto solo se pueden verificar aquí.
 
 ```bash
 npm run test:e2e        # suite completa, headless
@@ -154,10 +156,10 @@ npm run test:e2e:ui     # modo interactivo (Playwright UI)
 
 | Archivo | Qué prueba |
 |---|---|
-| `e2e/navigation.spec.ts` (9) | Landing en español e inglés con las 3 tarjetas de rol traducidas; por cada rol y cada idioma (6 rutas), el encabezado correcto y `--focus-ring` resuelto al hex exacto de su color de señal — verificado en un navegador real que sí computa CSS custom properties anidadas (jsdom no); el selector de idioma conserva la página actual al cambiar; `<html lang>` sigue el idioma activo |
+| `e2e/navigation.spec.ts` (10) | Landing en español e inglés con las 3 tarjetas de rol traducidas; por cada rol y cada idioma (6 rutas), el encabezado correcto y `--focus-ring` resuelto al hex exacto de su color de señal — verificado en un navegador real que sí computa CSS custom properties anidadas (jsdom no); la página Sobre mí accesible desde el nav en ambos idiomas; el selector de idioma conserva la página actual al cambiar; `<html lang>` sigue el idioma activo |
 | `e2e/nucleo-demo.spec.ts` (3) | El mismo flujo de la demo transaccional verificado manualmente durante el desarrollo, ahora automatizado en español: COMMIT actualiza estado + auditoría; rollback forzado revierte ambos juntos y desarma el toggle; una pasada en inglés confirma que el flujo real por navegador no se rompe con el idioma |
 | `e2e/copilot.spec.ts` (4) | Abrir el dock, enviar una pregunta y ver la respuesta streameada — con la red mockeada usando el formato SSE real de Gemini (CRLF, `\r\n\r\n`) como segunda línea de defensa contra la regresión de línea de comando descrita arriba; manejo de error del Worker; cierre con Escape devolviendo el foco; una pasada en `/en` confirma que el chrome del widget (botones, sugerencias) se traduce |
-| `e2e/a11y-contrast.spec.ts` (24) | **Contraste WCAG AA en navegador real** (axe-core con solo la regla `color-contrast`) sobre las 8 rutas — lo que la suite de jsdom no puede computar; atrapó el fallo de `--text-muted` sobre los paneles de señal. Además, por cada ruta, **cero desbordamiento horizontal** a 375px (móvil) y 1280px (escritorio) — regresión de layout del inglés (textos más largos) sin diffs de píxeles, estable entre SO/CI |
+| `e2e/a11y-contrast.spec.ts` (30) | **Contraste WCAG AA en navegador real** (axe-core con solo la regla `color-contrast`) sobre las 10 rutas — lo que la suite de jsdom no puede computar; atrapó el fallo de `--text-muted` sobre los paneles de señal. Además, por cada ruta, **cero desbordamiento horizontal** a 375px (móvil) y 1280px (escritorio) — regresión de layout del inglés (textos más largos) sin diffs de píxeles, estable entre SO/CI |
 
 Corre como job separado en CI (`e2e` en `.github/workflows/ci.yml`), en paralelo al de Vitest — instala Chromium y sube el reporte HTML como artefacto si algo falla.
 
@@ -168,9 +170,13 @@ Corre como job separado en CI (`e2e` en `.github/workflows/ci.yml`), en paralelo
 `src/seo/meta.ts` es la fuente única del `<head>` por ruta (título, descripción, canonical, Open Graph, Twitter Card, hreflang es/en/x-default). La consumen DOS lados con el mismo cálculo:
 
 - **En cliente**: el hook `useHeadMeta()` (en `Layout`) actualiza el `<head>` al navegar sin recarga — para Google, que sí ejecuta JS.
-- **En build**: `scripts/prerender.mjs` congela esas etiquetas en HTML estático por ruta (`dist/<ruta>/index.html`) tras `vite build`, usando la API de Vite (`ssrLoadModule`) sin navegador ni dependencias nuevas. Necesario porque los scrapers sociales (Facebook, LinkedIn, WhatsApp) **no ejecutan JS** y solo verían el `index.html` base. También emite `dist/sitemap.xml` (referenciado en `robots.txt`).
+- **En build**: `scripts/prerender.mjs` congela esas etiquetas en HTML estático por ruta (`dist/<ruta>/index.html`) tras `vite build`, usando la API de Vite (`ssrLoadModule`) sin navegador ni dependencias nuevas. Necesario porque los scrapers sociales (Facebook, LinkedIn, WhatsApp) **no ejecutan JS** y solo verían el `index.html` base. También emite `dist/sitemap.xml` (referenciado en `robots.txt`) con las **10 rutas** (home + 3 roles + `/sobre-mi`, × es/en).
 
-La imagen de previsualización de marca (`public/og-image.png`, 1200×630) se genera con `npm run og-image` (`scripts/gen-og-image.mjs`, reutiliza el Chromium de Playwright) — asset estático commiteado, fuera del build de producción. Invariantes cubiertas por `src/seo/meta.test.ts` (12 pruebas): 8 rutas únicas, título/descripción localizados, canonical/alternates absolutos y coherentes es↔en, y serialización HTML sin fugas de comillas.
+La imagen de previsualización de marca (`public/og-image.png`, 1200×630) se genera con `npm run og-image` (`scripts/gen-og-image.mjs`, reutiliza el Chromium de Playwright) — asset estático commiteado, fuera del build de producción. Invariantes cubiertas por `src/seo/meta.test.ts` (13 pruebas): 10 rutas únicas, título/descripción localizados (incluida la página Sobre mí), canonical/alternates absolutos y coherentes es↔en, y serialización HTML sin fugas de comillas.
+
+## Página "Sobre mí" (`/sobre-mi`, `/en/sobre-mi`)
+
+Página dedicada — no una sección expandible del home — para mantener la convención ya establecida de un link compartible por idioma y encajar directo con la infraestructura de SEO de Fase 6 (ruteo, `useHeadMeta`, prerender). El home conserva un resumen corto de `profile.intro` con un link "Leer más →" hacia esta página. El contenido narrativo (`about` en `src/data/content.ts`) son historias personales concretas — no relleno genérico — cubiertas por `content.test.ts` (bilingüismo, ids únicos) y renderizadas sin theming de rol (sin color de señal, es contenido transversal a las tres capas).
 
 ## Lighthouse — pase manual (Fase 6, 2026-07-20)
 

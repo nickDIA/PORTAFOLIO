@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/nickDIA/PORTAFOLIO/actions/workflows/ci.yml/badge.svg)](https://github.com/nickDIA/PORTAFOLIO/actions/workflows/ci.yml)
 
-Portafolio profesional bilingüe (es/en) con tres roles — **Desarrollo Web · Servicios IT · IA & Automatización** — con una demo interactiva de transacción atómica (Núcleo) y un copiloto IA en vivo anclado a los datos del sitio.
+Portafolio profesional bilingüe (es/en) con tres roles — **Desarrollo Web · Servicios IT · IA & Automatización** — más una página [Sobre mí](https://portafolio-ccq.pages.dev/sobre-mi), una demo interactiva de transacción atómica (Núcleo) y un copiloto IA en vivo anclado a los datos del sitio.
 
 **Stack**: Vite + React 19 + TypeScript + Tailwind CSS v4 · Cloudflare Worker (copiloto) · Cloudflare Pages (despliegue).
 
@@ -40,8 +40,8 @@ El español vive en las rutas sin prefijo (`/servicios-it`); el inglés bajo `/e
 ## Pruebas
 
 ```bash
-npm test             # 81 pruebas (Vitest + Testing Library + axe-core)
-npm run test:e2e     # 18 pruebas E2E (Playwright, navegador real, es + en)
+npm test             # 102 pruebas (Vitest + Testing Library + axe-core)
+npm run test:e2e     # 49 pruebas E2E (Playwright, navegador real, es + en)
 ```
 
 Detalle completo de cobertura y verificaciones manuales en [TESTING.md](TESTING.md).

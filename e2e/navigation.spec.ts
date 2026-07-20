@@ -65,6 +65,26 @@ for (const r of [...roles, ...rolesEn]) {
   });
 }
 
+test.describe("página Sobre mí", () => {
+  test("accesible desde el nav en cualquier página, en ambos idiomas", async ({
+    page,
+  }) => {
+    await page.goto("/servicios-it");
+    await page.getByRole("link", { name: "Sobre mí" }).click();
+    await expect(page).toHaveURL(/\/sobre-mi$/);
+    await expect(
+      page.getByRole("heading", { level: 1, name: "Sobre mí" }),
+    ).toBeVisible();
+
+    await page.goto("/en/servicios-it");
+    await page.getByRole("link", { name: "About" }).click();
+    await expect(page).toHaveURL(/\/en\/sobre-mi$/);
+    await expect(
+      page.getByRole("heading", { level: 1, name: "About me" }),
+    ).toBeVisible();
+  });
+});
+
 test.describe("selector de idioma", () => {
   test("de español a inglés conserva la página actual", async ({ page }) => {
     await page.goto("/servicios-it");

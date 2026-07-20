@@ -71,6 +71,18 @@ export interface Experience {
   highlights: LocalizedText[];
 }
 
+export interface AboutStory {
+  id: string;
+  heading: LocalizedText;
+  body: LocalizedText;
+}
+
+export interface AboutContent {
+  title: LocalizedText;
+  intro: LocalizedText;
+  stories: AboutStory[];
+}
+
 export interface Profile {
   name: string; // nombre propio — no se traduce
   title: LocalizedText;
@@ -92,12 +104,12 @@ export const profile: Profile = {
   name: "Dominick Ibarra Acedo",
   title: { es: "Ingeniero en Sistemas", en: "Systems Engineer" },
   tagline: {
-    es: "Construyo software que se puede tocar: interfaces accesibles, infraestructura que no se cae e IA integrada en productos reales.",
-    en: "I build software you can touch: accessible interfaces, infrastructure that doesn't go down, and AI integrated into real products.",
+    es: "Ingeniería con intención: datos que fluyen, transacciones sin cabos sueltos, interfaces que no excluyen a nadie — en las tres capas que un producto real necesita: web, redes e IA.",
+    en: "Engineering with intention: data that flows, transactions that leave no loose ends, interfaces that exclude no one — across the three layers a real product needs: web, networking, and AI.",
   },
   intro: {
-    es: "Me gusta el momento en que la tecnología deja de ser una promesa y se vuelve algo que funciona: una interfaz que cualquiera puede usar, una red que nadie nota porque nunca falla, un modelo de IA respondiendo dentro de un producto real. Trabajo en las tres capas — web, infraestructura e IA — porque los problemas reales nunca respetan una sola.",
-    en: "I like the moment technology stops being a promise and becomes something that works: an interface anyone can use, a network nobody notices because it never fails, an AI model responding inside a real product. I work across all three layers — web, infrastructure, and AI — because real problems never respect just one.",
+    es: "Quise hacer todo bien desde el inicio para no arrastrar deuda — terminé en parálisis por análisis. Aprendí lo contrario: solo haciendo las cosas se prepara mejor lo que sigue. Por eso trabajo en tres capas — web, redes e IA — con la misma disciplina en cada una.",
+    en: "I wanted to get everything right from the start to avoid debt later — I ended up in analysis paralysis. I learned the opposite: only by doing the work do you prepare better for what comes next. That's why I work across three layers — web, networking, and AI — with the same discipline in each.",
   },
   location: { es: "Tijuana, México", en: "Tijuana, Mexico" },
   contact: {
@@ -500,6 +512,73 @@ export const experience: Experience[] = [
     ],
   },
 ];
+
+/* ----------------------------- Sobre mí ----------------------------- */
+
+export const about: AboutContent = {
+  title: { es: "Sobre mí", en: "About me" },
+  intro: {
+    es: "Esta página existe para lo que no cabe en una tarjeta de proyecto: cómo pienso, qué aprendí a la mala, y por qué trabajo en tres capas que a primera vista parecen distintas.",
+    en: "This page exists for what doesn't fit on a project card: how I think, what I learned the hard way, and why I work across three layers that look unrelated at first glance.",
+  },
+  stories: [
+    {
+      id: "accion-vs-paralisis",
+      heading: {
+        es: "De la parálisis a hacer las cosas",
+        en: "From analysis paralysis to actually building",
+      },
+      body: {
+        es: "Durante un tiempo quise resolver todo bien desde el primer intento, para no arrastrar deuda técnica después. El resultado no fue calidad — fue parálisis por análisis: pasaba más tiempo planeando que construyendo. Con la práctica entendí lo contrario: solo haciendo las cosas aprendes qué preparar mejor para lo que sigue. Hoy prefiero una primera versión imperfecta que enseñe algo real, sobre un plan perfecto que nunca se ejecuta.",
+        en: "For a while I wanted to get everything right on the first try, so I wouldn't carry technical debt later. The result wasn't quality — it was analysis paralysis: I spent more time planning than building. With practice I learned the opposite: only by doing the work do you learn what to prepare better for what's next. Today I'd rather ship an imperfect first version that teaches me something real than polish a perfect plan that never ships.",
+      },
+    },
+    {
+      id: "cuidado-por-error",
+      heading: {
+        es: "Lo que aprendí rompiendo equipos",
+        en: "What breaking equipment taught me",
+      },
+      body: {
+        es: "Haciendo mantenimiento de más de 300 equipos, rompí más de un detalle que no debía tocar. No fue el mejor momento, pero fue el más formativo: me enseñó a revisar dos veces antes de actuar, a documentar cada paso, y a tratar cualquier sistema en producción — sea una computadora física o una base de datos — con el mismo respeto. Esa disciplina no vino de un curso, vino de un error real.",
+        en: "Doing maintenance on 300+ machines, I broke more than one thing I wasn't supposed to touch. It wasn't my best moment, but it was the most formative one: it taught me to check twice before acting, to document every step, and to treat any system in production — whether it's a physical machine or a database — with the same respect. That discipline didn't come from a course, it came from a real mistake.",
+      },
+    },
+    {
+      id: "integridad-antes-que-velocidad",
+      heading: {
+        es: "Integridad antes que velocidad",
+        en: "Integrity before speed",
+      },
+      body: {
+        es: "Con los sistemas que he construido entendí que un buen diseño de base de datos hace que todo el sistema fluya casi solo. También entendí por qué las transacciones atómicas importan: una petición a medias no debería dejar datos que no existen — o se confirma todo, o no se confirma nada. Y que el async no es solo una palabra de moda: es lo que permite atender varias peticiones a la base de datos sin que una bloquee a las demás. Nada de esto se nota desde afuera cuando funciona bien — y esa es la idea.",
+        en: "Building real systems taught me that a well-designed database makes the whole system flow almost on its own. It also taught me why atomic transactions matter: a half-finished request shouldn't leave behind data that shouldn't exist — either everything commits, or nothing does. And that async isn't just a buzzword — it's what lets you serve multiple database requests without one blocking the rest. None of this is visible from the outside when it works well. That's the point.",
+      },
+    },
+    {
+      id: "disenar-para-que-se-sienta-bien",
+      heading: {
+        es: "Diseñar para que se sienta bien, no solo para que se vea bien",
+        en: "Designing for how it feels, not just how it looks",
+      },
+      body: {
+        es: "No busco solo que algo se vea bonito — busco que usarlo se sienta bien, que cada paso tenga una intención detrás y no esté ahí por relleno. Ahí entra la accesibilidad: no como un checklist al final, sino como la diferencia entre que alguien con una dificultad pueda usar la herramienta que necesita, o quede fuera de ella. Si un detalle no aporta a esa experiencia, no se queda.",
+        en: "I don't just want something to look good — I want using it to feel good, with every step carrying an actual intention instead of existing as filler. That's where accessibility comes in: not as a checklist at the end, but as the difference between someone with a disability being able to use the tool they need, or being left out of it. If a detail doesn't serve that experience, it doesn't stay.",
+      },
+    },
+    {
+      id: "por-que-tres-capas",
+      heading: {
+        es: "Por qué trabajo en tres capas distintas",
+        en: "Why I work across three different layers",
+      },
+      body: {
+        es: "Las redes existen, para mí, para que la información llegue sin demoras — a un compañero de trabajo o a cualquier persona que la necesite, en una red local o en internet. La automatización existe para sacar del camino los procesos tediosos y repetitivos, y sobre todo los procesos críticos donde un error humano se puede prevenir. Y la IA es la herramienta más poderosa que he usado — pero solo vale si está al servicio de las personas, no al revés. Web, redes e IA no son intereses separados: son la misma idea de utilidad, aplicada en capas distintas.",
+        en: "To me, networks exist so information reaches people without delay — a coworker or anyone who needs it, on a local network or the internet. Automation exists to get tedious, repetitive processes out of the way, and especially the critical ones where a human error can be prevented. And AI is the most powerful tool I've used — but it's only worth it if it serves people, not the other way around. Web, networking, and AI aren't separate interests: they're the same idea of usefulness, applied across different layers.",
+      },
+    },
+  ],
+};
 
 /* ----------------------------- Utilidades ----------------------------- */
 

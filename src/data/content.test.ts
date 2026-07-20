@@ -4,6 +4,7 @@ import {
   projects,
   experience,
   profile,
+  about,
   projectsByRole,
   experienceByRole,
   isPending,
@@ -170,5 +171,25 @@ describe("bilingüe", () => {
         isPending(p.period.en),
       );
     }
+  });
+
+  it("about: title, intro y cada historia traen ambos idiomas", () => {
+    nonEmpty(about.title, "about.title");
+    nonEmpty(about.intro, "about.intro");
+    for (const s of about.stories) {
+      nonEmpty(s.heading, `about story ${s.id}.heading`);
+      nonEmpty(s.body, `about story ${s.id}.body`);
+    }
+  });
+});
+
+describe("about", () => {
+  it("cada historia tiene un id único", () => {
+    const ids = about.stories.map((s) => s.id);
+    expect(new Set(ids).size).toBe(ids.length);
+  });
+
+  it("trae al menos una historia", () => {
+    expect(about.stories.length).toBeGreaterThan(0);
   });
 });

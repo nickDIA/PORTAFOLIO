@@ -23,10 +23,12 @@ const ROUTES = [
   "/desarrollo-web",
   "/servicios-it",
   "/ia-automatizacion",
+  "/sobre-mi",
   "/en",
   "/en/desarrollo-web",
   "/en/servicios-it",
   "/en/ia-automatizacion",
+  "/en/sobre-mi",
 ];
 
 const WIDTHS = [

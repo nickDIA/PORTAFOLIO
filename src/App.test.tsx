@@ -115,6 +115,41 @@ describe.each([
   });
 });
 
+describe("página Sobre mí", () => {
+  it("/sobre-mi renderiza el título y al menos una historia en español", () => {
+    renderAt("/sobre-mi");
+    expect(
+      screen.getByRole("heading", { level: 1, name: "Sobre mí" }),
+    ).toBeInTheDocument();
+    expect(document.title).toContain("Sobre mí");
+    expect(
+      screen.getAllByRole("heading", { level: 2 }).length,
+    ).toBeGreaterThan(0);
+  });
+
+  it("/en/sobre-mi renderiza el título traducido al inglés", () => {
+    renderAt("/en/sobre-mi");
+    expect(
+      screen.getByRole("heading", { level: 1, name: "About me" }),
+    ).toBeInTheDocument();
+    expect(document.title).toContain("About me");
+  });
+
+  it("el nav enlaza a /sobre-mi (o /en/sobre-mi) desde cualquier página", () => {
+    renderAt("/servicios-it");
+    expect(screen.getByRole("link", { name: "Sobre mí" })).toHaveAttribute(
+      "href",
+      "/sobre-mi",
+    );
+    cleanup();
+    renderAt("/en/servicios-it");
+    expect(screen.getByRole("link", { name: "About" })).toHaveAttribute(
+      "href",
+      "/en/sobre-mi",
+    );
+  });
+});
+
 describe("selector de idioma", () => {
   it("en / ofrece un link a la versión en inglés de la misma página", () => {
     renderAt("/servicios-it");

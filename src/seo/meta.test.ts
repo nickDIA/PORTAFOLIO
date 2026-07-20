@@ -17,19 +17,21 @@ import { profile, roles } from "../data/content";
    ============================================================ */
 
 describe("ROUTES", () => {
-  it("cubre home + 3 roles en ambos idiomas (8 rutas únicas)", () => {
-    expect(ROUTES).toHaveLength(8);
-    expect(new Set(ROUTES).size).toBe(8);
+  it("cubre home + 3 roles + sobre mí en ambos idiomas (10 rutas únicas)", () => {
+    expect(ROUTES).toHaveLength(10);
+    expect(new Set(ROUTES).size).toBe(10);
     expect(ROUTES).toEqual(
       expect.arrayContaining([
         "/",
         "/desarrollo-web",
         "/servicios-it",
         "/ia-automatizacion",
+        "/sobre-mi",
         "/en",
         "/en/desarrollo-web",
         "/en/servicios-it",
         "/en/ia-automatizacion",
+        "/en/sobre-mi",
       ]),
     );
   });
@@ -67,6 +69,19 @@ describe("headForPath — páginas de rol", () => {
     expect(en.title).toBe(`${role.name.en} · Dominick Ibarra Acedo — Portafolio`);
     expect(en.description).toBe(role.description.en);
     expect(en.canonical).toBe(`${SITE_URL}/en${role.slug}`);
+  });
+});
+
+describe("headForPath — página Sobre mí", () => {
+  it("título y descripción usan el contenido de about, no el genérico de home", () => {
+    const es = headForPath("/sobre-mi");
+    expect(es.title).toBe("Sobre mí · Dominick Ibarra Acedo — Portafolio");
+    expect(es.description).not.toBe(profile.tagline.es);
+    expect(es.canonical).toBe(`${SITE_URL}/sobre-mi`);
+
+    const en = headForPath("/en/sobre-mi");
+    expect(en.title).toBe("About me · Dominick Ibarra Acedo — Portafolio");
+    expect(en.canonical).toBe(`${SITE_URL}/en/sobre-mi`);
   });
 });
 
@@ -124,12 +139,13 @@ describe("renderHeadTags", () => {
 });
 
 describe("renderSitemap", () => {
-  it("lista las 8 rutas como URLs absolutas en XML válido", () => {
+  it("lista las 10 rutas como URLs absolutas en XML válido", () => {
     const xml = renderSitemap();
     expect(xml).toContain("<?xml");
     expect(xml).toContain("<urlset");
-    expect(xml.match(/<loc>/g)).toHaveLength(8);
+    expect(xml.match(/<loc>/g)).toHaveLength(10);
     expect(xml).toContain(`<loc>${SITE_URL}</loc>`); // home sin barra final
     expect(xml).toContain(`<loc>${SITE_URL}/en/servicios-it</loc>`);
+    expect(xml).toContain(`<loc>${SITE_URL}/en/sobre-mi</loc>`);
   });
 });

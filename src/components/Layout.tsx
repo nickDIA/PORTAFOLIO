@@ -87,6 +87,18 @@ export default function Layout() {
             ))}
             <li>
               <NavLink
+                to={localizePath("/sobre-mi", locale)}
+                className={({ isActive }) =>
+                  `font-mono text-sm transition-colors ${
+                    isActive ? "text-text" : "text-text-muted hover:text-text"
+                  }`
+                }
+              >
+                {t(ui.about.navLabel)}
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
                 to={otherLocalePath}
                 hrefLang={otherLocale}
                 className="rounded border border-text/20 px-2.5 py-1 font-mono text-xs text-text-muted transition-colors hover:border-text hover:text-text"

@@ -17,7 +17,7 @@
    lo importa en Node vía Vite (ssrLoadModule).
    ============================================================ */
 
-import { profile, roles } from "../data/content";
+import { about, profile, roles } from "../data/content";
 import { LOCALES, localizePath, stripLocalePrefix, type Locale } from "../i18n/locale";
 
 /** Dominio canónico de producción; sobreescribible por entorno (Cloudflare Pages). */
@@ -33,9 +33,11 @@ const BASE_TITLE = "Dominick Ibarra Acedo — Portafolio";
 /** Locale → etiqueta og:locale (idioma_REGIÓN). */
 const OG_LOCALE: Record<Locale, string> = { es: "es_ES", en: "en_US" };
 
-/** Las 8 rutas reales del sitio (home + 3 roles) × (es, en). */
+/** Las 10 rutas reales del sitio (home + 3 roles + sobre mí) × (es, en). */
 export const ROUTES: string[] = LOCALES.flatMap((locale) =>
-  ["/", ...roles.map((r) => r.slug)].map((path) => localizePath(path, locale)),
+  ["/", ...roles.map((r) => r.slug), "/sobre-mi"].map((path) =>
+    localizePath(path, locale),
+  ),
 );
 
 export interface HeadData {
@@ -61,13 +63,20 @@ function normalize(pathname: string): string {
 export function headForPath(pathname: string): HeadData {
   const path = normalize(pathname);
   const locale: Locale = path === "/en" || path.startsWith("/en/") ? "en" : "es";
-  const basePath = stripLocalePrefix(path); // "/", "/desarrollo-web", …
+  const basePath = stripLocalePrefix(path); // "/", "/desarrollo-web", "/sobre-mi", …
   const role = roles.find((r) => r.slug === basePath);
+  const isAbout = basePath === "/sobre-mi";
 
-  const title = role ? `${role.name[locale]} · ${BASE_TITLE}` : BASE_TITLE;
+  const title = role
+    ? `${role.name[locale]} · ${BASE_TITLE}`
+    : isAbout
+      ? `${about.title[locale]} · ${BASE_TITLE}`
+      : BASE_TITLE;
   const description = role
     ? role.description[locale]
-    : profile.tagline[locale];
+    : isAbout
+      ? about.intro[locale]
+      : profile.tagline[locale];
 
   const esHref = SITE_URL + basePath;
   const enHref = SITE_URL + localizePath(basePath, "en");

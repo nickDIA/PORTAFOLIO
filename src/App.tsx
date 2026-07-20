@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import DesarrolloWeb from "./pages/DesarrolloWeb";
 import ServiciosIT from "./pages/ServiciosIT";
 import IaAutomatizacion from "./pages/IaAutomatizacion";
+import SobreMi from "./pages/SobreMi";
 
 /* ============================================================
    Español (sin prefijo) e inglés (/en) son árboles de rutas
@@ -26,6 +27,7 @@ export default function App() {
         <Route path="/desarrollo-web" element={<DesarrolloWeb />} />
         <Route path="/servicios-it" element={<ServiciosIT />} />
         <Route path="/ia-automatizacion" element={<IaAutomatizacion />} />
+        <Route path="/sobre-mi" element={<SobreMi />} />
       </Route>
 
       <Route
@@ -40,6 +42,7 @@ export default function App() {
         <Route path="desarrollo-web" element={<DesarrolloWeb />} />
         <Route path="servicios-it" element={<ServiciosIT />} />
         <Route path="ia-automatizacion" element={<IaAutomatizacion />} />
+        <Route path="sobre-mi" element={<SobreMi />} />
       </Route>
     </Routes>
   );

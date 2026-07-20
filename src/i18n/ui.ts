@@ -26,6 +26,13 @@ export const ui = {
     explore: { es: "explorar →", en: "explore →" },
     pending: { es: "pendiente", en: "pending" },
     downloadCv: { es: "Descargar CV", en: "Download Resume" },
+    readMore: { es: "Leer más →", en: "Read more →" },
+  } satisfies Record<string, LocalizedText>,
+
+  about: {
+    navLabel: { es: "Sobre mí", en: "About" },
+    eyebrow: { es: "quién soy", en: "who I am" },
+    storiesLabel: { es: "Historias", en: "Stories" },
   } satisfies Record<string, LocalizedText>,
 
   role: {

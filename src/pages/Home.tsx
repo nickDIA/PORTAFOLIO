@@ -105,6 +105,12 @@ export default function Home() {
           {t(ui.home.aboutHeading)}
         </h2>
         <p className="mt-4 text-lg leading-relaxed">{t(profile.intro)}</p>
+        <Link
+          to={localizePath("/sobre-mi", locale)}
+          className="mt-4 inline-block font-mono text-sm text-signal-web transition-colors hover:underline"
+        >
+          {t(ui.home.readMore)}
+        </Link>
       </section>
 
       {/* ============ Contacto ============ */}

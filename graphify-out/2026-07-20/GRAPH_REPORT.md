@@ -1,12 +1,18 @@
-# Graph Report - .  (2026-07-16)
+# Graph Report - PORTAFOLIO  (2026-07-20)
 
 ## Corpus Check
-- Corpus is ~14,532 words - fits in a single context window. You may not need a graph.
+- 63 files · ~77,496 words
+- Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 327 nodes · 467 edges · 28 communities (25 shown, 3 thin omitted)
-- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 9 edges (avg confidence: 0.8)
-- Token cost: 135,065 input · 0 output
+- 400 nodes · 659 edges · 38 communities (32 shown, 6 thin omitted)
+- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 9 edges (avg confidence: 0.8)
+- Token cost: 0 input · 0 output
+
+## Graph Freshness
+- Built from commit: `fc6318c3`
+- Run `git rev-parse HEAD` and compare to check if the graph is stale.
+- Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - Facet Page Components
@@ -34,18 +40,26 @@
 - Viaje De Petición Diagram
 - Root TS Config
 - Favicon Branding Motif
+- Vite Env Types
+- SignalTrace.tsx
+- vexp context tools <!-- vexp v2.2.3 -->
+- App.tsx
+- a11y-contrast.spec.ts
+- prerender.mjs
+- navigation.spec.ts
+- gen-og-image.mjs
 
 ## God Nodes (most connected - your core abstractions)
-1. `TESTING.md — Pruebas del portafolio` - 21 edges
-2. `compilerOptions` - 19 edges
-3. `compilerOptions` - 17 edges
-4. `compilerOptions` - 16 edges
-5. `isPending()` - 12 edges
-6. `file_hashes` - 11 edges
-7. `Accent` - 9 edges
-8. `Dominick Ibarra Acedo (CV)` - 9 edges
-9. `scripts` - 8 edges
-10. `FacetId` - 8 edges
+1. `useT()` - 28 edges
+2. `TESTING.md — Pruebas del portafolio` - 21 edges
+3. `compilerOptions` - 19 edges
+4. `compilerOptions` - 17 edges
+5. `compilerOptions` - 16 edges
+6. `ui` - 13 edges
+7. `scripts` - 12 edges
+8. `isPending()` - 12 edges
+9. `file_hashes` - 11 edges
+10. `LocalizedText` - 11 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `Residencia Profesional — Nautylab (ene-jun 2026)` --semantically_similar_to--> `Proyecto: integracion-gemini`  [INFERRED] [semantically similar]
@@ -67,31 +81,31 @@
 - **Worker Rate-Limit & Validation Enforcement** — readme_session_limits_rationale, testing_session_limit_429, testing_role_injection_reject, worker_validate_module [INFERRED 0.85]
 - **Nautylab AI Integration Case Study** — public_cv_nautylab, testing_project_nautylab, testing_project_integracion_gemini, public_cv_skills_ai [INFERRED 0.75]
 
-## Communities (28 total, 3 thin omitted)
+## Communities (38 total, 6 thin omitted)
 
 ### Community 0 - "Facet Page Components"
-Cohesion: 0.19
-Nodes (19): FacetShell(), SectionLabel(), Props, ProjectCard(), Props, ProjectLinks(), Props, Props (+11 more)
+Cohesion: 0.20
+Nodes (22): FeaturedProject(), Props, ProjectCard(), Props, ProjectLinks(), RoleShell(), SectionLabel(), Props (+14 more)
 
 ### Community 1 - "Dev Dependencies"
 Cohesion: 0.06
-Nodes (31): axe-core, @cloudflare/workers-types, jsdom, devDependencies, axe-core, @cloudflare/workers-types, jsdom, tailwindcss (+23 more)
+Nodes (33): axe-core, @cloudflare/workers-types, jsdom, devDependencies, axe-core, @cloudflare/workers-types, jsdom, @playwright/test (+25 more)
 
 ### Community 2 - "App TypeScript Config"
 Cohesion: 0.07
 Nodes (26): DOM, DOM.Iterable, src, @testing-library/jest-dom, vitest/globals, compilerOptions, allowImportingTsExtensions, jsx (+18 more)
 
 ### Community 3 - "App Routing & A11y Tests"
-Cohesion: 0.13
-Nodes (12): signalNav, Experience, experienceByFacet(), facets, Profile, projects, projectsByFacet(), buildSystemPrompt() (+4 more)
+Cohesion: 0.24
+Nodes (14): Props, Experience, experienceByRole(), Profile, ProjectLink, projects, Role, Screenshot (+6 more)
 
 ### Community 4 - "Worker TypeScript Config"
 Cohesion: 0.09
 Nodes (22): @cloudflare/workers-types, src/data, worker, compilerOptions, allowImportingTsExtensions, lib, module, moduleDetection (+14 more)
 
 ### Community 5 - "Package Manifest"
-Cohesion: 0.10
-Nodes (19): dependencies, react, react-dom, react-router-dom, name, private, scripts, build (+11 more)
+Cohesion: 0.08
+Nodes (23): dependencies, react, react-dom, react-router-dom, name, private, scripts, build (+15 more)
 
 ### Community 6 - "Node/Vite TS Config"
 Cohesion: 0.10
@@ -102,16 +116,16 @@ Cohesion: 0.10
 Nodes (19): file_hashes, .claude/CLAUDE.md, .claude/hooks/vexp-guard.sh, src/App.tsx, src/components/Layout.tsx, src/data/content.ts, src/main.tsx, src/pages/FacetPage.tsx (+11 more)
 
 ### Community 8 - "Signal Hero Animation"
-Cohesion: 0.18
-Nodes (12): Props, Branch, branches, ORIGIN, Props, SignalTrace(), FacetId, useDocumentTitle() (+4 more)
+Cohesion: 0.13
+Nodes (27): Layout(), signalNav, roles, Locale, LocaleContext, LOCALES, localizePath(), stripLocalePrefix() (+19 more)
 
 ### Community 9 - "Núcleo Demo Logic"
-Cohesion: 0.14
-Nodes (11): Activo, ACTIVOS_INICIALES, AUDITORIA_INICIAL, badge, CICLO, EntradaAuditoria, Estado, LineaConsola (+3 more)
+Cohesion: 0.18
+Nodes (10): Activo, ACTIVOS_INICIALES, badge, CICLO, EntradaAuditoria, Estado, hora(), LineaConsola (+2 more)
 
 ### Community 10 - "Copilot Worker API"
-Cohesion: 0.25
-Nodes (9): corsHeaders(), Env, fetch(), jsonResponse(), ChatMessage, fail(), LIMITS, validateChatRequest() (+1 more)
+Cohesion: 0.23
+Nodes (11): corsHeaders(), Env, fetch(), geminiUrl(), jsonResponse(), toGeminiContents(), ChatMessage, fail() (+3 more)
 
 ### Community 11 - "CV Work Experience"
 Cohesion: 0.18
@@ -130,8 +144,8 @@ Cohesion: 0.29
 Nodes (7): Residencia Profesional — Nautylab (ene-jun 2026), Perfil profesional: Ingeniero en Sistemas bilingüe, Habilidades: IA & Automatización (Gemini 2.5 Flash, streaming SSE, Python), Habilidades: Servicios & Infraestructura IT (redes, C#/.NET, SQL Server), Habilidades: Desarrollo Web (React 19, Angular, TS, Vite, Radix UI, WCAG 2.1), Proyecto: integracion-gemini, Proyecto: nautylab
 
 ### Community 15 - "Chat Dock Widget"
-Cohesion: 0.33
-Nodes (4): cargarConversacion(), ChatDock(), Msg, SUGERENCIAS
+Cohesion: 0.40
+Nodes (3): cargarConversacion(), ChatDock(), Msg
 
 ### Community 16 - "vexp Tool Suite"
 Cohesion: 0.33
@@ -157,25 +171,45 @@ Nodes (4): content.ts (fuente única de verdad), content.test.ts, systemPrompt.t
 Cohesion: 0.67
 Nodes (3): a11y.test.tsx, Auditoría de accesibilidad axe-core, WCAG 2.1 AA — cumplimiento de contraste
 
+### Community 22 - "Viaje De Petición Diagram"
+Cohesion: 0.18
+Nodes (10): Advanced Parameters, MANDATORY: use vexp pipeline - do NOT grep or glob the codebase, Multi-Repo Workspaces, Other MCP tools (use only when run_pipeline is insufficient), Primary Tool, Query shape (do this), Smart Features (automatic - no action needed), Subagent / Explore / Plan mode (+2 more)
+
+### Community 28 - "SignalTrace.tsx"
+Cohesion: 0.31
+Nodes (7): Props, Branch, branches, ORIGIN, Props, SignalTrace(), RoleId
+
+### Community 29 - "vexp context tools <!-- vexp v2.2.3 -->"
+Cohesion: 0.25
+Nodes (7): Agentic search, Available MCP tools, Multi-Repo, Query shape (do this), Smart Features, vexp context tools <!-- vexp v2.2.3 -->, Workflow
+
+### Community 31 - "a11y-contrast.spec.ts"
+Cohesion: 0.40
+Nodes (4): AXE_PATH, require, ROUTES, WIDTHS
+
+### Community 32 - "prerender.mjs"
+Cohesion: 0.50
+Nodes (4): distDir, main(), outFile(), root
+
 ## Knowledge Gaps
-- **145 isolated node(s):** `.claude/CLAUDE.md`, `.claude/hooks/vexp-guard.sh`, `src/App.tsx`, `src/components/Layout.tsx`, `src/data/content.ts` (+140 more)
+- **173 isolated node(s):** `.claude/CLAUDE.md`, `.claude/hooks/vexp-guard.sh`, `src/App.tsx`, `src/components/Layout.tsx`, `src/data/content.ts` (+168 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **3 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **6 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `TESTING.md — Pruebas del portafolio` connect `Test Suite Overview` to `CV Work Experience`, `Design System & Deploy`, `CV Skills Profile`, `Copilot Design Rationale`, `Worker Rate-Limit Rationale`, `Content & System Prompt`, `Accessibility Audit`?**
-  _High betweenness centrality (0.020) - this node is a cross-community bridge._
 - **Why does `devDependencies` connect `Dev Dependencies` to `Package Manifest`?**
-  _High betweenness centrality (0.019) - this node is a cross-community bridge._
+  _High betweenness centrality (0.016) - this node is a cross-community bridge._
+- **Why does `useT()` connect `Facet Page Components` to `Signal Hero Animation`, `Núcleo Demo Logic`, `Chat Dock Widget`?**
+  _High betweenness centrality (0.014) - this node is a cross-community bridge._
+- **Why does `TESTING.md — Pruebas del portafolio` connect `Test Suite Overview` to `CV Work Experience`, `Design System & Deploy`, `CV Skills Profile`, `Copilot Design Rationale`, `Worker Rate-Limit Rationale`, `Content & System Prompt`, `Accessibility Audit`?**
+  _High betweenness centrality (0.013) - this node is a cross-community bridge._
 - **What connects `.claude/CLAUDE.md`, `.claude/hooks/vexp-guard.sh`, `src/App.tsx` to the rest of the system?**
-  _145 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _173 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Dev Dependencies` be split into smaller, more focused modules?**
-  _Cohesion score 0.06451612903225806 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.06060606060606061 - nodes in this community are weakly interconnected._
 - **Should `App TypeScript Config` be split into smaller, more focused modules?**
   _Cohesion score 0.07407407407407407 - nodes in this community are weakly interconnected._
-- **Should `App Routing & A11y Tests` be split into smaller, more focused modules?**
-  _Cohesion score 0.13405797101449277 - nodes in this community are weakly interconnected._
 - **Should `Worker TypeScript Config` be split into smaller, more focused modules?**
   _Cohesion score 0.08695652173913043 - nodes in this community are weakly interconnected._
