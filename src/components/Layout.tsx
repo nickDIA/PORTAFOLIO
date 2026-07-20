@@ -3,6 +3,7 @@ import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { roles } from "../data/content";
 import { useLocale, useT, localizePath, stripLocalePrefix } from "../i18n/locale";
 import { ui } from "../i18n/ui";
+import { useHeadMeta } from "../lib/useHeadMeta";
 import ChatDock from "./copilot/ChatDock";
 
 /* Mapa estático rol → clases (Tailwind necesita ver las clases
@@ -26,6 +27,10 @@ export default function Layout() {
   const locale = useLocale();
   const t = useT();
   const location = useLocation();
+
+  /* <head> SEO por ruta (canonical, Open Graph, Twitter, hreflang) —
+     el gemelo en runtime del prerender. Ver src/seo/meta.ts. */
+  useHeadMeta();
 
   /* lang del documento sincronizado con el idioma actual — accesibilidad
      y corrección semántica, no solo cosmético. */

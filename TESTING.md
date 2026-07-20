@@ -1,6 +1,6 @@
 # TESTING.md — Pruebas del portafolio
 
-> Estado (2026-07-19): **81 pruebas unitarias/componente (Vitest) + 18 E2E (Playwright) · todas en verde** · build de producción limpio (incluye type-check del Worker) · CI en GitHub Actions en cada push/PR a `main` · sitio bilingüe (es/en) y copiloto en producción.
+> Estado (2026-07-20): **93 pruebas unitarias/componente (Vitest) + 42 E2E (Playwright) · todas en verde** · build de producción limpio (incluye type-check del Worker y prerender de las 8 rutas) · CI en GitHub Actions en cada push/PR a `main` · sitio bilingüe (es/en) y copiloto en producción · SEO por idioma (Open Graph + hreflang) prerenderizado.
 
 ## Cómo correr las pruebas
 
@@ -107,11 +107,13 @@ Calculado con la fórmula de luminancia relativa WCAG (mínimo AA texto normal: 
 | Token | vs `--ink` #0B0D12 | vs `--surface` #12151C | AA |
 |---|---|---|---|
 | `--text` #E7E9F0 | 16.02 | 15.06 | ✅ |
-| `--text-muted` #7A8099 | 4.97 | 4.68 | ✅ |
+| `--text-muted` #868DA8 | 5.91 | 5.77 | ✅ |
 | `--signal-web` #5B8DEF | 6.02 | 5.65 | ✅ |
 | `--signal-it` #E8A23D | 8.95 | 8.41 | ✅ |
 | `--signal-ai` #4FD1C5 | 10.42 | 9.79 | ✅ |
 | `--danger` #EF6A6A | 6.42 | 6.04 | ✅ |
+
+**Regresión de Fase 6**: la auditoría axe en navegador real (ver E2E abajo) reveló que el `--text-muted` anterior (#7A8099) fallaba AA — 3.89–4.45:1 — cuando caía sobre los **paneles tenues de señal** (`bgSoft`, ej. `bg-signal-ai/…` computado a `#18282d`), no solo sobre `--ink`/`--surface`. jsdom no lo detecta porque no renderiza. Se subió a **#868DA8**, que clarea 4.5:1 sobre el panel tenue más claro (peor caso 4.63:1) y mejora sobre ink/surface. Como solo aumenta el contraste sobre fondos oscuros, ningún combo que ya pasaba regresa.
 
 ## Verificación manual en navegador (Fases 2–4)
 
@@ -155,14 +157,34 @@ npm run test:e2e:ui     # modo interactivo (Playwright UI)
 | `e2e/navigation.spec.ts` (9) | Landing en español e inglés con las 3 tarjetas de rol traducidas; por cada rol y cada idioma (6 rutas), el encabezado correcto y `--focus-ring` resuelto al hex exacto de su color de señal — verificado en un navegador real que sí computa CSS custom properties anidadas (jsdom no); el selector de idioma conserva la página actual al cambiar; `<html lang>` sigue el idioma activo |
 | `e2e/nucleo-demo.spec.ts` (3) | El mismo flujo de la demo transaccional verificado manualmente durante el desarrollo, ahora automatizado en español: COMMIT actualiza estado + auditoría; rollback forzado revierte ambos juntos y desarma el toggle; una pasada en inglés confirma que el flujo real por navegador no se rompe con el idioma |
 | `e2e/copilot.spec.ts` (4) | Abrir el dock, enviar una pregunta y ver la respuesta streameada — con la red mockeada usando el formato SSE real de Gemini (CRLF, `\r\n\r\n`) como segunda línea de defensa contra la regresión de línea de comando descrita arriba; manejo de error del Worker; cierre con Escape devolviendo el foco; una pasada en `/en` confirma que el chrome del widget (botones, sugerencias) se traduce |
+| `e2e/a11y-contrast.spec.ts` (24) | **Contraste WCAG AA en navegador real** (axe-core con solo la regla `color-contrast`) sobre las 8 rutas — lo que la suite de jsdom no puede computar; atrapó el fallo de `--text-muted` sobre los paneles de señal. Además, por cada ruta, **cero desbordamiento horizontal** a 375px (móvil) y 1280px (escritorio) — regresión de layout del inglés (textos más largos) sin diffs de píxeles, estable entre SO/CI |
 
 Corre como job separado en CI (`e2e` en `.github/workflows/ci.yml`), en paralelo al de Vitest — instala Chromium y sube el reporte HTML como artefacto si algo falla.
 
 **Sanity check aplicado**: antes de dar por buena la suite, rompí a propósito una aserción (`ring: "#000000"` en vez del hex real) y confirmé que el test falla con el mensaje esperado, no que pase en falso — misma disciplina que se usó para verificar el fix de CRLF.
 
-## Huecos conocidos (pendientes para Fase 6)
+## SEO por idioma (Fase 6)
 
-- Sin regresión visual (screenshots diff) — relevante sobre todo para inglés, donde los textos más largos podrían desbordar contenedores que nunca se probaron con esas longitudes.
-- La auditoría de contraste con axe en navegador real (no jsdom) queda para el pase final de accesibilidad de la Fase 6, junto con Lighthouse.
+`src/seo/meta.ts` es la fuente única del `<head>` por ruta (título, descripción, canonical, Open Graph, Twitter Card, hreflang es/en/x-default). La consumen DOS lados con el mismo cálculo:
+
+- **En cliente**: el hook `useHeadMeta()` (en `Layout`) actualiza el `<head>` al navegar sin recarga — para Google, que sí ejecuta JS.
+- **En build**: `scripts/prerender.mjs` congela esas etiquetas en HTML estático por ruta (`dist/<ruta>/index.html`) tras `vite build`, usando la API de Vite (`ssrLoadModule`) sin navegador ni dependencias nuevas. Necesario porque los scrapers sociales (Facebook, LinkedIn, WhatsApp) **no ejecutan JS** y solo verían el `index.html` base. También emite `dist/sitemap.xml` (referenciado en `robots.txt`).
+
+La imagen de previsualización de marca (`public/og-image.png`, 1200×630) se genera con `npm run og-image` (`scripts/gen-og-image.mjs`, reutiliza el Chromium de Playwright) — asset estático commiteado, fuera del build de producción. Invariantes cubiertas por `src/seo/meta.test.ts` (12 pruebas): 8 rutas únicas, título/descripción localizados, canonical/alternates absolutos y coherentes es↔en, y serialización HTML sin fugas de comillas.
+
+## Lighthouse — pase manual (Fase 6, 2026-07-20)
+
+Corrido contra el **build de producción** (`npm run build` → `vite preview`, HTML prerenderizado), en Chromium headless. Ejecución manual, no cableada a CI:
+
+| Ruta | Performance | Accessibility | Best Practices | SEO |
+|---|---|---|---|---|
+| `/` (home es) | 92 | 100 | 100 | 100 |
+| `/ia-automatizacion` (rol, la más pesada) | 99 | 100 | 100 | 100 |
+
+Métricas de la home: FCP 1.7s · **LCP 2.6s** · **TBT 0ms** · **CLS 0** · Speed Index 5.3s. Todo verde (≥90). Único aspecto mejorable: la hoja de estilos de Google Fonts es *render-blocking* (afecta LCP/Speed Index) — no se cambió porque las tipografías (Space Grotesk / IBM Plex) son decisión de diseño fija y volverlas no-bloqueantes puede causar FOUT en el primer paint; queda como palanca opcional a discreción del usuario.
+
+## Huecos conocidos (pendientes)
+
+- **Lighthouse en CI**: el pase es manual; cablearlo como job (`@lhci/cli` + presupuestos) queda como opción futura (dependencia + tiempo de CI).
 - Los E2E de Playwright corren solo en Chromium — Firefox/WebKit quedan para cuando el proyecto lo justifique.
-- Sin `hreflang` ni Open Graph por idioma todavía — se agregan junto con el resto de meta tags de la Fase 6.
+- Sin regresión visual por diffs de píxeles: se optó por aserciones de no-desbordamiento (estables entre SO) en vez de snapshots, que son frágiles entre Windows local y el CI en Linux.

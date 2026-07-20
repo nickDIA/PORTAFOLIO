@@ -3,12 +3,41 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- SEO:start — bloque gestionado. El prerender (scripts/prerender.mjs)
+         lo reescribe por ruta con el <head> exacto de cada idioma; en runtime
+         useHeadMeta() mantiene lo mismo al navegar. Este baseline es la home
+         en español, por si algún path llegara sin prerenderizar. -->
+    <title>Dominick Ibarra Acedo — Portafolio</title>
     <meta
       name="description"
-      content="Portafolio profesional — Ingeniero en Sistemas: Desarrollo Web, Servicios IT, e Integración de IA y Automatización."
+      content="Construyo software que se puede tocar: interfaces accesibles, infraestructura que no se cae e IA integrada en productos reales."
     />
-    <title>Portafolio — Ingeniero en Sistemas</title>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href="https://portafolio-ccq.pages.dev/" />
+    <link rel="alternate" hreflang="es" href="https://portafolio-ccq.pages.dev/" />
+    <link rel="alternate" hreflang="en" href="https://portafolio-ccq.pages.dev/en" />
+    <link rel="alternate" hreflang="x-default" href="https://portafolio-ccq.pages.dev/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Dominick Ibarra Acedo" />
+    <meta property="og:title" content="Dominick Ibarra Acedo — Portafolio" />
+    <meta
+      property="og:description"
+      content="Construyo software que se puede tocar: interfaces accesibles, infraestructura que no se cae e IA integrada en productos reales."
+    />
+    <meta property="og:url" content="https://portafolio-ccq.pages.dev/" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:image" content="https://portafolio-ccq.pages.dev/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Dominick Ibarra Acedo — Portafolio" />
+    <meta
+      name="twitter:description"
+      content="Construyo software que se puede tocar: interfaces accesibles, infraestructura que no se cae e IA integrada en productos reales."
+    />
+    <meta name="twitter:image" content="https://portafolio-ccq.pages.dev/og-image.png" />
+    <!-- SEO:end -->
 
     <!-- Tipografía del sistema de diseño -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

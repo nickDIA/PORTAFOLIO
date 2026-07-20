@@ -11,7 +11,7 @@
   --color-ink: #0b0d12; /* fondo global */
   --color-surface: #12151c; /* tarjetas / superficies elevadas */
   --color-text: #e7e9f0; /* texto principal */
-  --color-text-muted: #7a8099; /* texto secundario */
+  --color-text-muted: #868da8; /* texto secundario — AA (4.5:1) incluso sobre los paneles tenues de señal (bgSoft), no solo sobre ink/surface */
 
   /* -- Colores de señal: uno por faceta. No decorativos —
         son el sistema de navegación del sitio. -- */
