@@ -17,7 +17,7 @@
    lo importa en Node vía Vite (ssrLoadModule).
    ============================================================ */
 
-import { about, profile, roles } from "../data/content";
+import { about, landing, roles } from "../data/content";
 import { LOCALES, localizePath, stripLocalePrefix, type Locale } from "../i18n/locale";
 
 /** Dominio canónico de producción; sobreescribible por entorno (Cloudflare Pages). */
@@ -72,11 +72,13 @@ export function headForPath(pathname: string): HeadData {
     : isAbout
       ? `${about.title[locale]} · ${BASE_TITLE}`
       : BASE_TITLE;
+  /* La home describe la OFERTA en lenguaje de cliente (landing.hero.sub):
+     es lo que aparece al compartir el link con una empresa o individuo. */
   const description = role
     ? role.description[locale]
     : isAbout
       ? about.intro[locale]
-      : profile.tagline[locale];
+      : landing.hero.sub[locale];
 
   const esHref = SITE_URL + basePath;
   const enHref = SITE_URL + localizePath(basePath, "en");

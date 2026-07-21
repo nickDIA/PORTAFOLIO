@@ -1,6 +1,6 @@
 # TESTING.md — Pruebas del portafolio
 
-> Estado (2026-07-20): **102 pruebas unitarias/componente (Vitest) + 49 E2E (Playwright) · todas en verde** · build de producción limpio (incluye type-check del Worker y prerender de las 10 rutas) · CI en GitHub Actions en cada push/PR a `main` · sitio bilingüe (es/en) y copiloto en producción · SEO por idioma (Open Graph + hreflang) prerenderizado · página "Sobre mí" (`/sobre-mi`) con historias personales.
+> Estado (2026-07-20): **108 pruebas unitarias/componente (Vitest) + 50 E2E (Playwright) · todas en verde** · build de producción limpio (incluye type-check del Worker y prerender de las 10 rutas) · CI en GitHub Actions en cada push/PR a `main` · sitio bilingüe (es/en) y copiloto en producción · SEO por idioma (Open Graph + hreflang) prerenderizado · página "Sobre mí" (`/sobre-mi`) con historias personales · **landing de clientes en `/`** (lenguaje no técnico, galería de evidencia, CTA WhatsApp→email).
 
 ## Cómo correr las pruebas
 
@@ -20,7 +20,7 @@ Es un gate de calidad, no el despliegue: Cloudflare Pages despliega por su propi
 
 ## Suite automatizada
 
-### 1. `src/data/content.test.ts` — integridad de la fuente única de verdad (20 pruebas)
+### 1. `src/data/content.test.ts` — integridad de la fuente única de verdad (25 pruebas)
 
 `content.ts` alimenta la UI hoy y el system prompt del copiloto. Estas pruebas protegen sus invariantes mientras se rellenan los `[[TODO`:
 
@@ -32,6 +32,7 @@ Es un gate de calidad, no el despliegue: Cloudflare Pages despliega por su propi
 - `isPending` detecta placeholders; los datos ya confirmados (nombre, email) no lo son.
 - **Bilingüe**: cada campo `LocalizedText` (perfil, roles, proyectos, experiencia) trae `es` y `en` no vacíos; los placeholders `[[TODO` quedan sincronizados entre ambos idiomas (nunca pendiente en uno y resuelto en el otro).
 - **`about`** (historias de "Sobre mí"): título e intro de la página en ambos idiomas; cada historia trae `heading`/`body` en `es` y `en`; ids de historia únicos.
+- **`landing`** (carta de presentación para clientes): exactamente un servicio por rol y en el mismo orden; hero/servicios/confianza/CTA bilingües; toda evidencia con rol válido, ruta bajo `/screenshots/`, alt bilingüe y `src` únicos; si el WhatsApp deja de ser `[[TODO`, debe ser solo dígitos con código de país (11–15).
 
 ### 2. `src/components/role/NucleoDemo.test.tsx` — la transacción atómica (5 pruebas)
 
@@ -44,9 +45,10 @@ Con timers reales (la secuencia temporizada ES el contenido de la demo):
 | Bloqueo de concurrencia | Todos los botones deshabilitados durante la transacción, rehabilitados al terminar |
 | **Rollback atómico** | Con "forzar error": `ERROR simulado → ROLLBACK → sin cambios parciales`; el activo vuelve a su estado original, la entrada revertida desaparece, el conteo de auditoría queda intacto y el toggle se desarma solo |
 
-### 3. `src/App.test.tsx` — routing, tematización y bilingüismo (22 pruebas)
+### 3. `src/App.test.tsx` — routing, tematización y bilingüismo (23 pruebas)
 
-- Landing en `/` (español) y `/en` (inglés): nombre, las 3 tarjetas de rol traducidas enlazando a su ruta con el prefijo correcto, sección de contacto traducida.
+- Landing en `/` (español) y `/en` (inglés): el `h1` en **lenguaje de cliente** ("Tecnología que trabaja para ti" / "Technology that works for you"), el nombre visible como firma, las 3 tarjetas de servicio enlazando a su página de rol con el prefijo correcto (conservan el nombre técnico como puente), contacto traducido.
+- **CTA de la landing**: usa `wa.me` si hay número de WhatsApp; mientras siga `[[TODO`, cae a `mailto:` — verificado contra el estado real del dato, en el hero y en contacto.
 - Contacto resiliente: el email real es enlace `mailto:`; los `[[TODO` se muestran como chips inertes, **nunca como enlaces rotos**.
 - Por cada rol, en **ambos** árboles de rutas (`/desarrollo-web` y `/en/desarrollo-web`, etc.): renderiza su `h1` traducido, fija `--focus-ring` a **su** color de señal y tematiza el `document.title` — el color como sistema de navegación, verificado en los dos idiomas.
 - **Página Sobre mí** (`/sobre-mi`, `/en/sobre-mi`): título traducido, al menos una historia renderizada, y el nav enlaza a la ruta correcta desde cualquier página en ambos idiomas.
@@ -147,7 +149,7 @@ El camino con API real (streaming de Gemini end-to-end) queda pendiente de la AP
 
 ## Suite E2E (Playwright)
 
-`e2e/` contiene 49 pruebas en navegador real (Chromium) que complementan la suite de Vitest — jsdom no renderiza de verdad, así que layout, contraste computado y el flujo completo por red del copiloto solo se pueden verificar aquí.
+`e2e/` contiene 50 pruebas en navegador real (Chromium) que complementan la suite de Vitest — jsdom no renderiza de verdad, así que layout, contraste computado y el flujo completo por red del copiloto solo se pueden verificar aquí.
 
 ```bash
 npm run test:e2e        # suite completa, headless
@@ -159,6 +161,7 @@ npm run test:e2e:ui     # modo interactivo (Playwright UI)
 | `e2e/navigation.spec.ts` (10) | Landing en español e inglés con las 3 tarjetas de rol traducidas; por cada rol y cada idioma (6 rutas), el encabezado correcto y `--focus-ring` resuelto al hex exacto de su color de señal — verificado en un navegador real que sí computa CSS custom properties anidadas (jsdom no); la página Sobre mí accesible desde el nav en ambos idiomas; el selector de idioma conserva la página actual al cambiar; `<html lang>` sigue el idioma activo |
 | `e2e/nucleo-demo.spec.ts` (3) | El mismo flujo de la demo transaccional verificado manualmente durante el desarrollo, ahora automatizado en español: COMMIT actualiza estado + auditoría; rollback forzado revierte ambos juntos y desarma el toggle; una pasada en inglés confirma que el flujo real por navegador no se rompe con el idioma |
 | `e2e/copilot.spec.ts` (4) | Abrir el dock, enviar una pregunta y ver la respuesta streameada — con la red mockeada usando el formato SSE real de Gemini (CRLF, `\r\n\r\n`) como segunda línea de defensa contra la regresión de línea de comando descrita arriba; manejo de error del Worker; cierre con Escape devolviendo el foco; una pasada en `/en` confirma que el chrome del widget (botones, sugerencias) se traduce |
+| `e2e/landing.spec.ts` (1) | **Cero imágenes rotas en la galería de evidencia** — disk-agnostic a propósito: las fotos pendientes usan rutas reales que aún no existen en `/public`, el servidor responde con el fallback SPA (200 + HTML, no 404), el `<img>` falla al decodificar y `ScreenshotFrame` cae al marco punteado. Cada figura debe estabilizarse en imagen cargada o marco pendiente, sin importar qué archivos existan el día que corra; al menos una real (Nautylab) debe cargar |
 | `e2e/a11y-contrast.spec.ts` (30) | **Contraste WCAG AA en navegador real** (axe-core con solo la regla `color-contrast`) sobre las 10 rutas — lo que la suite de jsdom no puede computar; atrapó el fallo de `--text-muted` sobre los paneles de señal. Además, por cada ruta, **cero desbordamiento horizontal** a 375px (móvil) y 1280px (escritorio) — regresión de layout del inglés (textos más largos) sin diffs de píxeles, estable entre SO/CI |
 
 Corre como job separado en CI (`e2e` en `.github/workflows/ci.yml`), en paralelo al de Vitest — instala Chromium y sube el reporte HTML como artefacto si algo falla.
@@ -173,6 +176,15 @@ Corre como job separado en CI (`e2e` en `.github/workflows/ci.yml`), en paralelo
 - **En build**: `scripts/prerender.mjs` congela esas etiquetas en HTML estático por ruta (`dist/<ruta>/index.html`) tras `vite build`, usando la API de Vite (`ssrLoadModule`) sin navegador ni dependencias nuevas. Necesario porque los scrapers sociales (Facebook, LinkedIn, WhatsApp) **no ejecutan JS** y solo verían el `index.html` base. También emite `dist/sitemap.xml` (referenciado en `robots.txt`) con las **10 rutas** (home + 3 roles + `/sobre-mi`, × es/en).
 
 La imagen de previsualización de marca (`public/og-image.png`, 1200×630) se genera con `npm run og-image` (`scripts/gen-og-image.mjs`, reutiliza el Chromium de Playwright) — asset estático commiteado, fuera del build de producción. Invariantes cubiertas por `src/seo/meta.test.ts` (13 pruebas): 10 rutas únicas, título/descripción localizados (incluida la página Sobre mí), canonical/alternates absolutos y coherentes es↔en, y serialización HTML sin fugas de comillas.
+
+## Landing de clientes (`/`)
+
+La raíz dejó de ser el portafolio técnico: es la **carta de presentación para clientes** (empresas e individuos no técnicos). Decisiones:
+
+- **Lenguaje de beneficio, no de ingeniería** — `landing` en `src/data/content.ts`: hero ("Tecnología que trabaja para ti"), 3 tarjetas de servicio en lenguaje cliente que conservan el nombre técnico del rol como puente hacia su página (donde vive la profundidad para reclutadores), galería de evidencia, bullets de confianza y el copiloto como demo viviente.
+- **CTA WhatsApp con fallback** — `profile.contact.whatsapp` (solo dígitos con código de país); mientras siga `[[TODO`, ambos CTAs (hero y contacto) caen a `mailto:` automáticamente.
+- **Galería rellenable sin código** — cada evidencia usa la ruta real esperada (`/screenshots/mantenimiento-1.jpg`, `redes-1.jpg`, `nucleo-1.png`, `inventario-1.png`, `gemini-integracion-1.png`); al soltar el archivo en `public/screenshots/` la foto aparece sola. Mientras tanto, `ScreenshotFrame` muestra el marco punteado con la ruta esperada.
+- El **SEO de la home** (description/OG) usa `landing.hero.sub` — quien comparta el link con un cliente ve la oferta, no jerga técnica.
 
 ## Página "Sobre mí" (`/sobre-mi`, `/en/sobre-mi`)
 

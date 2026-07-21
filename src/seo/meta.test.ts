@@ -6,7 +6,7 @@ import {
   renderHeadTags,
   renderSitemap,
 } from "./meta";
-import { profile, roles } from "../data/content";
+import { landing, profile, roles } from "../data/content";
 
 /* ============================================================
    meta.ts es la fuente única del <head> por ruta — la consumen
@@ -38,19 +38,19 @@ describe("ROUTES", () => {
 });
 
 describe("headForPath — home", () => {
-  it("español: título base y descripción = tagline en español", () => {
+  it("español: título base y descripción en lenguaje de cliente (landing)", () => {
     const h = headForPath("/");
     expect(h.lang).toBe("es");
     expect(h.title).toBe("Dominick Ibarra Acedo — Portafolio");
-    expect(h.description).toBe(profile.tagline.es);
+    expect(h.description).toBe(landing.hero.sub.es);
     expect(h.canonical).toBe(`${SITE_URL}/`);
     expect(h.ogLocale).toBe("es_ES");
   });
 
-  it("inglés (/en): descripción = tagline en inglés y canonical con prefijo", () => {
+  it("inglés (/en): descripción de landing en inglés y canonical con prefijo", () => {
     const h = headForPath("/en");
     expect(h.lang).toBe("en");
-    expect(h.description).toBe(profile.tagline.en);
+    expect(h.description).toBe(landing.hero.sub.en);
     expect(h.canonical).toBe(`${SITE_URL}/en`);
     expect(h.ogLocale).toBe("en_US");
   });

@@ -2,6 +2,7 @@ import { describe, it, expect, afterEach } from "vitest";
 import { render, screen, cleanup, within } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import App from "./App";
+import { isPending, profile } from "./data/content";
 
 /* ============================================================
    Routing + tematización + bilingüismo: cada ruta renderiza su
@@ -24,12 +25,16 @@ afterEach(() => {
 });
 
 describe("landing (/)", () => {
-  it("muestra nombre, las tres tarjetas de rol y contacto en español", () => {
+  it("muestra el titular de servicios, el nombre y las tres tarjetas en español", () => {
     renderAt("/");
+    /* El h1 habla en lenguaje de cliente; el nombre queda como firma */
     expect(
-      screen.getByRole("heading", { level: 1, name: /Dominick Ibarra Acedo/ }),
+      screen.getByRole("heading", { level: 1, name: /Tecnología que trabaja/ }),
     ).toBeInTheDocument();
-    /* Acotado a main: los nombres de rol también están en el nav */
+    expect(screen.getByText(/Dominick Ibarra Acedo/)).toBeInTheDocument();
+    /* Acotado a main: los nombres de rol también están en el nav.
+       Cada tarjeta de servicio conserva el nombre técnico del rol
+       como puente hacia su página de profundidad. */
     const main = within(screen.getByRole("main"));
     expect(main.getByRole("link", { name: /Desarrollo Web/ })).toHaveAttribute(
       "href",
@@ -42,7 +47,21 @@ describe("landing (/)", () => {
     expect(
       main.getByRole("link", { name: /IA & Automatización/ }),
     ).toHaveAttribute("href", "/ia-automatizacion");
+    /* Y el lenguaje de cliente está presente en las tarjetas */
+    expect(main.getByText("Tu negocio en internet")).toBeInTheDocument();
     expect(screen.getByText("Contacto")).toBeInTheDocument();
+  });
+
+  it("el CTA usa WhatsApp si hay número, y cae a email mientras siga pendiente", () => {
+    renderAt("/");
+    const ctas = screen.getAllByRole("link", { name: /Escríbeme/ });
+    expect(ctas.length).toBeGreaterThan(0); // hero + contacto
+    const expected = isPending(profile.contact.whatsapp)
+      ? `mailto:${profile.contact.email}`
+      : `https://wa.me/${profile.contact.whatsapp}`;
+    for (const cta of ctas) {
+      expect(cta.getAttribute("href")).toContain(expected);
+    }
   });
 
   it("los enlaces de contacto ya rellenos son reales, no chips pendientes", () => {
@@ -64,11 +83,12 @@ describe("landing (/)", () => {
 });
 
 describe("landing (/en)", () => {
-  it("muestra las tres tarjetas de rol traducidas al inglés", () => {
+  it("muestra el titular y las tarjetas de servicio traducidas al inglés", () => {
     renderAt("/en");
     expect(
-      screen.getByRole("heading", { level: 1, name: /Dominick Ibarra Acedo/ }),
+      screen.getByRole("heading", { level: 1, name: /Technology that works/ }),
     ).toBeInTheDocument();
+    expect(screen.getByText(/Dominick Ibarra Acedo/)).toBeInTheDocument();
     const main = within(screen.getByRole("main"));
     expect(main.getByRole("link", { name: /Web Development/ })).toHaveAttribute(
       "href",

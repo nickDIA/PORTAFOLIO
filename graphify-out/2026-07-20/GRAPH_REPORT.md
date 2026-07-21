@@ -1,16 +1,16 @@
 # Graph Report - PORTAFOLIO  (2026-07-20)
 
 ## Corpus Check
-- 63 files · ~77,496 words
+- 64 files · ~79,424 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 400 nodes · 659 edges · 38 communities (32 shown, 6 thin omitted)
+- 406 nodes · 680 edges · 38 communities (32 shown, 6 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 9 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `fc6318c3`
+- Built from commit: `c7e140e0`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -50,16 +50,16 @@
 - gen-og-image.mjs
 
 ## God Nodes (most connected - your core abstractions)
-1. `useT()` - 28 edges
+1. `useT()` - 30 edges
 2. `TESTING.md — Pruebas del portafolio` - 21 edges
 3. `compilerOptions` - 19 edges
 4. `compilerOptions` - 17 edges
 5. `compilerOptions` - 16 edges
-6. `ui` - 13 edges
-7. `scripts` - 12 edges
-8. `isPending()` - 12 edges
-9. `file_hashes` - 11 edges
-10. `LocalizedText` - 11 edges
+6. `ui` - 14 edges
+7. `LocalizedText` - 13 edges
+8. `scripts` - 12 edges
+9. `isPending()` - 12 edges
+10. `file_hashes` - 11 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `Residencia Profesional — Nautylab (ene-jun 2026)` --semantically_similar_to--> `Proyecto: integracion-gemini`  [INFERRED] [semantically similar]
@@ -84,8 +84,8 @@
 ## Communities (38 total, 6 thin omitted)
 
 ### Community 0 - "Facet Page Components"
-Cohesion: 0.20
-Nodes (22): FeaturedProject(), Props, ProjectCard(), Props, ProjectLinks(), RoleShell(), SectionLabel(), Props (+14 more)
+Cohesion: 0.15
+Nodes (29): FeaturedProject(), Props, ProjectCard(), Props, ProjectLinks(), RoleShell(), SectionLabel(), Props (+21 more)
 
 ### Community 1 - "Dev Dependencies"
 Cohesion: 0.06
@@ -96,8 +96,8 @@ Cohesion: 0.07
 Nodes (26): DOM, DOM.Iterable, src, @testing-library/jest-dom, vitest/globals, compilerOptions, allowImportingTsExtensions, jsx (+18 more)
 
 ### Community 3 - "App Routing & A11y Tests"
-Cohesion: 0.24
-Nodes (14): Props, Experience, experienceByRole(), Profile, ProjectLink, projects, Role, Screenshot (+6 more)
+Cohesion: 0.19
+Nodes (19): Props, about, AboutContent, AboutStory, Experience, experienceByRole(), Profile, ProjectLink (+11 more)
 
 ### Community 4 - "Worker TypeScript Config"
 Cohesion: 0.09
@@ -116,12 +116,12 @@ Cohesion: 0.10
 Nodes (19): file_hashes, .claude/CLAUDE.md, .claude/hooks/vexp-guard.sh, src/App.tsx, src/components/Layout.tsx, src/data/content.ts, src/main.tsx, src/pages/FacetPage.tsx (+11 more)
 
 ### Community 8 - "Signal Hero Animation"
-Cohesion: 0.13
-Nodes (27): Layout(), signalNav, roles, Locale, LocaleContext, LOCALES, localizePath(), stripLocalePrefix() (+19 more)
+Cohesion: 0.17
+Nodes (20): Layout(), signalNav, roles, Locale, LOCALES, localizePath(), stripLocalePrefix(), applyHead() (+12 more)
 
 ### Community 9 - "Núcleo Demo Logic"
-Cohesion: 0.18
-Nodes (10): Activo, ACTIVOS_INICIALES, badge, CICLO, EntradaAuditoria, Estado, hora(), LineaConsola (+2 more)
+Cohesion: 0.17
+Nodes (11): Activo, ACTIVOS_INICIALES, badge, CICLO, EntradaAuditoria, Estado, hora(), LineaConsola (+3 more)
 
 ### Community 10 - "Copilot Worker API"
 Cohesion: 0.23
@@ -192,7 +192,7 @@ Cohesion: 0.50
 Nodes (4): distDir, main(), outFile(), root
 
 ## Knowledge Gaps
-- **173 isolated node(s):** `.claude/CLAUDE.md`, `.claude/hooks/vexp-guard.sh`, `src/App.tsx`, `src/components/Layout.tsx`, `src/data/content.ts` (+168 more)
+- **174 isolated node(s):** `.claude/CLAUDE.md`, `.claude/hooks/vexp-guard.sh`, `src/App.tsx`, `src/components/Layout.tsx`, `src/data/content.ts` (+169 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **6 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -200,13 +200,13 @@ Nodes (4): distDir, main(), outFile(), root
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `devDependencies` connect `Dev Dependencies` to `Package Manifest`?**
-  _High betweenness centrality (0.016) - this node is a cross-community bridge._
-- **Why does `useT()` connect `Facet Page Components` to `Signal Hero Animation`, `Núcleo Demo Logic`, `Chat Dock Widget`?**
-  _High betweenness centrality (0.014) - this node is a cross-community bridge._
+  _High betweenness centrality (0.015) - this node is a cross-community bridge._
+- **Why does `useT()` connect `Facet Page Components` to `Signal Hero Animation`, `Núcleo Demo Logic`, `App Routing & A11y Tests`, `Chat Dock Widget`?**
+  _High betweenness centrality (0.015) - this node is a cross-community bridge._
 - **Why does `TESTING.md — Pruebas del portafolio` connect `Test Suite Overview` to `CV Work Experience`, `Design System & Deploy`, `CV Skills Profile`, `Copilot Design Rationale`, `Worker Rate-Limit Rationale`, `Content & System Prompt`, `Accessibility Audit`?**
   _High betweenness centrality (0.013) - this node is a cross-community bridge._
 - **What connects `.claude/CLAUDE.md`, `.claude/hooks/vexp-guard.sh`, `src/App.tsx` to the rest of the system?**
-  _173 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _174 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Dev Dependencies` be split into smaller, more focused modules?**
   _Cohesion score 0.06060606060606061 - nodes in this community are weakly interconnected._
 - **Should `App TypeScript Config` be split into smaller, more focused modules?**

@@ -377,7 +377,7 @@
       "label": "WIDTHS",
       "file_type": "code",
       "source_file": "e2e/a11y-contrast.spec.ts",
-      "source_location": "L32",
+      "source_location": "L34",
       "_origin": "ast",
       "id": "e2e_a11y_contrast_spec_widths",
       "community": 31,
@@ -1194,15 +1194,15 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_app",
-      "community": 30,
-      "community_name": "App.tsx",
+      "community": 0,
+      "community_name": "Facet Page Components",
       "norm_label": "app.tsx"
     },
     {
       "label": "App()",
       "file_type": "code",
       "source_file": "src/App.tsx",
-      "source_location": "L15",
+      "source_location": "L16",
       "_origin": "ast",
       "id": "src_app_app",
       "community": 30,
@@ -1818,7 +1818,7 @@
       "label": "nonEmpty()",
       "file_type": "code",
       "source_file": "src/data/content.test.ts",
-      "source_location": "L125",
+      "source_location": "L126",
       "_origin": "ast",
       "id": "src_data_content_test_nonempty",
       "community": 3,
@@ -1903,10 +1903,32 @@
       "norm_label": "experience"
     },
     {
-      "label": "Profile",
+      "label": "AboutStory",
       "file_type": "code",
       "source_file": "src/data/content.ts",
       "source_location": "L74",
+      "_origin": "ast",
+      "id": "src_data_content_aboutstory",
+      "community": 3,
+      "community_name": "App Routing & A11y Tests",
+      "norm_label": "aboutstory"
+    },
+    {
+      "label": "AboutContent",
+      "file_type": "code",
+      "source_file": "src/data/content.ts",
+      "source_location": "L80",
+      "_origin": "ast",
+      "id": "src_data_content_aboutcontent",
+      "community": 3,
+      "community_name": "App Routing & A11y Tests",
+      "norm_label": "aboutcontent"
+    },
+    {
+      "label": "Profile",
+      "file_type": "code",
+      "source_file": "src/data/content.ts",
+      "source_location": "L86",
       "_origin": "ast",
       "id": "src_data_content_profile",
       "community": 3,
@@ -1917,7 +1939,7 @@
       "label": "roles",
       "file_type": "code",
       "source_file": "src/data/content.ts",
-      "source_location": "L117",
+      "source_location": "L129",
       "_origin": "ast",
       "id": "src_data_content_roles",
       "community": 8,
@@ -1928,7 +1950,7 @@
       "label": "projects",
       "file_type": "code",
       "source_file": "src/data/content.ts",
-      "source_location": "L164",
+      "source_location": "L176",
       "_origin": "ast",
       "id": "src_data_content_projects",
       "community": 3,
@@ -1936,10 +1958,21 @@
       "norm_label": "projects"
     },
     {
+      "label": "about",
+      "file_type": "code",
+      "source_file": "src/data/content.ts",
+      "source_location": "L518",
+      "_origin": "ast",
+      "id": "src_data_content_about",
+      "community": 3,
+      "community_name": "App Routing & A11y Tests",
+      "norm_label": "about"
+    },
+    {
       "label": "isPending()",
       "file_type": "code",
       "source_file": "src/data/content.ts",
-      "source_location": "L507",
+      "source_location": "L586",
       "_origin": "ast",
       "id": "src_data_content_ispending",
       "community": 0,
@@ -1950,18 +1983,18 @@
       "label": "projectsByRole()",
       "file_type": "code",
       "source_file": "src/data/content.ts",
-      "source_location": "L510",
+      "source_location": "L589",
       "_origin": "ast",
       "id": "src_data_content_projectsbyrole",
-      "community": 0,
-      "community_name": "Facet Page Components",
+      "community": 3,
+      "community_name": "App Routing & A11y Tests",
       "norm_label": "projectsbyrole()"
     },
     {
       "label": "experienceByRole()",
       "file_type": "code",
       "source_file": "src/data/content.ts",
-      "source_location": "L517",
+      "source_location": "L596",
       "_origin": "ast",
       "id": "src_data_content_experiencebyrole",
       "community": 3,
@@ -2052,8 +2085,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_i18n_locale",
-      "community": 8,
-      "community_name": "Signal Hero Animation",
+      "community": 0,
+      "community_name": "Facet Page Components",
       "norm_label": "locale.ts"
     },
     {
@@ -2096,8 +2129,8 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "src_i18n_locale_localecontext",
-      "community": 8,
-      "community_name": "Signal Hero Animation",
+      "community": 0,
+      "community_name": "Facet Page Components",
       "norm_label": "localecontext"
     },
     {
@@ -2107,8 +2140,8 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "src_i18n_locale_localeprovider",
-      "community": 30,
-      "community_name": "App.tsx",
+      "community": 0,
+      "community_name": "Facet Page Components",
       "norm_label": "localeprovider()"
     },
     {
@@ -2118,8 +2151,8 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "src_i18n_locale_uselocale",
-      "community": 8,
-      "community_name": "Signal Hero Animation",
+      "community": 9,
+      "community_name": "N\u00facleo Demo Logic",
       "norm_label": "uselocale()"
     },
     {
@@ -2217,8 +2250,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_lib_usedocumenttitle",
-      "community": 8,
-      "community_name": "Signal Hero Animation",
+      "community": 0,
+      "community_name": "Facet Page Components",
       "norm_label": "usedocumenttitle.ts"
     },
     {
@@ -2228,8 +2261,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "src_lib_usedocumenttitle_usedocumenttitle",
-      "community": 8,
-      "community_name": "Signal Hero Animation",
+      "community": 0,
+      "community_name": "Facet Page Components",
       "norm_label": "usedocumenttitle()"
     },
     {
@@ -2327,8 +2360,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_pages_home",
-      "community": 8,
-      "community_name": "Signal Hero Animation",
+      "community": 0,
+      "community_name": "Facet Page Components",
       "norm_label": "home.tsx"
     },
     {
@@ -2338,8 +2371,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "src_pages_home_cardaccent",
-      "community": 8,
-      "community_name": "Signal Hero Animation",
+      "community": 0,
+      "community_name": "Facet Page Components",
       "norm_label": "cardaccent"
     },
     {
@@ -2349,8 +2382,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "src_pages_home_titleaccent",
-      "community": 8,
-      "community_name": "Signal Hero Animation",
+      "community": 0,
+      "community_name": "Facet Page Components",
       "norm_label": "titleaccent"
     },
     {
@@ -2360,8 +2393,8 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "src_pages_home_carddelays",
-      "community": 8,
-      "community_name": "Signal Hero Animation",
+      "community": 0,
+      "community_name": "Facet Page Components",
       "norm_label": "carddelays"
     },
     {
@@ -2371,8 +2404,8 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "src_pages_home_home",
-      "community": 8,
-      "community_name": "Signal Hero Animation",
+      "community": 0,
+      "community_name": "Facet Page Components",
       "norm_label": "home()"
     },
     {
@@ -2415,9 +2448,42 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "src_pages_serviciosit_serviciosit",
+      "community": 3,
+      "community_name": "App Routing & A11y Tests",
+      "norm_label": "serviciosit()"
+    },
+    {
+      "label": "SobreMi.tsx",
+      "file_type": "code",
+      "source_file": "src/pages/SobreMi.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_pages_sobremi",
       "community": 0,
       "community_name": "Facet Page Components",
-      "norm_label": "serviciosit()"
+      "norm_label": "sobremi.tsx"
+    },
+    {
+      "label": "storyDelays",
+      "file_type": "code",
+      "source_file": "src/pages/SobreMi.tsx",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "src_pages_sobremi_storydelays",
+      "community": 0,
+      "community_name": "Facet Page Components",
+      "norm_label": "storydelays"
+    },
+    {
+      "label": "SobreMi()",
+      "file_type": "code",
+      "source_file": "src/pages/SobreMi.tsx",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "src_pages_sobremi_sobremi",
+      "community": 0,
+      "community_name": "Facet Page Components",
+      "norm_label": "sobremi()"
     },
     {
       "label": "meta.test.ts",
@@ -2478,7 +2544,7 @@
       "label": "HeadData",
       "file_type": "code",
       "source_file": "src/seo/meta.ts",
-      "source_location": "L41",
+      "source_location": "L43",
       "_origin": "ast",
       "id": "src_seo_meta_headdata",
       "community": 8,
@@ -2489,7 +2555,7 @@
       "label": "normalize()",
       "file_type": "code",
       "source_file": "src/seo/meta.ts",
-      "source_location": "L54",
+      "source_location": "L56",
       "_origin": "ast",
       "id": "src_seo_meta_normalize",
       "community": 8,
@@ -2500,7 +2566,7 @@
       "label": "headForPath()",
       "file_type": "code",
       "source_file": "src/seo/meta.ts",
-      "source_location": "L61",
+      "source_location": "L63",
       "_origin": "ast",
       "id": "src_seo_meta_headforpath",
       "community": 8,
@@ -2511,7 +2577,7 @@
       "label": "escapeAttr()",
       "file_type": "code",
       "source_file": "src/seo/meta.ts",
-      "source_location": "L92",
+      "source_location": "L101",
       "_origin": "ast",
       "id": "src_seo_meta_escapeattr",
       "community": 8,
@@ -2522,7 +2588,7 @@
       "label": "renderHeadTags()",
       "file_type": "code",
       "source_file": "src/seo/meta.ts",
-      "source_location": "L104",
+      "source_location": "L113",
       "_origin": "ast",
       "id": "src_seo_meta_renderheadtags",
       "community": 8,
@@ -2533,7 +2599,7 @@
       "label": "renderSitemap()",
       "file_type": "code",
       "source_file": "src/seo/meta.ts",
-      "source_location": "L130",
+      "source_location": "L139",
       "_origin": "ast",
       "id": "src_seo_meta_rendersitemap",
       "community": 8,
@@ -3783,8 +3849,8 @@
       "contributor": null,
       "community": 16,
       "norm_label": "vexp (context-aware ai coding pipeline)",
-      "id": "_claude_claude_vexp",
-      "community_name": "vexp Tool Suite"
+      "community_name": "vexp Tool Suite",
+      "id": "_claude_claude_vexp"
     },
     {
       "label": "run_pipeline tool",
@@ -3797,8 +3863,8 @@
       "contributor": null,
       "community": 16,
       "norm_label": "run_pipeline tool",
-      "id": "_claude_claude_run_pipeline",
-      "community_name": "vexp Tool Suite"
+      "community_name": "vexp Tool Suite",
+      "id": "_claude_claude_run_pipeline"
     },
     {
       "label": "get_skeleton tool",
@@ -3811,8 +3877,8 @@
       "contributor": null,
       "community": 16,
       "norm_label": "get_skeleton tool",
-      "id": "_claude_claude_get_skeleton",
-      "community_name": "vexp Tool Suite"
+      "community_name": "vexp Tool Suite",
+      "id": "_claude_claude_get_skeleton"
     },
     {
       "label": "index_status tool",
@@ -3825,8 +3891,8 @@
       "contributor": null,
       "community": 16,
       "norm_label": "index_status tool",
-      "id": "_claude_claude_index_status",
-      "community_name": "vexp Tool Suite"
+      "community_name": "vexp Tool Suite",
+      "id": "_claude_claude_index_status"
     },
     {
       "label": "expand_vexp_ref tool",
@@ -3839,8 +3905,8 @@
       "contributor": null,
       "community": 16,
       "norm_label": "expand_vexp_ref tool",
-      "id": "_claude_claude_expand_vexp_ref",
-      "community_name": "vexp Tool Suite"
+      "community_name": "vexp Tool Suite",
+      "id": "_claude_claude_expand_vexp_ref"
     },
     {
       "label": "PreToolUse hook blocking Grep/Glob when vexp daemon running",
@@ -3853,8 +3919,8 @@
       "contributor": null,
       "community": 16,
       "norm_label": "pretooluse hook blocking grep/glob when vexp daemon running",
-      "id": "_claude_claude_pretooluse_hook",
-      "community_name": "vexp Tool Suite"
+      "community_name": "vexp Tool Suite",
+      "id": "_claude_claude_pretooluse_hook"
     },
     {
       "label": "Portafolio \u2014 Dominick Ibarra Acedo",
@@ -3867,8 +3933,8 @@
       "contributor": null,
       "community": 12,
       "norm_label": "portafolio \u2014 dominick ibarra acedo",
-      "id": "readme_portafolio",
-      "community_name": "Design System & Deploy"
+      "community_name": "Design System & Deploy",
+      "id": "readme_portafolio"
     },
     {
       "label": "Tech stack: Vite + React 19 + TypeScript + Tailwind CSS v4 + Cloudflare",
@@ -3881,8 +3947,8 @@
       "contributor": null,
       "community": 12,
       "norm_label": "tech stack: vite + react 19 + typescript + tailwind css v4 + cloudflare",
-      "id": "readme_stack",
-      "community_name": "Design System & Deploy"
+      "community_name": "Design System & Deploy",
+      "id": "readme_stack"
     },
     {
       "label": "Copiloto IA (widget de chat con Claude)",
@@ -3895,8 +3961,8 @@
       "contributor": null,
       "community": 17,
       "norm_label": "copiloto ia (widget de chat con claude)",
-      "id": "readme_copilot",
-      "community_name": "Copilot Design Rationale"
+      "community_name": "Copilot Design Rationale",
+      "id": "readme_copilot"
     },
     {
       "label": "Grounding: system prompt generado desde content.ts, sin invenci\u00f3n",
@@ -3909,8 +3975,8 @@
       "contributor": null,
       "community": 17,
       "norm_label": "grounding: system prompt generado desde content.ts, sin invencion",
-      "id": "readme_grounding_rationale",
-      "community_name": "Copilot Design Rationale"
+      "community_name": "Copilot Design Rationale",
+      "id": "readme_grounding_rationale"
     },
     {
       "label": "API key solo en el servidor (secret del Worker, nunca en el bundle cliente)",
@@ -3923,8 +3989,8 @@
       "contributor": null,
       "community": 12,
       "norm_label": "api key solo en el servidor (secret del worker, nunca en el bundle cliente)",
-      "id": "readme_apikey_serveronly_rationale",
-      "community_name": "Design System & Deploy"
+      "community_name": "Design System & Deploy",
+      "id": "readme_apikey_serveronly_rationale"
     },
     {
       "label": "L\u00edmites del Worker: 15 msgs/sesi\u00f3n, 1000 chars/msg, 512 tokens salida, solo roles user/assistant",
@@ -3937,8 +4003,8 @@
       "contributor": null,
       "community": 18,
       "norm_label": "limites del worker: 15 msgs/sesion, 1000 chars/msg, 512 tokens salida, solo roles user/assistant",
-      "id": "readme_session_limits_rationale",
-      "community_name": "Worker Rate-Limit Rationale"
+      "community_name": "Worker Rate-Limit Rationale",
+      "id": "readme_session_limits_rationale"
     },
     {
       "label": "Streaming SSE de Claude canalizado directo al widget sin re-parseo",
@@ -3951,8 +4017,8 @@
       "contributor": null,
       "community": 17,
       "norm_label": "streaming sse de claude canalizado directo al widget sin re-parseo",
-      "id": "readme_streaming_sse_rationale",
-      "community_name": "Copilot Design Rationale"
+      "community_name": "Copilot Design Rationale",
+      "id": "readme_streaming_sse_rationale"
     },
     {
       "label": "Despliegue: Cloudflare Pages (sitio) + Cloudflare Worker (copiloto) v\u00eda wrangler",
@@ -3965,8 +4031,8 @@
       "contributor": null,
       "community": 12,
       "norm_label": "despliegue: cloudflare pages (sitio) + cloudflare worker (copiloto) via wrangler",
-      "id": "readme_deployment",
-      "community_name": "Design System & Deploy"
+      "community_name": "Design System & Deploy",
+      "id": "readme_deployment"
     },
     {
       "label": "npm test \u2014 62 pruebas (Vitest + Testing Library + axe-core)",
@@ -3979,8 +4045,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "npm test \u2014 62 pruebas (vitest + testing library + axe-core)",
-      "id": "readme_npm_test",
-      "community_name": "Test Suite Overview"
+      "community_name": "Test Suite Overview",
+      "id": "readme_npm_test"
     },
     {
       "label": "content.ts (fuente \u00fanica de verdad)",
@@ -3993,8 +4059,8 @@
       "contributor": null,
       "community": 20,
       "norm_label": "content.ts (fuente unica de verdad)",
-      "id": "src_data_content_module",
-      "community_name": "Content & System Prompt"
+      "community_name": "Content & System Prompt",
+      "id": "src_data_content_module"
     },
     {
       "label": "systemPrompt.ts (system prompt del copiloto)",
@@ -4007,8 +4073,8 @@
       "contributor": null,
       "community": 20,
       "norm_label": "systemprompt.ts (system prompt del copiloto)",
-      "id": "src_data_systemprompt_module",
-      "community_name": "Content & System Prompt"
+      "community_name": "Content & System Prompt",
+      "id": "src_data_systemprompt_module"
     },
     {
       "label": "wrangler.jsonc (config del Worker, ALLOWED_ORIGIN)",
@@ -4021,8 +4087,8 @@
       "contributor": null,
       "community": 12,
       "norm_label": "wrangler.jsonc (config del worker, allowed_origin)",
-      "id": "wrangler_module",
-      "community_name": "Design System & Deploy"
+      "community_name": "Design System & Deploy",
+      "id": "wrangler_module"
     },
     {
       "label": "TESTING.md \u2014 Pruebas del portafolio",
@@ -4035,8 +4101,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "testing.md \u2014 pruebas del portafolio",
-      "id": "testing_doc",
-      "community_name": "Test Suite Overview"
+      "community_name": "Test Suite Overview",
+      "id": "testing_doc"
     },
     {
       "label": "content.test.ts",
@@ -4049,8 +4115,8 @@
       "contributor": null,
       "community": 20,
       "norm_label": "content.test.ts",
-      "id": "src_data_content_test_module",
-      "community_name": "Content & System Prompt"
+      "community_name": "Content & System Prompt",
+      "id": "src_data_content_test_module"
     },
     {
       "label": "NucleoDemo.test.tsx",
@@ -4063,8 +4129,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "nucleodemo.test.tsx",
-      "id": "src_components_facet_nucleodemo_test_module",
-      "community_name": "Test Suite Overview"
+      "community_name": "Test Suite Overview",
+      "id": "src_components_facet_nucleodemo_test_module"
     },
     {
       "label": "App.test.tsx",
@@ -4077,8 +4143,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "app.test.tsx",
-      "id": "src_app_test_module",
-      "community_name": "Test Suite Overview"
+      "community_name": "Test Suite Overview",
+      "id": "src_app_test_module"
     },
     {
       "label": "ScreenshotFrame.test.tsx",
@@ -4091,8 +4157,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "screenshotframe.test.tsx",
-      "id": "src_components_facet_screenshotframe_test_module",
-      "community_name": "Test Suite Overview"
+      "community_name": "Test Suite Overview",
+      "id": "src_components_facet_screenshotframe_test_module"
     },
     {
       "label": "SignalTrace.test.tsx",
@@ -4105,8 +4171,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "signaltrace.test.tsx",
-      "id": "src_components_signaltrace_test_module",
-      "community_name": "Test Suite Overview"
+      "community_name": "Test Suite Overview",
+      "id": "src_components_signaltrace_test_module"
     },
     {
       "label": "a11y.test.tsx",
@@ -4119,8 +4185,8 @@
       "contributor": null,
       "community": 21,
       "norm_label": "a11y.test.tsx",
-      "id": "src_a11y_test_module",
-      "community_name": "Accessibility Audit"
+      "community_name": "Accessibility Audit",
+      "id": "src_a11y_test_module"
     },
     {
       "label": "systemPrompt.test.ts",
@@ -4133,8 +4199,8 @@
       "contributor": null,
       "community": 20,
       "norm_label": "systemprompt.test.ts",
-      "id": "src_data_systemprompt_test_module",
-      "community_name": "Content & System Prompt"
+      "community_name": "Content & System Prompt",
+      "id": "src_data_systemprompt_test_module"
     },
     {
       "label": "workerValidate.test.ts",
@@ -4147,8 +4213,8 @@
       "contributor": null,
       "community": 18,
       "norm_label": "workervalidate.test.ts",
-      "id": "src_test_workervalidate_test_module",
-      "community_name": "Worker Rate-Limit Rationale"
+      "community_name": "Worker Rate-Limit Rationale",
+      "id": "src_test_workervalidate_test_module"
     },
     {
       "label": "ChatDock.test.tsx",
@@ -4161,8 +4227,8 @@
       "contributor": null,
       "community": 17,
       "norm_label": "chatdock.test.tsx",
-      "id": "src_components_copilot_chatdock_test_module",
-      "community_name": "Copilot Design Rationale"
+      "community_name": "Copilot Design Rationale",
+      "id": "src_components_copilot_chatdock_test_module"
     },
     {
       "label": "worker/validate.ts (m\u00f3dulo puro de validaci\u00f3n)",
@@ -4175,8 +4241,8 @@
       "contributor": null,
       "community": 18,
       "norm_label": "worker/validate.ts (modulo puro de validacion)",
-      "id": "worker_validate_module",
-      "community_name": "Worker Rate-Limit Rationale"
+      "community_name": "Worker Rate-Limit Rationale",
+      "id": "worker_validate_module"
     },
     {
       "label": "N\u00facleo \u2014 demo de transacci\u00f3n at\u00f3mica",
@@ -4189,8 +4255,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "nucleo \u2014 demo de transaccion atomica",
-      "id": "testing_nucleo_project",
-      "community_name": "Test Suite Overview"
+      "community_name": "Test Suite Overview",
+      "id": "testing_nucleo_project"
     },
     {
       "label": "WCAG 2.1 AA \u2014 cumplimiento de contraste",
@@ -4203,8 +4269,8 @@
       "contributor": null,
       "community": 21,
       "norm_label": "wcag 2.1 aa \u2014 cumplimiento de contraste",
-      "id": "testing_wcag_aa",
-      "community_name": "Accessibility Audit"
+      "community_name": "Accessibility Audit",
+      "id": "testing_wcag_aa"
     },
     {
       "label": "Auditor\u00eda de accesibilidad axe-core",
@@ -4217,8 +4283,8 @@
       "contributor": null,
       "community": 21,
       "norm_label": "auditoria de accesibilidad axe-core",
-      "id": "testing_axe_audit",
-      "community_name": "Accessibility Audit"
+      "community_name": "Accessibility Audit",
+      "id": "testing_axe_audit"
     },
     {
       "label": "L\u00edmite de sesi\u00f3n: HTTP 429 en el mensaje 16",
@@ -4231,8 +4297,8 @@
       "contributor": null,
       "community": 18,
       "norm_label": "limite de sesion: http 429 en el mensaje 16",
-      "id": "testing_session_limit_429",
-      "community_name": "Worker Rate-Limit Rationale"
+      "community_name": "Worker Rate-Limit Rationale",
+      "id": "testing_session_limit_429"
     },
     {
       "label": "Rechazo de inyecci\u00f3n de rol system (HTTP 400)",
@@ -4245,8 +4311,8 @@
       "contributor": null,
       "community": 18,
       "norm_label": "rechazo de inyeccion de rol system (http 400)",
-      "id": "testing_role_injection_reject",
-      "community_name": "Worker Rate-Limit Rationale"
+      "community_name": "Worker Rate-Limit Rationale",
+      "id": "testing_role_injection_reject"
     },
     {
       "label": "Cobertura reduced-motion: bucles infinitos ocultos",
@@ -4259,8 +4325,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "cobertura reduced-motion: bucles infinitos ocultos",
-      "id": "testing_reduced_motion",
-      "community_name": "Test Suite Overview"
+      "community_name": "Test Suite Overview",
+      "id": "testing_reduced_motion"
     },
     {
       "label": "Design tokens de color (--ink, --surface, --text, --signal-*, --danger)",
@@ -4273,8 +4339,8 @@
       "contributor": null,
       "community": 12,
       "norm_label": "design tokens de color (--ink, --surface, --text, --signal-*, --danger)",
-      "id": "testing_color_tokens",
-      "community_name": "Design System & Deploy"
+      "community_name": "Design System & Deploy",
+      "id": "testing_color_tokens"
     },
     {
       "label": "Huecos conocidos para Fase 6 (E2E Playwright, regresi\u00f3n visual, axe en navegador real)",
@@ -4287,8 +4353,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "huecos conocidos para fase 6 (e2e playwright, regresion visual, axe en navegador real)",
-      "id": "testing_known_gaps",
-      "community_name": "Test Suite Overview"
+      "community_name": "Test Suite Overview",
+      "id": "testing_known_gaps"
     },
     {
       "label": "Proyecto: nautylab",
@@ -4301,8 +4367,8 @@
       "contributor": null,
       "community": 14,
       "norm_label": "proyecto: nautylab",
-      "id": "testing_project_nautylab",
-      "community_name": "CV Skills Profile"
+      "community_name": "CV Skills Profile",
+      "id": "testing_project_nautylab"
     },
     {
       "label": "Proyecto: copiloto-ia",
@@ -4315,8 +4381,8 @@
       "contributor": null,
       "community": 17,
       "norm_label": "proyecto: copiloto-ia",
-      "id": "testing_project_copiloto_ia",
-      "community_name": "Copilot Design Rationale"
+      "community_name": "Copilot Design Rationale",
+      "id": "testing_project_copiloto_ia"
     },
     {
       "label": "Proyecto: integracion-gemini",
@@ -4329,8 +4395,8 @@
       "contributor": null,
       "community": 14,
       "norm_label": "proyecto: integracion-gemini",
-      "id": "testing_project_integracion_gemini",
-      "community_name": "CV Skills Profile"
+      "community_name": "CV Skills Profile",
+      "id": "testing_project_integracion_gemini"
     },
     {
       "label": "Proyecto: alexa-skill",
@@ -4343,8 +4409,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "proyecto: alexa-skill",
-      "id": "testing_project_alexa_skill",
-      "community_name": "CV Work Experience"
+      "community_name": "CV Work Experience",
+      "id": "testing_project_alexa_skill"
     },
     {
       "label": "Experiencia IT: ayuntamiento",
@@ -4357,8 +4423,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "experiencia it: ayuntamiento",
-      "id": "testing_exp_ayuntamiento",
-      "community_name": "CV Work Experience"
+      "community_name": "CV Work Experience",
+      "id": "testing_exp_ayuntamiento"
     },
     {
       "label": "Experiencia IT: freelance-it",
@@ -4371,8 +4437,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "experiencia it: freelance-it",
-      "id": "testing_exp_freelance_it",
-      "community_name": "CV Work Experience"
+      "community_name": "CV Work Experience",
+      "id": "testing_exp_freelance_it"
     },
     {
       "label": "Experiencia IT: liderazgo-operativo",
@@ -4385,8 +4451,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "experiencia it: liderazgo-operativo",
-      "id": "testing_exp_liderazgo_operativo",
-      "community_name": "CV Work Experience"
+      "community_name": "CV Work Experience",
+      "id": "testing_exp_liderazgo_operativo"
     },
     {
       "label": "index.html \u2014 shell HTML de la app",
@@ -4399,8 +4465,8 @@
       "contributor": null,
       "community": 12,
       "norm_label": "index.html \u2014 shell html de la app",
-      "id": "index_html_doc",
-      "community_name": "Design System & Deploy"
+      "community_name": "Design System & Deploy",
+      "id": "index_html_doc"
     },
     {
       "label": "Google Fonts: Space Grotesk, IBM Plex Sans, IBM Plex Mono",
@@ -4413,8 +4479,8 @@
       "contributor": null,
       "community": 12,
       "norm_label": "google fonts: space grotesk, ibm plex sans, ibm plex mono",
-      "id": "index_google_fonts",
-      "community_name": "Design System & Deploy"
+      "community_name": "Design System & Deploy",
+      "id": "index_google_fonts"
     },
     {
       "label": "src/main.tsx (entry point)",
@@ -4427,8 +4493,8 @@
       "contributor": null,
       "community": 12,
       "norm_label": "src/main.tsx (entry point)",
-      "id": "src_main_module",
-      "community_name": "Design System & Deploy"
+      "community_name": "Design System & Deploy",
+      "id": "src_main_module"
     },
     {
       "label": "robots.txt: Allow all user-agents",
@@ -4441,8 +4507,8 @@
       "contributor": null,
       "community": 12,
       "norm_label": "robots.txt: allow all user-agents",
-      "id": "public_robots_policy",
-      "community_name": "Design System & Deploy"
+      "community_name": "Design System & Deploy",
+      "id": "public_robots_policy"
     },
     {
       "label": "Dominick Ibarra Acedo (CV)",
@@ -4455,8 +4521,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "dominick ibarra acedo (cv)",
-      "id": "public_cv_dominick",
-      "community_name": "CV Work Experience"
+      "community_name": "CV Work Experience",
+      "id": "public_cv_dominick"
     },
     {
       "label": "Perfil profesional: Ingeniero en Sistemas biling\u00fce",
@@ -4469,8 +4535,8 @@
       "contributor": null,
       "community": 14,
       "norm_label": "perfil profesional: ingeniero en sistemas bilingue",
-      "id": "public_cv_profile",
-      "community_name": "CV Skills Profile"
+      "community_name": "CV Skills Profile",
+      "id": "public_cv_profile"
     },
     {
       "label": "Habilidades: Desarrollo Web (React 19, Angular, TS, Vite, Radix UI, WCAG 2.1)",
@@ -4483,8 +4549,8 @@
       "contributor": null,
       "community": 14,
       "norm_label": "habilidades: desarrollo web (react 19, angular, ts, vite, radix ui, wcag 2.1)",
-      "id": "public_cv_skills_web",
-      "community_name": "CV Skills Profile"
+      "community_name": "CV Skills Profile",
+      "id": "public_cv_skills_web"
     },
     {
       "label": "Habilidades: Servicios & Infraestructura IT (redes, C#/.NET, SQL Server)",
@@ -4497,8 +4563,8 @@
       "contributor": null,
       "community": 14,
       "norm_label": "habilidades: servicios & infraestructura it (redes, c#/.net, sql server)",
-      "id": "public_cv_skills_it",
-      "community_name": "CV Skills Profile"
+      "community_name": "CV Skills Profile",
+      "id": "public_cv_skills_it"
     },
     {
       "label": "Habilidades: IA & Automatizaci\u00f3n (Gemini 2.5 Flash, streaming SSE, Python)",
@@ -4511,8 +4577,8 @@
       "contributor": null,
       "community": 14,
       "norm_label": "habilidades: ia & automatizacion (gemini 2.5 flash, streaming sse, python)",
-      "id": "public_cv_skills_ai",
-      "community_name": "CV Skills Profile"
+      "community_name": "CV Skills Profile",
+      "id": "public_cv_skills_ai"
     },
     {
       "label": "Residencia Profesional \u2014 Nautylab (ene-jun 2026)",
@@ -4525,8 +4591,8 @@
       "contributor": null,
       "community": 14,
       "norm_label": "residencia profesional \u2014 nautylab (ene-jun 2026)",
-      "id": "public_cv_nautylab",
-      "community_name": "CV Skills Profile"
+      "community_name": "CV Skills Profile",
+      "id": "public_cv_nautylab"
     },
     {
       "label": "Servicios IT Independientes (Freelance, 2025\u2013Presente)",
@@ -4539,8 +4605,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "servicios it independientes (freelance, 2025\u2013presente)",
-      "id": "public_cv_freelance_it",
-      "community_name": "CV Work Experience"
+      "community_name": "CV Work Experience",
+      "id": "public_cv_freelance_it"
     },
     {
       "label": "Soporte T\u00e9cnico \u2014 Ayuntamiento de Playas de Rosarito (2020-2021)",
@@ -4553,8 +4619,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "soporte tecnico \u2014 ayuntamiento de playas de rosarito (2020-2021)",
-      "id": "public_cv_ayuntamiento",
-      "community_name": "CV Work Experience"
+      "community_name": "CV Work Experience",
+      "id": "public_cv_ayuntamiento"
     },
     {
       "label": "Encargado de Turno \u2014 Tienda de Conveniencia (2017-2019)",
@@ -4567,8 +4633,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "encargado de turno \u2014 tienda de conveniencia (2017-2019)",
-      "id": "public_cv_tienda",
-      "community_name": "CV Work Experience"
+      "community_name": "CV Work Experience",
+      "id": "public_cv_tienda"
     },
     {
       "label": "N\u00facleo (Angular \u00b7 .NET \u00b7 SQL Server) \u2014 gesti\u00f3n de activos IT multi-cliente",
@@ -4581,8 +4647,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "nucleo (angular \u00b7 .net \u00b7 sql server) \u2014 gestion de activos it multi-cliente",
-      "id": "public_cv_nucleo_project",
-      "community_name": "Test Suite Overview"
+      "community_name": "Test Suite Overview",
+      "id": "public_cv_nucleo_project"
     },
     {
       "label": "Skill de voz 'Cuenta Cuentos' \u2014 Amazon Alexa (Innovatec 2025)",
@@ -4595,8 +4661,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "skill de voz 'cuenta cuentos' \u2014 amazon alexa (innovatec 2025)",
-      "id": "public_cv_alexa_skill",
-      "community_name": "CV Work Experience"
+      "community_name": "CV Work Experience",
+      "id": "public_cv_alexa_skill"
     },
     {
       "label": "Gestor de Inventario (Angular, 2022)",
@@ -4609,8 +4675,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "gestor de inventario (angular, 2022)",
-      "id": "public_cv_gestor_inventario",
-      "community_name": "CV Work Experience"
+      "community_name": "CV Work Experience",
+      "id": "public_cv_gestor_inventario"
     },
     {
       "label": "Instituto Tecnol\u00f3gico de Tijuana \u2014 Ing. Sistemas Computacionales",
@@ -4623,8 +4689,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "instituto tecnologico de tijuana \u2014 ing. sistemas computacionales",
-      "id": "public_cv_educacion",
-      "community_name": "CV Work Experience"
+      "community_name": "CV Work Experience",
+      "id": "public_cv_educacion"
     },
     {
       "label": "Favicon SVG (circuit-node icon)",
@@ -4637,8 +4703,8 @@
       "contributor": null,
       "community": 24,
       "norm_label": "favicon svg (circuit-node icon)",
-      "id": "public_favicon_svg_icon",
-      "community_name": "Favicon Branding Motif"
+      "community_name": "Favicon Branding Motif",
+      "id": "public_favicon_svg_icon"
     },
     {
       "label": "Circuit-node signal branding motif",
@@ -4651,8 +4717,8 @@
       "contributor": null,
       "community": 24,
       "norm_label": "circuit-node signal branding motif",
-      "id": "public_favicon_circuit_node_motif",
-      "community_name": "Favicon Branding Motif"
+      "community_name": "Favicon Branding Motif",
+      "id": "public_favicon_circuit_node_motif"
     }
   ],
   "links": [
@@ -4959,7 +5025,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "e2e/a11y-contrast.spec.ts",
-      "source_location": "L32",
+      "source_location": "L34",
       "weight": 1.0,
       "_origin": "ast",
       "source": "e2e_a11y_contrast_spec",
@@ -5752,7 +5818,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/App.tsx",
-      "source_location": "L15",
+      "source_location": "L16",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_app",
@@ -5865,6 +5931,30 @@
       "_origin": "ast",
       "source": "src_app",
       "target": "src_pages_serviciosit_serviciosit",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app",
+      "target": "src_pages_sobremi",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app",
+      "target": "src_pages_sobremi_sobremi",
       "confidence_score": 1.0
     },
     {
@@ -8058,6 +8148,18 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_data_content_test",
+      "target": "src_data_content_about",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/data/content.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_data_content_test",
       "target": "src_data_content_experience",
       "confidence_score": 1.0
     },
@@ -8137,7 +8239,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/data/content.test.ts",
-      "source_location": "L125",
+      "source_location": "L126",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_data_content_test",
@@ -8149,7 +8251,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/data/content.test.ts",
-      "source_location": "L11",
+      "source_location": "L12",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_data_content_test",
@@ -8161,7 +8263,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/data/content.test.ts",
-      "source_location": "L11",
+      "source_location": "L12",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_data_content_test",
@@ -8172,7 +8274,40 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/data/content.ts",
-      "source_location": "L438",
+      "source_location": "L518",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_data_content",
+      "target": "src_data_content_about",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/data/content.ts",
+      "source_location": "L80",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_data_content",
+      "target": "src_data_content_aboutcontent",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/data/content.ts",
+      "source_location": "L74",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_data_content",
+      "target": "src_data_content_aboutstory",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/data/content.ts",
+      "source_location": "L450",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_data_content",
@@ -8183,7 +8318,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/data/content.ts",
-      "source_location": "L517",
+      "source_location": "L596",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_data_content",
@@ -8194,7 +8329,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/data/content.ts",
-      "source_location": "L507",
+      "source_location": "L586",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_data_content",
@@ -8205,7 +8340,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/data/content.ts",
-      "source_location": "L91",
+      "source_location": "L103",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_data_content",
@@ -8238,7 +8373,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/data/content.ts",
-      "source_location": "L164",
+      "source_location": "L176",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_data_content",
@@ -8249,7 +8384,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/data/content.ts",
-      "source_location": "L510",
+      "source_location": "L589",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_data_content",
@@ -8282,7 +8417,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/data/content.ts",
-      "source_location": "L117",
+      "source_location": "L129",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_data_content",
@@ -8412,6 +8547,18 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "src/pages/SobreMi.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_pages_sobremi",
+      "target": "src_data_content",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "src/seo/meta.ts",
       "source_location": "L20",
       "weight": 1.0,
@@ -8522,6 +8669,30 @@
       "confidence": "EXTRACTED",
       "source_file": "src/data/content.ts",
       "source_location": "L76",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_data_content_aboutstory",
+      "target": "src_i18n_locale_localizedtext",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "field",
+      "confidence": "EXTRACTED",
+      "source_file": "src/data/content.ts",
+      "source_location": "L81",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_data_content_aboutcontent",
+      "target": "src_i18n_locale_localizedtext",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "field",
+      "confidence": "EXTRACTED",
+      "source_file": "src/data/content.ts",
+      "source_location": "L88",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_data_content_profile",
@@ -8670,6 +8841,30 @@
       "_origin": "ast",
       "source": "src_pages_iaautomatizacion",
       "target": "src_data_content_projects",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SobreMi.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_pages_sobremi",
+      "target": "src_data_content_about",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/seo/meta.ts",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_seo_meta",
+      "target": "src_data_content_about",
       "confidence_score": 1.0
     },
     {
@@ -9190,6 +9385,18 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "src/pages/SobreMi.tsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_pages_sobremi",
+      "target": "src_i18n_locale",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "src/seo/meta.ts",
       "source_location": "L21",
       "weight": 1.0,
@@ -9215,7 +9422,7 @@
       "context": "field",
       "confidence": "EXTRACTED",
       "source_file": "src/seo/meta.ts",
-      "source_location": "L42",
+      "source_location": "L44",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_seo_meta_headdata",
@@ -9382,6 +9589,30 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "src/pages/SobreMi.tsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_pages_sobremi",
+      "target": "src_i18n_locale_uset",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/pages/SobreMi.tsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_pages_sobremi_sobremi",
+      "target": "src_i18n_locale_uset"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "src/pages/Home.tsx",
       "source_location": "L6",
       "weight": 1.0,
@@ -9420,7 +9651,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/seo/meta.ts",
-      "source_location": "L73",
+      "source_location": "L82",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_seo_meta_headforpath",
@@ -9444,7 +9675,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/seo/meta.ts",
-      "source_location": "L64",
+      "source_location": "L66",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_seo_meta_headforpath",
@@ -9510,6 +9741,18 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SobreMi.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_pages_sobremi",
+      "target": "src_i18n_ui",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -9554,6 +9797,18 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_pages_serviciosit",
+      "target": "src_i18n_ui_ui",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SobreMi.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_pages_sobremi",
       "target": "src_i18n_ui_ui",
       "confidence_score": 1.0
     },
@@ -9675,6 +9930,18 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SobreMi.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_pages_sobremi",
+      "target": "src_lib_usedocumenttitle",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -9696,6 +9963,30 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_pages_home_home",
+      "target": "src_lib_usedocumenttitle_usedocumenttitle"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SobreMi.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_pages_sobremi",
+      "target": "src_lib_usedocumenttitle_usedocumenttitle",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/pages/SobreMi.tsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_pages_sobremi_sobremi",
       "target": "src_lib_usedocumenttitle_usedocumenttitle"
     },
     {
@@ -9916,6 +10207,28 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SobreMi.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_pages_sobremi",
+      "target": "src_pages_sobremi_sobremi",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SobreMi.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_pages_sobremi",
+      "target": "src_pages_sobremi_storydelays",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -9991,7 +10304,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/seo/meta.ts",
-      "source_location": "L92",
+      "source_location": "L101",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_seo_meta",
@@ -10002,7 +10315,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/seo/meta.ts",
-      "source_location": "L41",
+      "source_location": "L43",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_seo_meta",
@@ -10013,7 +10326,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/seo/meta.ts",
-      "source_location": "L61",
+      "source_location": "L63",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_seo_meta",
@@ -10024,7 +10337,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/seo/meta.ts",
-      "source_location": "L54",
+      "source_location": "L56",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_seo_meta",
@@ -10046,7 +10359,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/seo/meta.ts",
-      "source_location": "L104",
+      "source_location": "L113",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_seo_meta",
@@ -10057,7 +10370,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/seo/meta.ts",
-      "source_location": "L130",
+      "source_location": "L139",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_seo_meta",
@@ -10091,7 +10404,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/seo/meta.ts",
-      "source_location": "L62",
+      "source_location": "L64",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_seo_meta_headforpath",
@@ -10103,7 +10416,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/seo/meta.ts",
-      "source_location": "L106",
+      "source_location": "L115",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_seo_meta_renderheadtags",
@@ -12208,5 +12521,5 @@
       "source_file": "public/cv.pdf"
     }
   ],
-  "built_at_commit": "fc6318c36bfdee3b3f6e41e8f7962da4340dbade"
+  "built_at_commit": "c7e140e08b0df29f48b5a7a3453ff7943a266cb0"
 }

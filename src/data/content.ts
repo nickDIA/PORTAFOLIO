@@ -71,6 +71,41 @@ export interface Experience {
   highlights: LocalizedText[];
 }
 
+export interface LandingService {
+  /** Rol técnico al que traduce este servicio — hereda color de señal y ruta. */
+  role: RoleId;
+  /** Nombre del servicio en lenguaje de cliente (el técnico vive en roles[]). */
+  label: LocalizedText;
+  benefit: LocalizedText;
+}
+
+export interface LandingEvidence {
+  /** Rol cuyo color de señal enmarca la foto. */
+  role: RoleId;
+  shot: Screenshot;
+}
+
+export interface LandingContent {
+  hero: {
+    eyebrow: LocalizedText;
+    headline: LocalizedText;
+    sub: LocalizedText;
+  };
+  services: LandingService[];
+  evidenceHeading: LocalizedText;
+  evidence: LandingEvidence[];
+  trustHeading: LocalizedText;
+  trust: LocalizedText[];
+  copilotNote: LocalizedText;
+  cta: {
+    heading: LocalizedText;
+    whatsappLabel: LocalizedText;
+    emailLabel: LocalizedText;
+    /** Mensaje precargado del link wa.me. */
+    whatsappMessage: LocalizedText;
+  };
+}
+
 export interface AboutStory {
   id: string;
   heading: LocalizedText;
@@ -93,6 +128,8 @@ export interface Profile {
     email: string;
     github: string;
     linkedin: string;
+    /** Solo dígitos con código de país (ej. 52664...). Alimenta el link wa.me del CTA. */
+    whatsapp: string;
     cvUrl: string; // ruta al PDF en /public — una sola versión general
     cvNote: LocalizedText;
   };
@@ -116,6 +153,8 @@ export const profile: Profile = {
     email: "dominickomg@gmail.com",
     github: "https://github.com/nickDIA",
     linkedin: "https://www.linkedin.com/in/dominick-ia",
+    /* Mientras sea [[TODO, el CTA de la landing cae a email automáticamente. */
+    whatsapp: "526611259411",
     cvUrl: "/cv.pdf",
     cvNote: {
       es: "Versiones adaptadas por rol disponibles bajo solicitud",
@@ -512,6 +551,180 @@ export const experience: Experience[] = [
     ],
   },
 ];
+
+/* ----------------------------- Landing ----------------------------- */
+/* La raíz (/) es la carta de presentación para CLIENTES — lenguaje de
+   beneficio, no de ingeniería. La profundidad técnica para reclutadores
+   vive en las páginas de rol, a un clic desde cada tarjeta de servicio.
+   Las fotos de la galería usan la ruta REAL esperada: mientras el archivo
+   no exista en /public, ScreenshotFrame muestra el marco pendiente con esa
+   ruta; al soltar la foto ahí, aparece sola sin tocar código. */
+
+export const landing: LandingContent = {
+  hero: {
+    eyebrow: {
+      es: "Servicios de tecnología · Tijuana",
+      en: "Technology services · Tijuana",
+    },
+    headline: {
+      es: "Tecnología que trabaja para ti",
+      en: "Technology that works for you",
+    },
+    sub: {
+      es: "Páginas web, soporte de equipos y redes, y automatización con IA — para negocios y personas que necesitan que las cosas simplemente funcionen.",
+      en: "Websites, computer and network support, and AI automation — for businesses and people who need things to simply work.",
+    },
+  },
+
+  services: [
+    {
+      role: "web",
+      label: { es: "Tu negocio en internet", en: "Your business online" },
+      benefit: {
+        es: "Páginas y aplicaciones web rápidas, que se ven bien en el celular y que cualquier persona puede usar.",
+        en: "Fast websites and web applications that look great on a phone and anyone can use.",
+      },
+    },
+    {
+      role: "it",
+      label: {
+        es: "Equipos y redes que funcionan",
+        en: "Computers and networks that work",
+      },
+      benefit: {
+        es: "Mantenimiento, reparación, redes e inventario de equipo — para que la tecnología no detenga tu operación.",
+        en: "Maintenance, repair, networking, and equipment inventory — so technology never stops your operation.",
+      },
+    },
+    {
+      role: "ai",
+      label: { es: "Automatización e IA", en: "Automation & AI" },
+      benefit: {
+        es: "Procesos repetitivos que se hacen solos y asistentes de IA que responden por ti — menos errores, más tiempo.",
+        en: "Repetitive processes that run themselves and AI assistants that answer for you — fewer errors, more time.",
+      },
+    },
+  ],
+
+  evidenceHeading: { es: "Trabajo real, no promesas", en: "Real work, not promises" },
+  evidence: [
+    {
+      role: "it",
+      shot: {
+        src: "/screenshots/mantenimiento-1.jpg",
+        alt: {
+          es: "Mantenimiento y reparación de equipo de cómputo",
+          en: "Computer equipment maintenance and repair",
+        },
+        caption: {
+          es: "Mantenimiento y reparación — más de 300 equipos atendidos",
+          en: "Maintenance and repair — 300+ machines serviced",
+        },
+      },
+    },
+    {
+      role: "it",
+      shot: {
+        src: "/screenshots/redes-1.jpg",
+        alt: {
+          es: "Instalación de red en un espacio de trabajo",
+          en: "Network installation in a workspace",
+        },
+        caption: {
+          es: "Redes para oficinas y negocios — información sin demoras",
+          en: "Networking for offices and businesses — information without delays",
+        },
+      },
+    },
+    {
+      role: "it",
+      shot: {
+        src: "/screenshots/nucleo-1.png",
+        alt: {
+          es: "Panel de activos de Núcleo con su registro de auditoría",
+          en: "Núcleo's asset panel with its audit log",
+        },
+        caption: {
+          es: "Núcleo: inventario que registra cada movimiento, sin errores",
+          en: "Núcleo: inventory that logs every movement, error-free",
+        },
+      },
+    },
+    {
+      role: "web",
+      shot: {
+        src: "/screenshots/Nautylab1.png",
+        alt: {
+          es: "Lector de cuentos de Nautylab mostrando una historia ilustrada generada por IA",
+          en: "Nautylab's story reader showing an AI-generated illustrated story",
+        },
+        caption: {
+          es: "Nautylab: aplicación web con asistente de IA integrado",
+          en: "Nautylab: web application with a built-in AI assistant",
+        },
+      },
+    },
+    {
+      role: "web",
+      shot: {
+        src: "/screenshots/inventario-1.png",
+        alt: {
+          es: "Listado de productos del gestor de inventario con su historial de movimientos",
+          en: "Inventory manager's product list with its movement history",
+        },
+        caption: {
+          es: "Gestor de inventario para catálogos que crecen",
+          en: "Inventory manager for growing catalogs",
+        },
+      },
+    },
+    {
+      role: "ai",
+      shot: {
+        src: "/screenshots/gemini-integracion-1.png",
+        alt: {
+          es: "Respuesta de un asistente de IA llegando en tiempo real",
+          en: "An AI assistant's response arriving in real time",
+        },
+        caption: {
+          es: "Asistentes de IA que responden en tiempo real",
+          en: "AI assistants that respond in real time",
+        },
+      },
+    },
+  ],
+
+  trustHeading: { es: "Cómo trabajo", en: "How I work" },
+  trust: [
+    {
+      es: "Explico sin tecnicismos — siempre sabrás qué se hizo y por qué.",
+      en: "I explain without jargon — you'll always know what was done and why.",
+    },
+    {
+      es: "Diagnóstico honesto: reparar cuando conviene, reemplazar cuando no.",
+      en: "Honest diagnostics: repair when it makes sense, replace when it doesn't.",
+    },
+    {
+      es: "Trabajo documentado: cada cambio queda registrado.",
+      en: "Documented work: every change is on record.",
+    },
+  ],
+
+  copilotNote: {
+    es: "¿Tienes dudas? Pregúntale a mi asistente de IA — está en la esquina inferior derecha. Es una muestra en vivo de lo que puedo construir para tu negocio.",
+    en: "Questions? Ask my AI assistant — it's in the bottom-right corner. It's a live sample of what I can build for your business.",
+  },
+
+  cta: {
+    heading: { es: "Cuéntame qué necesitas", en: "Tell me what you need" },
+    whatsappLabel: { es: "Escríbeme por WhatsApp", en: "Message me on WhatsApp" },
+    emailLabel: { es: "Escríbeme un correo", en: "Send me an email" },
+    whatsappMessage: {
+      es: "Hola Dominick, vi tu sitio y necesito ayuda con...",
+      en: "Hi Dominick, I saw your site and I need help with...",
+    },
+  },
+};
 
 /* ----------------------------- Sobre mí ----------------------------- */
 

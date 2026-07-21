@@ -5,6 +5,7 @@ import {
   experience,
   profile,
   about,
+  landing,
   projectsByRole,
   experienceByRole,
   isPending,
@@ -191,5 +192,58 @@ describe("about", () => {
 
   it("trae al menos una historia", () => {
     expect(about.stories.length).toBeGreaterThan(0);
+  });
+});
+
+/* ============================================================
+   Landing de clientes: la raíz vende servicios en lenguaje no
+   técnico, pero cada pieza sigue anclada al sistema de roles —
+   un servicio por rol, evidencia con rol válido, y todo bilingüe.
+   ============================================================ */
+
+describe("landing", () => {
+  it("hay exactamente un servicio por rol, en el mismo orden", () => {
+    expect(landing.services.map((s) => s.role)).toEqual(roles.map((r) => r.id));
+  });
+
+  it("hero, servicios, confianza y CTA traen ambos idiomas", () => {
+    nonEmpty(landing.hero.eyebrow, "landing.hero.eyebrow");
+    nonEmpty(landing.hero.headline, "landing.hero.headline");
+    nonEmpty(landing.hero.sub, "landing.hero.sub");
+    for (const s of landing.services) {
+      nonEmpty(s.label, `landing service ${s.role}.label`);
+      nonEmpty(s.benefit, `landing service ${s.role}.benefit`);
+    }
+    nonEmpty(landing.evidenceHeading, "landing.evidenceHeading");
+    nonEmpty(landing.trustHeading, "landing.trustHeading");
+    for (const [i, item] of landing.trust.entries()) {
+      nonEmpty(item, `landing.trust[${i}]`);
+    }
+    nonEmpty(landing.copilotNote, "landing.copilotNote");
+    nonEmpty(landing.cta.heading, "landing.cta.heading");
+    nonEmpty(landing.cta.whatsappLabel, "landing.cta.whatsappLabel");
+    nonEmpty(landing.cta.emailLabel, "landing.cta.emailLabel");
+    nonEmpty(landing.cta.whatsappMessage, "landing.cta.whatsappMessage");
+  });
+
+  it("toda evidencia tiene rol válido, ruta bajo /screenshots y alt bilingüe", () => {
+    const roleIds = new Set(roles.map((r) => r.id));
+    for (const e of landing.evidence) {
+      expect(roleIds.has(e.role), `evidence ${e.shot.src}: rol`).toBe(true);
+      expect(e.shot.src, `evidence src`).toMatch(/^\/screenshots\//);
+      nonEmpty(e.shot.alt, `evidence ${e.shot.src}.alt`);
+      if (e.shot.caption) nonEmpty(e.shot.caption, `evidence ${e.shot.src}.caption`);
+    }
+  });
+
+  it("las rutas de evidencia son únicas (la galería usa src como key)", () => {
+    const srcs = landing.evidence.map((e) => e.shot.src);
+    expect(new Set(srcs).size).toBe(srcs.length);
+  });
+
+  it("el WhatsApp pendiente sigue el patrón [[TODO (el CTA cae a email)", () => {
+    /* Cuando se rellene, debe ser solo dígitos con código de país. */
+    const wa = profile.contact.whatsapp;
+    if (!isPending(wa)) expect(wa).toMatch(/^\d{11,15}$/);
   });
 });

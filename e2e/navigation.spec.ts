@@ -20,11 +20,15 @@ const rolesEn = [
   { path: "/en/ia-automatizacion", heading: "AI & Automation", ring: "#4fd1c5" },
 ];
 
-test("la landing muestra el nombre y las tres tarjetas de rol", async ({ page }) => {
+test("la landing muestra el titular de servicios, el nombre y las tres tarjetas", async ({
+  page,
+}) => {
   await page.goto("/");
+  /* El h1 habla al cliente; el nombre queda como firma bajo el hero */
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "Dominick Ibarra Acedo",
+    "Tecnología que trabaja para ti",
   );
+  await expect(page.getByText(/Dominick Ibarra Acedo/)).toBeVisible();
   for (const r of roles) {
     await expect(
       page.getByRole("link", { name: new RegExp(r.heading) }).first(),
@@ -32,13 +36,14 @@ test("la landing muestra el nombre y las tres tarjetas de rol", async ({ page })
   }
 });
 
-test("la landing en inglés (/en) muestra las tarjetas traducidas", async ({
+test("la landing en inglés (/en) muestra el titular y las tarjetas traducidas", async ({
   page,
 }) => {
   await page.goto("/en");
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "Dominick Ibarra Acedo",
+    "Technology that works for you",
   );
+  await expect(page.getByText(/Dominick Ibarra Acedo/)).toBeVisible();
   for (const r of rolesEn) {
     await expect(
       page.getByRole("link", { name: new RegExp(r.heading) }).first(),
