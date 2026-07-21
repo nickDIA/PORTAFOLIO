@@ -63,9 +63,14 @@ export default function Layout() {
           <NavLink
             to={localizePath("/", locale)}
             end
+            aria-label={t(ui.layout.brand)}
             className="font-display font-semibold text-lg tracking-tight"
           >
-            {t(ui.layout.brand)}
+            {/* Cada inicial en su color de señal — D-I-A son, en orden,
+                Desarrollo web, servicios IT y automatización con IA. */}
+            <span className="text-signal-web">D</span>
+            <span className="text-signal-it">I</span>
+            <span className="text-signal-ai">A</span>
           </NavLink>
 
           <ul className="flex flex-wrap items-center gap-x-6 gap-y-2 ml-auto">

@@ -183,7 +183,7 @@ La raíz dejó de ser el portafolio técnico: es la **carta de presentación par
 
 - **Lenguaje de beneficio, no de ingeniería** — `landing` en `src/data/content.ts`: hero ("Tecnología que trabaja para ti"), 3 tarjetas de servicio en lenguaje cliente que conservan el nombre técnico del rol como puente hacia su página (donde vive la profundidad para reclutadores), galería de evidencia, bullets de confianza y el copiloto como demo viviente.
 - **CTA WhatsApp con fallback** — `profile.contact.whatsapp` (solo dígitos con código de país); mientras siga `[[TODO`, ambos CTAs (hero y contacto) caen a `mailto:` automáticamente.
-- **Galería rellenable sin código** — cada evidencia usa la ruta real esperada (`/screenshots/mantenimiento-1.jpg`, `redes-1.jpg`, `nucleo-1.png`, `inventario-1.png`, `gemini-integracion-1.png`); al soltar el archivo en `public/screenshots/` la foto aparece sola. Mientras tanto, `ScreenshotFrame` muestra el marco punteado con la ruta esperada.
+- **Galería rellenable sin código** — cada evidencia usa la ruta real esperada (`/screenshots/mantenimiento-1.jpg`, `nucleo-1.png`, `inventario-1.png`); al soltar el archivo en `public/screenshots/` la foto aparece sola. Mientras tanto, `ScreenshotFrame` muestra el marco punteado con la ruta esperada. La evidencia de IA reutiliza una captura real ya existente (`Nautylab2.png`, el chat del tutor de Español con Gemini) — no hay evidencia de redes (sin fotos disponibles, se quitó del array en vez de dejarla pendiente indefinidamente).
 - El **SEO de la home** (description/OG) usa `landing.hero.sub` — quien comparta el link con un cliente ve la oferta, no jerga técnica.
 
 ## Página "Sobre mí" (`/sobre-mi`, `/en/sobre-mi`)
@@ -200,6 +200,18 @@ Corrido contra el **build de producción** (`npm run build` → `vite preview`, 
 | `/ia-automatizacion` (rol, la más pesada) | 99 | 100 | 100 | 100 |
 
 Métricas de la home: FCP 1.7s · **LCP 2.6s** · **TBT 0ms** · **CLS 0** · Speed Index 5.3s. Todo verde (≥90). Único aspecto mejorable: la hoja de estilos de Google Fonts es *render-blocking* (afecta LCP/Speed Index) — no se cambió porque las tipografías (Space Grotesk / IBM Plex) son decisión de diseño fija y volverlas no-bloqueantes puede causar FOUT en el primer paint; queda como palanca opcional a discreción del usuario.
+
+## Nombre del sitio: DIA (2026-07-20)
+
+El sitio dejó de llamarse "Portafolio" — ahora es **DIA** (iniciales de Dominick Ibarra Acedo, ya usado como handle de GitHub `nickDIA`; también es la palabra "día" en español). Cambia el texto de marca en 5 lugares que deben mantenerse en sync manualmente (no hay una única fuente porque el prerender y el runtime tienen sus propios módulos por diseño — ver "SEO por idioma" arriba):
+
+- `src/i18n/ui.ts` → `ui.layout.brand` (nav, mismo texto es/en).
+- `src/lib/useDocumentTitle.ts` → `BASE` (sufijo del `<title>` en runtime).
+- `src/seo/meta.ts` → `BASE_TITLE` y `SITE_NAME` (prerender + `og:site_name`).
+- `src/lib/useHeadMeta.ts` → `og:site_name` en runtime (debe calzar con `meta.ts`).
+- `index.html` → baseline estático (`<title>`, `og:title`, `og:site_name`, `twitter:title`).
+
+El nombre completo ("Dominick Ibarra Acedo") se conserva en el `<title>` junto con DIA — el propósito es que alguien busque el nombre y lo encuentre, no ocultarlo detrás de la marca corta.
 
 ## Huecos conocidos (pendientes)
 

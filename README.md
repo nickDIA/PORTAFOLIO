@@ -1,4 +1,4 @@
-# Portafolio — Dominick Ibarra Acedo
+# DIA — Dominick Ibarra Acedo
 
 [![CI](https://github.com/nickDIA/PORTAFOLIO/actions/workflows/ci.yml/badge.svg)](https://github.com/nickDIA/PORTAFOLIO/actions/workflows/ci.yml)
 

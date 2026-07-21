@@ -41,7 +41,7 @@ describe("headForPath — home", () => {
   it("español: título base y descripción en lenguaje de cliente (landing)", () => {
     const h = headForPath("/");
     expect(h.lang).toBe("es");
-    expect(h.title).toBe("Dominick Ibarra Acedo — Portafolio");
+    expect(h.title).toBe("Dominick Ibarra Acedo — DIA");
     expect(h.description).toBe(landing.hero.sub.es);
     expect(h.canonical).toBe(`${SITE_URL}/`);
     expect(h.ogLocale).toBe("es_ES");
@@ -60,13 +60,13 @@ describe("headForPath — páginas de rol", () => {
   it.each(roles)("$slug tematiza título y descripción por idioma", (role) => {
     const es = headForPath(role.slug);
     expect(es.lang).toBe("es");
-    expect(es.title).toBe(`${role.name.es} · Dominick Ibarra Acedo — Portafolio`);
+    expect(es.title).toBe(`${role.name.es} · Dominick Ibarra Acedo — DIA`);
     expect(es.description).toBe(role.description.es);
     expect(es.canonical).toBe(`${SITE_URL}${role.slug}`);
 
     const en = headForPath(`/en${role.slug}`);
     expect(en.lang).toBe("en");
-    expect(en.title).toBe(`${role.name.en} · Dominick Ibarra Acedo — Portafolio`);
+    expect(en.title).toBe(`${role.name.en} · Dominick Ibarra Acedo — DIA`);
     expect(en.description).toBe(role.description.en);
     expect(en.canonical).toBe(`${SITE_URL}/en${role.slug}`);
   });
@@ -75,12 +75,12 @@ describe("headForPath — páginas de rol", () => {
 describe("headForPath — página Sobre mí", () => {
   it("título y descripción usan el contenido de about, no el genérico de home", () => {
     const es = headForPath("/sobre-mi");
-    expect(es.title).toBe("Sobre mí · Dominick Ibarra Acedo — Portafolio");
+    expect(es.title).toBe("Sobre mí · Dominick Ibarra Acedo — DIA");
     expect(es.description).not.toBe(profile.tagline.es);
     expect(es.canonical).toBe(`${SITE_URL}/sobre-mi`);
 
     const en = headForPath("/en/sobre-mi");
-    expect(en.title).toBe("About me · Dominick Ibarra Acedo — Portafolio");
+    expect(en.title).toBe("About me · Dominick Ibarra Acedo — DIA");
     expect(en.canonical).toBe(`${SITE_URL}/en/sobre-mi`);
   });
 });

@@ -55,7 +55,7 @@ function applyHead(h: HeadData): void {
   );
 
   meta("property", "og:type", "website");
-  meta("property", "og:site_name", "Dominick Ibarra Acedo");
+  meta("property", "og:site_name", "DIA");
   meta("property", "og:title", h.title);
   meta("property", "og:description", h.description);
   meta("property", "og:url", h.canonical);

@@ -625,20 +625,6 @@ export const landing: LandingContent = {
     {
       role: "it",
       shot: {
-        src: "/screenshots/redes-1.jpg",
-        alt: {
-          es: "Instalación de red en un espacio de trabajo",
-          en: "Network installation in a workspace",
-        },
-        caption: {
-          es: "Redes para oficinas y negocios — información sin demoras",
-          en: "Networking for offices and businesses — information without delays",
-        },
-      },
-    },
-    {
-      role: "it",
-      shot: {
         src: "/screenshots/nucleo-1.png",
         alt: {
           es: "Panel de activos de Núcleo con su registro de auditoría",
@@ -681,14 +667,17 @@ export const landing: LandingContent = {
     {
       role: "ai",
       shot: {
-        src: "/screenshots/gemini-integracion-1.png",
+        /* Reutiliza una captura real de Nautylab (no hay una dedicada a
+           "integración de Gemini" todavía) — el tutor de Español demuestra
+           el mismo chat en tiempo real con Gemini, en contexto de aprendizaje. */
+        src: "/screenshots/Nautylab2.png",
         alt: {
-          es: "Respuesta de un asistente de IA llegando en tiempo real",
-          en: "An AI assistant's response arriving in real time",
+          es: "Chat del tutor de Español de Nautylab respondiendo la pregunta de un estudiante, con Gemini",
+          en: "Nautylab's Spanish tutor chat answering a student's question, powered by Gemini",
         },
         caption: {
-          es: "Asistentes de IA que responden en tiempo real",
-          en: "AI assistants that respond in real time",
+          es: "Asistente de IA que responde en tiempo real — integrado con Gemini",
+          en: "AI assistant that responds in real time — powered by Gemini",
         },
       },
     },

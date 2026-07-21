@@ -11,7 +11,7 @@ import type { LocalizedText } from "./locale";
 export const ui = {
   layout: {
     skipLink: { es: "Saltar al contenido", en: "Skip to content" },
-    brand: { es: "Portafolio", en: "Portfolio" },
+    brand: { es: "DIA", en: "DIA" },
     navLabel: { es: "Navegación principal", en: "Main navigation" },
     footer: {
       es: "© 2026 — construido con React, TypeScript y Tailwind CSS",

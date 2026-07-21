@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const BASE = "Dominick Ibarra Acedo — Portafolio";
+const BASE = "Dominick Ibarra Acedo — DIA";
 
 /** Actualiza el <title> por página (accesibilidad: orientación al navegar). */
 export function useDocumentTitle(prefix?: string) {

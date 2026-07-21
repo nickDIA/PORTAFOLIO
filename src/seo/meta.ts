@@ -28,7 +28,8 @@ export const SITE_URL = (
 /** Imagen de previsualización de marca (1200×630) — ver public/og-image.png. */
 export const OG_IMAGE_PATH = "/og-image.png";
 
-const BASE_TITLE = "Dominick Ibarra Acedo — Portafolio";
+const BASE_TITLE = "Dominick Ibarra Acedo — DIA";
+const SITE_NAME = "DIA";
 
 /** Locale → etiqueta og:locale (idioma_REGIÓN). */
 const OG_LOCALE: Record<Locale, string> = { es: "es_ES", en: "en_US" };
@@ -121,7 +122,7 @@ export function renderHeadTags(head: HeadData): string {
       (a) => `<link rel="alternate" hreflang="${a.hreflang}" href="${a.href}" />`,
     ),
     `<meta property="og:type" content="website" />`,
-    `<meta property="og:site_name" content="Dominick Ibarra Acedo" />`,
+    `<meta property="og:site_name" content="${SITE_NAME}" />`,
     `<meta property="og:title" content="${escapeAttr(head.title)}" />`,
     `<meta property="og:description" content="${escapeAttr(head.description)}" />`,
     `<meta property="og:url" content="${head.canonical}" />`,

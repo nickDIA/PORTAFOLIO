@@ -35,8 +35,8 @@
     "semantic_hash": ""
   },
   "src/App.test.tsx": {
-    "mtime": 1784587962.6438372,
-    "ast_hash": "57f6e63d1039d8992a6048786262960e",
+    "mtime": 1784604867.528035,
+    "ast_hash": "e847e1bd0e2851c9a77247bf27544586",
     "semantic_hash": ""
   },
   "src/App.tsx": {
@@ -75,13 +75,13 @@
     "semantic_hash": ""
   },
   "src/data/content.test.ts": {
-    "mtime": 1784587956.336508,
-    "ast_hash": "3fd86d335dfafdf5587bd258cd0f354c",
+    "mtime": 1784604832.3802342,
+    "ast_hash": "c4d06a112af75fcdfa50c8749fd05323",
     "semantic_hash": ""
   },
   "src/data/content.ts": {
-    "mtime": 1784587838.575246,
-    "ast_hash": "82b2e10608bbb54dab6ecd8f831a6ef3",
+    "mtime": 1784607494.934868,
+    "ast_hash": "36ecbbb446763a2c398858bbd4e754f6",
     "semantic_hash": ""
   },
   "src/data/systemPrompt.test.ts": {
@@ -115,8 +115,8 @@
     "semantic_hash": ""
   },
   "src/pages/Home.tsx": {
-    "mtime": 1784587871.9374907,
-    "ast_hash": "3fd34d30e827bbd8924e4d0003eb3535",
+    "mtime": 1784604785.7034624,
+    "ast_hash": "9b40a8b116c3388da2690c9806352b24",
     "semantic_hash": ""
   },
   "src/pages/IaAutomatizacion.tsx": {
@@ -185,13 +185,13 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1784588162.7883048,
-    "ast_hash": "065811b5bcab081c3ed3f6bca593de18",
+    "mtime": 1784605625.359151,
+    "ast_hash": "2e4a05badce97c299a022105289cde7e",
     "semantic_hash": ""
   },
   "TESTING.md": {
-    "mtime": 1784588154.242978,
-    "ast_hash": "e1c88f541f767ac160549a7c405977ca",
+    "mtime": 1784605617.1521823,
+    "ast_hash": "96a1b26e1fb9b4d6c1bcba31996076b9",
     "semantic_hash": ""
   },
   "index.html": {
@@ -230,8 +230,8 @@
     "semantic_hash": ""
   },
   "e2e/navigation.spec.ts": {
-    "mtime": 1784587980.8738284,
-    "ast_hash": "b03d0a5636c2563a7963fb8d28dc02d1",
+    "mtime": 1784604878.0819707,
+    "ast_hash": "123705308433e66528a1c52ea1e47c74",
     "semantic_hash": ""
   },
   "e2e/nucleo-demo.spec.ts": {
@@ -320,13 +320,13 @@
     "semantic_hash": ""
   },
   "src/seo/meta.test.ts": {
-    "mtime": 1784587946.0473797,
-    "ast_hash": "3a31a3871ec4ccf6913f2c47c2997994",
+    "mtime": 1784604813.0833647,
+    "ast_hash": "d24eb7a34c2c4530d782f1bb436e961d",
     "semantic_hash": ""
   },
   "src/seo/meta.ts": {
-    "mtime": 1784587884.5269003,
-    "ast_hash": "fa056b1d8556bbd2717b1266bf7ab480",
+    "mtime": 1784604798.6298037,
+    "ast_hash": "290a390372b2302a5fea664656d31763",
     "semantic_hash": ""
   },
   ".github/copilot-instructions.md": {
@@ -367,6 +367,16 @@
   "src/pages/SobreMi.tsx": {
     "mtime": 1784587850.8234937,
     "ast_hash": "8c233914120a26659ed42d797b7fcc99",
+    "semantic_hash": ""
+  },
+  "e2e/landing.spec.ts": {
+    "mtime": 1784605557.207648,
+    "ast_hash": "3a929620c4f7284c0cb40d59a67169af",
+    "semantic_hash": ""
+  },
+  "public/screenshots/nautylab5.png": {
+    "mtime": 1784607002.4637103,
+    "ast_hash": "9da86f4aabe90a3815053cb5b475856e",
     "semantic_hash": ""
   }
 }
